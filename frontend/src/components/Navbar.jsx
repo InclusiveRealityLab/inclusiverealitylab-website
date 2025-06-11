@@ -12,7 +12,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`label bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite min-h-screen xl:min-h-fit xl:w-full xl:px-7 xl:border-6 border-amber-500 xl:bg-baseWhite ${
+        className={`label fixed w-full top-0 left-0 z-50 bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite min-h-screen xl:min-h-fit xl:w-full xl:px-7 xl:border-6 border-amber-500 xl:bg-transparent ${
           !isOpen && "bg-transparent"
         } `}
       >

@@ -105,12 +105,12 @@
     font-weight: var(--font-weight-medium);
   }
 
-  .body {
+  /* .body {
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.5;
     font-weight: var(--font-weight-light);
-  }
+  } */
 
   .label {
     font-family: var(--font-title);
