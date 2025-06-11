@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend+Giga:wght@100..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -9,15 +10,36 @@
   --color-baseLightGrey: #efefef;
 
   /* BRAND COLORS */
-  --color-brandBlue: #0087bd;
-  --color-brandVividLimegreen: #7cfe7c;
-  --color-brandSunyYellow: #f3ff69;
+  --color-primary: #0087bd;
+  --color-secondary: #7cfe7c;
+  --color-tertiary: #f3ff69;
+
   --color-brandDarkBlueStandard: #0087bd;
   --color-brandDarkGreen: #76ff7a;
   --color-brandDarkYellow: #f3ff69;
 
   /* SEMANTIC */
   --color-error: #ff276f;
+
+  --color-text-primary: var(--color-baseBlack);
+  --color-text-secondary: var(--color-baseDarkGrey);
+  --color-text-invalid: var(--color-baseGrey);
+  --color-text-active: var(--color-secondary);
+
+  --color-background-white: var(--color-baseWhite);
+  --color-background-black: var(--color-baseBlack);
+  --color-background-invalid: var(--color-baseLightGrey);
+  --color-background-secondary: var(--color-secondary);
+  --color-tertiary: var(--color-tertiary);
+
+  --color-element-black: var(--color-baseBlack);
+  --color-element-white: var(--color-baseWhite);
+  --color-element-grey: var(--color-baseGrey);
+  --color-element-greyDark: var(--color-baseDarkGrey);
+  --color-element-greyLight: var(--color-baseLightGrey);
+  --color-element-primary: var(--color-primary);
+  --color-element-secondary: var(--color-secondary);
+  --color-element-tertiary: var(--color-tertiary);
 
   /* TO BE CONFIRMED : shades of brand colors*/
   --color-brandDarkBlueStandardLight: #ffffff;
@@ -28,72 +50,122 @@
 
   --color-brandDarkYellowStandardLight: #ffffff;
   --color-brandDarkYellowStandardLighter: #005f8a;
-}
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* TYPOGRAPHY */
+  --font-title: "Lexend Giga", sans-serif;
+  --font-body: "Inter", sans-serif;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* SPACING */
+  --spacing: 16px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@layer components {
+  
+
+  /* HEADINGS and TITLES */
+  .bigTitle {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .heading1 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .heading2 {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .heading3 {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .heading4 {
+    font-family: var(--font-title);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-light);
+  }
+
+  .label {
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-regular);
+  }
+
+  /* BODY */
+  .body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-light);
+  }
+  .bodyBold {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .bodySmall {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-light);
+  }
+
+  .bodySmallBold {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .caption {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.3;
+    font-weight: var(--font-weight-regular);
+  }
+
+  .buttonPrimary {
+    width: 144px;
+    height: 40px;
+    border: 1px solid var(--color-baseWhite);
+    padding: 8px;
+  }
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex;
+  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
