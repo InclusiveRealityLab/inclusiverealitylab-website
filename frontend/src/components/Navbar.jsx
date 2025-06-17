@@ -4,7 +4,7 @@ import close from "../assets/icons/close.svg";
 import menu from "../assets/icons/menu.svg";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -17,11 +17,11 @@ function Navbar() {
         } `}
       >
         <ul class="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between xl:border-2 border-violet-500  py-1 px-1.5 xl:items-center">
-          <li className="w-3">
-            <img src="/logoBlack.svg"></img>
+          <li className="w-3 cursor-pointer">
+            <img src="/logoBlack.svg" alt="logo"></img>
           </li>
-          <li class="xl:hidden" onClick={toggleMenu}>
-            <img src={isOpen ? close : menu}></img>
+          <li class="xl:hidden cursor-pointer" onClick={toggleMenu}>
+            <img src={isOpen ? close : menu} alt="toggle menu button"></img>
           </li>
         </ul>
 
