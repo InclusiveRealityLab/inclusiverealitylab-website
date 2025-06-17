@@ -19,6 +19,6 @@ assignees: skau811
 - [ ] <Criteria 1>
 - [ ] <Critera 2>
 
-## 🖼️ UI Mockups / References
+## Other references
 
 <!-- Add screenshots, Figma links, or references here if applicable. -->
