@@ -10,9 +10,12 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Routes>
+        
+          <Routes>
           <Route path="/" element={<LandingPage />} />
         </Routes>
+       
+        
       </BrowserRouter>
     </>
   );
