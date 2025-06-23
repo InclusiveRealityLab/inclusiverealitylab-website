@@ -23,7 +23,7 @@ function Navbar() {
   if (isOpen) {
     bgClass = "bg-black";
   } else if (isScrolledBeyondVisual) {
-    bgClass = "xl:bg-white bg-transparent";
+    bgClass = "bg-white bg-transparent";
   } else {
     bgClass = "bg-transparent";
   }
@@ -34,9 +34,9 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`label fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite min-h-screen xl:min-h-fit xl:max-w-75.5 w-full  mx-auto xl:bg-transparent ${
+        className={`label fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite  xl:max-w-75.5 w-full mx-auto  ${
           bgClass
-        } ${scrollDirection === "down" ? "hidden" : "block"}`}
+        } ${scrollDirection === "down" ? "hidden" : "block"} ${!isOpen ? "min-h-fit" : "min-h-screen"}`}
       >
         <ul class="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
           <li className="w-3 cursor-pointer">
