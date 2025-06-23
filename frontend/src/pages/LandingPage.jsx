@@ -4,11 +4,16 @@ import PublicationListItem from "../components/PublicationListItem";
 import NewsListItem from "../components/NewsListItem";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
+import useCustomCentering from "../hooks/useCustomCentering";
+import { useRef } from "react";
 
 function LandingPage() {
+  const marginRef = useRef();
+  useCustomCentering(marginRef);
+
   return (
     <>
-      <div class="border-4 border-blue-400  xl:flex xl:flex-col xl:justify-between xl:items-center">
+      <div class="  xl:flex xl:flex-col xl:justify-between xl:items-center ">
         {/* img container */}
         <div class="w-screen h-50 flex">
           {/* intro container */}
@@ -60,8 +65,8 @@ function LandingPage() {
             </div>
           </div>
 
-          <section class="ml-8 border-2 bg-baseBlack ">
-            <div className="flex flex-col justify-start xl:py-5 py-5  xl:ml-8 gap-1.5 xl:max-w-64.5 mx-auto border-2 border-white border-dashed  ">
+          <section class="relative border-2 bg-baseBlack xl:ml-8   ">
+            <div  ref={marginRef} className="flex flex-col justify-start  xl:py-5 py-5  gap-1.5 xl:max-w-64.5  border-2 border-white border-dashed  ">
                <h1 class="heading1 text-baseWhite ">Our latest works</h1>
             <div class="flex flex-row justify-start  gap-1.5 overflow-x-scroll">
               {/* until backend is ready! */}
@@ -69,7 +74,7 @@ function LandingPage() {
               <ProjectCard className="xl:w-30 flex-shrink-0"/>
               <ProjectCard className="xl:w-30 flex-shrink-0"/>
             </div>
-            <div class="flex flex-row justify-between xl:items-center items-end gap-1.5">
+            <div class="flex flex-row justify-between xl:items-center items-end gap-1.5 ">
               <div class="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5">
                 <p class="label text-baseWhite">move left</p>
                 <p class="label text-baseWhite">move right</p>
@@ -97,11 +102,11 @@ function LandingPage() {
 
               <div class="flex xl:flex-col flex-row flex-wrap  xl:justify-between  items-start xl:items-center xl:gap-2 gap-x-1.5 gap-y-2.5 ">
                 {/* will use a mapping function to return the latest publications once backend is ready! */}
+                {/* <PublicationListItem />
                 <PublicationListItem />
                 <PublicationListItem />
                 <PublicationListItem />
-                <PublicationListItem />
-                <PublicationListItem />
+                <PublicationListItem /> */}
               </div>
               {/* this needs to changed to a Link component */}
               <p className="labelBold">view all publications</p>
