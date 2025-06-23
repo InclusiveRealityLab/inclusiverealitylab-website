@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import close from "../assets/icons/close.svg";
 import menu from "../assets/icons/menu.svg";
+import useCustomScroll from "../hooks/useCustomScroll";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,12 +10,18 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const isScrolledBeyondVisual = useCustomScroll(800);
+
   return (
     <>
       <nav
         className={`label fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite min-h-screen xl:min-h-fit xl:max-w-75.5 w-full  mx-auto  xl:border-6 border-amber-500 xl:bg-transparent ${
-          !isOpen && "bg-transparent"
-        } `}
+      !isOpen && !isScrolledBeyondVisual
+        ? "bg-transparent"
+        : isOpen
+        ? "bg-black"
+        : "bg-black xl:bg-white"
+    }`}
       >
         <ul class="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between xl:border-2 border-violet-500  py-1 px-1.5 xl:items-center">
           <li className="w-3 cursor-pointer">
