@@ -1,13 +1,13 @@
-
-function ProjectCard({project}){
-    return(
-        <div class="flex flex-col justify-start items-center xl:max-w-35 xl:min-w-25 max-w-25 min-w-16 py-1 px-0.5 gap-1 bg-[url(/gradientImage.png)] bg-cover">
-            <h2 class="heading2 text-baseWhite">Project name</h2>
-            
-
-        </div>
-
-    )
+function ProjectCard({ project, className = "" }) {
+  return (
+    <div
+      class={`${className} flex flex-col justify-end items-end xl:max-w-36.5 xl:min-w-25 max-w-25 min-w-16  py-1 px-0.5 gap-1 h-20 bg-[url(/projectPhoto.png)] bg-cover`}
+    >
+      <h2 class="heading2 text-baseWhite line-clamp-2">
+        {project?.title ?? "Enhance human-food interaction in social settings "}
+      </h2>
+    </div>
+  );
 }
 
 export default ProjectCard;

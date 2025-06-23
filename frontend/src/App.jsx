@@ -4,17 +4,21 @@ import LandingPage from "./pages/LandingPage";
 import "./App.css";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
-        
-          <Routes>
+
+        <Routes>
           <Route path="/" element={<LandingPage />} />
         </Routes>
-       
+
+        
+
+        <Footer/>
         
       </BrowserRouter>
     </>
