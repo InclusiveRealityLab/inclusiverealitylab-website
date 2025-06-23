@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
 import close from "../assets/icons/close.svg";
 import menu from "../assets/icons/menu.svg";
-import useCustomScroll from "../hooks/useCustomScroll";
+import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
+import useScrollDirection from "../hooks/useScrollDirection";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,9 @@ function Navbar() {
   };
 
   // Change this threshold value (in pixels) according to the design specification, current placeholder image height is 800px
-  const isScrolledBeyondVisual = useCustomScroll(800);
+  const isScrolledBeyondVisual = useScrollBeyondVisual(800);
+
+  const scrollDirection = useScrollDirection();
 
 
   let bgClass = "";
@@ -26,12 +29,14 @@ function Navbar() {
   }
 
 
+
+
   return (
     <>
       <nav
         className={`label fixed top-0 left-1/2 transform -translate-x-1/2 z-50 bg-black flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite min-h-screen xl:min-h-fit xl:max-w-75.5 w-full  mx-auto xl:bg-transparent ${
           bgClass
-        }`}
+        } ${scrollDirection === "down" ? "hidden" : "block"}`}
       >
         <ul class="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
           <li className="w-3 cursor-pointer">
