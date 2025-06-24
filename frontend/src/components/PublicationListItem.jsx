@@ -1,6 +1,6 @@
 function PublicationListItem({ publication }) {
   return (
-    <div class="flex xl:flex-row-reverse flex-col justify-between items-stretch  xl:max-w-64.5 xl:h-12.5 min-w-17 max-w-25 h-27 gap-1 ">
+    <div className="flex xl:flex-row-reverse flex-col justify-between items-stretch  xl:max-w-64.5 xl:h-12.5 min-w-17 max-w-25 w-full gap-1 ">
       {/* container for publication img container */}
 
       <img
@@ -9,7 +9,7 @@ function PublicationListItem({ publication }) {
       />
 
       {/* container for pub details */}
-      <div class="flex flex-col items-start pb-0.5 xl:pt-1 xl:pr-1 xl:gap-0.5  ">
+      <div className="flex flex-col items-start pb-0.5 xl:pt-1 xl:pr-1 xl:gap-0.5  ">
         <p className="flex bodySmall mb-0.5">
           {publication?.conference ?? "CHI2024"}
         </p>
@@ -20,10 +20,10 @@ function PublicationListItem({ publication }) {
         </p>
 
         {/* container for the CTA buttons : DOI and PDF links */}
-        <div class="flex flex-row w-auto justify-center gap-1.5 ">
+        <div className="flex flex-row w-auto justify-center gap-1.5 ">
           {/* these will become separate components soon */}
-          <button class="label border-1 h-2.5 w-6.5 ">DOI</button>
-          <button class="label border-1 h-2.5 w-6.5 ">PDF</button>
+          <button className="label border-1 h-2.5 w-6.5 ">DOI</button>
+          <button className="label border-1 h-2.5 w-6.5 ">PDF</button>
         </div>
       </div>
     </div>

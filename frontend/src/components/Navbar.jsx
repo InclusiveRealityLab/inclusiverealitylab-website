@@ -38,7 +38,7 @@ function Navbar() {
           bgClass
         } ${scrollDirection === "down" ? "hidden" : "block"} ${!isOpen ? "min-h-fit" : "min-h-screen"}`}
       >
-        <ul class="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
+        <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
           <li className="w-3 cursor-pointer">
             <img src="/logoBlack.svg" alt="logo"></img>
           </li>
@@ -59,12 +59,12 @@ function Navbar() {
           <li>people</li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
             <li>
-              <button class="buttonPrimary bg-baseWhite xl:bg-background-black text-baseBlack xl:text-baseWhite">
+              <button className="buttonPrimary bg-baseWhite xl:bg-background-black text-baseBlack xl:text-baseWhite">
                 join us
               </button>
             </li>
             <li>
-              <button class="buttonPrimary  text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack">
+              <button className="buttonPrimary  text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack">
                 keep in touch
               </button>
             </li>

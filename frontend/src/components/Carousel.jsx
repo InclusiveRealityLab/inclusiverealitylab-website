@@ -34,7 +34,7 @@ function Carousel({ movementAmount }) {
       className="flex flex-col justify-start  xl:py-5 py-5  gap-1.5 xl:max-w-64.5  border-2 border-white border-dashed  "
     >
       <h1 className="heading1 text-baseWhite ">Our latest works</h1>
-      <div className="relative w-screen overflow-hidden">
+      <div className="relative xl:w-screen overflow-hidden overflow-x-scroll ">
         {/* until backend is ready! */}
         {/* <ProjectCard className="xl:w-30 flex-shrink-0" />
                 <ProjectCard className="xl:w-30 flex-shrink-0" />
@@ -66,7 +66,7 @@ function Carousel({ movementAmount }) {
           </button>
         </div>
 
-        <p className="label text-baseWhite xl:self-end">view all projects</p>
+        <p className="label text-baseWhite">view all projects</p>
       </div>
     </div>
   );
