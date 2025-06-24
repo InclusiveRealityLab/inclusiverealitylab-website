@@ -3,7 +3,12 @@ import useCustomCentering from "../hooks/useCustomCentering";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-function Carousel({movementAmount}) {
+import validRightArrow from "../assets/icons/validRightArrow.svg";
+import invalidLeftArrow from "../assets/icons/invalidLeftArrow.svg";
+import invalidRightArrow from "../assets/icons/invalidRightArrow.svg";
+import validLeftArrow from "../assets/icons/validLeftArrow.svg";
+
+function Carousel({ movementAmount }) {
   const marginRef = useRef();
   useCustomCentering(marginRef);
 
@@ -37,8 +42,8 @@ function Carousel({movementAmount}) {
         <motion.div
           className="flex gap-1.5"
           initial={{ x: 0 }}
-          animate={{ x: -currentIndex * movementAmount }} 
-          transition={{ type: "tween", duration:0.6}}
+          animate={{ x: -currentIndex * movementAmount }}
+          transition={{ type: "tween", duration: 0.6 }}
         >
           {projects.map((project) => (
             <motion.div className="xl:w-30" key={project.id}>
@@ -53,10 +58,11 @@ function Carousel({movementAmount}) {
       <div className="flex flex-row justify-between xl:items-center items-end gap-1.5 ">
         <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5">
           <button onClick={handleMoveLeft} className="label text-baseWhite">
-            move left
+            <img src={currentIndex == 0 ? invalidLeftArrow : validLeftArrow} alt="Left arrow" className="w-2.5 h-2.5" />
           </button>
+
           <button onClick={handleMoveRight} className="label text-baseWhite">
-            move right
+            <img src={currentIndex == (projects.length)-1 ? invalidRightArrow : validRightArrow} alt="Right arrow" className="w-2.5 h-2.5" />
           </button>
         </div>
 
