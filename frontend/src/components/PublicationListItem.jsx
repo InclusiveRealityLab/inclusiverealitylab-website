@@ -1,6 +1,6 @@
 function PublicationListItem({ publication }) {
   return (
-    <div className="flex xl:flex-row-reverse flex-col justify-between items-stretch  xl:max-w-64.5 xl:h-12.5 min-w-17 max-w-25 w-full gap-1 ">
+    <div className="flex xl:flex-row-reverse flex-col justify-between items-stretch  xl:max-w-64.5 xl:h-12.5 flex-grow basis-17 max-w-25  gap-1 ">
       {/* container for publication img container */}
 
       <img
