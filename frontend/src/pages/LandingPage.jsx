@@ -14,22 +14,6 @@ function LandingPage() {
   const marginRef = useRef();
   useCustomCentering(marginRef);
 
-  const projects = [
-    { id: 1, title: "Project one sample name" },
-    { id: 2, title: "Project two sample name" },
-    { id: 3, title: "Project three sample name" },
-    { id: 4, title: "Project four sample name" },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const handleMoveRight = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length);
-  };
-
-  const handleMoveLeft = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  };
-
   return (
     <>
       <div className="  xl:flex xl:flex-col xl:justify-between xl:items-center ">
@@ -115,7 +99,7 @@ function LandingPage() {
             </div>
           </section> */}
 
-          <PublicationContainer/>
+          <PublicationContainer />
 
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
             <h1 className="heading1">News</h1>
