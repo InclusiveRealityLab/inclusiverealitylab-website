@@ -13,15 +13,16 @@ function Navbar() {
   };
 
   const [modalType, setModalType] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenJoin, setIsModalOpenJoin] = useState(false);
+  const [isModalOpenContact, setIsModalOpenContact] = useState(false);
 
   const handleOpenJoinModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpenJoin(true);
     setModalType("join");
   };
 
   const handleOpenContactModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpenContact(true);
     setModalType("contact");
   };
 
@@ -76,9 +77,13 @@ function Navbar() {
               >
                 join us
               </button>
-              {isModalOpen && (
-                <Modal onClose={() => setIsModalOpen(false)} type={modalType}>
-                  <h1 className="heading1">
+              {isModalOpenJoin && (
+                <Modal
+                  onClose={() => setIsModalOpenJoin(false)}
+                  type={modalType}
+                >
+                  <div className="gap-2">
+                    <h1 className="heading1">
                       Looking for opportunities to join us?
                     </h1>
                     <p className="body">
@@ -90,15 +95,41 @@ function Navbar() {
                       from our team or our director will be happy to get back to
                       you soon.
                     </p>
-                    
-                  
+                  </div>
                 </Modal>
               )}
             </li>
             <li>
-              <button className="buttonPrimary  text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack">
+              <button
+                className="buttonPrimary  text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack"
+                onClick={() => handleOpenContactModal()}
+              >
                 keep in touch
               </button>
+              {isModalOpenContact && (
+                <Modal
+                  onClose={() => setIsModalOpenContact(false)}
+                  type={modalType}
+                >
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2 ">
+                      <h1 className="heading1">Let's keep in touch!</h1>
+                      <p className="body">
+                        Drop a message to say hi, or send an email to
+                        inclusiverealitylab@gmail.com, we will get back to you
+                        soon.
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center justify-between gap-1.5">
+                      <input type="text" name="contactName" placeholder="Name" className="bg-background-white w-full h-2.5 border-1 border-black px-1 body" />
+                      <input type="email" name="contactEmail" placeholder="Email" className="bg-background-white w-full h-2.5 border-1 border-black px-1 body" />
+                      <textarea type="text" name="contactEmail" placeholder="Message" className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body" />
+                      <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5">send</button>
+
+                    </div>
+                  </div>
+                </Modal>
+              )}
             </li>
           </ul>
         </ul>
