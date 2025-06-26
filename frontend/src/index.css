@@ -30,7 +30,7 @@
   --color-background-black: var(--color-baseBlack);
   --color-background-invalid: var(--color-baseLightGrey);
   --color-background-secondary: var(--color-secondary);
-  --color-tertiary: var(--color-tertiary);
+  --color-background-tertiary: var(--color-tertiary);
 
   --color-element-black: var(--color-baseBlack);
   --color-element-white: var(--color-baseWhite);
