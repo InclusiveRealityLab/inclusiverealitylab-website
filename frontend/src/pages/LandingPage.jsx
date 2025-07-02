@@ -8,7 +8,7 @@ import useCustomCentering from "../hooks/useCustomCentering";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Carousel from "../components/Carousel";
-import PublicationContainer from "./PublicationsContainer.jsx";
+import PublicationContainer from "../components/PublicationsContainer";
 
 function LandingPage() {
   const marginRef = useRef();
