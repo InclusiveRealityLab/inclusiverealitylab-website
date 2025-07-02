@@ -26,6 +26,10 @@
   --color-text-invalid: var(--color-baseGrey);
   --color-text-active: var(--color-secondary);
 
+  --color-background-primary: var(--color-primary);
+  --color-background-secondary: var(--color-secondary);
+  --color-background-tertiary: var(--color-tertiary);
+
   --color-background-white: var(--color-baseWhite);
   --color-background-black: var(--color-baseBlack);
   --color-background-invalid: var(--color-baseLightGrey);
@@ -60,8 +64,6 @@
 }
 
 @layer components {
-  
-
   /* HEADINGS and TITLES */
   .bigTitle {
     font-family: var(--font-title);
@@ -119,7 +121,7 @@
     font-weight: var(--font-weight-regular);
   }
 
-  .labelBold{
+  .labelBold {
     font-family: var(--font-title);
     font-size: 0.75rem;
     line-height: 1.5;
@@ -183,8 +185,7 @@ body {
   display: flex;
   place-items: center;
   overflow-x: hidden;
-  
-  
+
   /* min-width: 320px;
   min-height: 100vh; */
 }
