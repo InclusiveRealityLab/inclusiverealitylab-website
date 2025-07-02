@@ -5,6 +5,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProjectsPage from "./pages/ProjectsPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
         </Routes>
 
         
