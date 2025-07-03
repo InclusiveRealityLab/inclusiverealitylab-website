@@ -9,6 +9,8 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Carousel from "../components/Carousel";
 import PublicationContainer from "../components/PublicationsContainer";
+import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
+import publications from "../sampleData/publications";
 
 function LandingPage() {
   const marginRef = useRef();
@@ -82,24 +84,10 @@ function LandingPage() {
             their full potential.
           </p>
 
-          {/* <section className="flex flex-col bg-background-white xl:justify-items-start items-start w-screen ">
-            <div className="flex flex-col justify-between items-start xl:items-center py-5 gap-4 xl:w-64.5 mx-auto border-2 bg-basewhite">
-              <h1 className="heading1 self-start ">Recent Publications </h1>
-
-              <div className="flex xl:flex-col flex-row flex-wrap  xl:justify-between  items-start xl:items-center xl:gap-2 gap-x-1.5 gap-y-2.5 ">
-               
-                <PublicationListItem />
-                <PublicationListItem />
-                <PublicationListItem />
-                <PublicationListItem />
-                <PublicationListItem />
-              </div>
-              
-              <p className="labelBold">view all publications</p>
-            </div>
-          </section> */}
-
-          <PublicationContainer />
+          <PublicationSectionWrapper headingContent="Recent Publications">
+            <PublicationContainer publications={publications} />
+            <p className="labelBold">view all publications</p>
+          </PublicationSectionWrapper>
 
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
             <h1 className="heading1">News</h1>
