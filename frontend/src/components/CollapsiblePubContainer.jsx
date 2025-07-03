@@ -1,6 +1,9 @@
 import { useState } from "react";
 import PublicationsContainer from "./PublicationsContainer";
 
+import up from "../assets/icons/up.svg";
+import down from "../assets/icons/down.svg";
+
 function CollapsiblePubContainer({ data }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -15,7 +18,7 @@ function CollapsiblePubContainer({ data }) {
               setIsExpanded((prev) => !prev);
             }}
           >
-            {isExpanded ? "hide" : "show"}
+            <img src={isExpanded ? up : down} />
           </button>
         </div>
         {isExpanded && <PublicationsContainer publications={data.items} />}
