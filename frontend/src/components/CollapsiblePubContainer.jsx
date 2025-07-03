@@ -9,11 +9,11 @@ function CollapsiblePubContainer({ data }) {
 
   return (
     <>
-      <div className="flex flex-col bg-cyan-700 w-full ">
-        <div className="flex flex-row w-full justify-between  py-0.5">
+      <div className="flex flex-col w-full gap-1.5">
+        <div className="flex flex-row w-full justify-between items-center py-0.5">
           <h2 className="heading4 ">{data.year}</h2>
           <button
-            className="label bg-background-primary text-white"
+            className="label text-white"
             onClick={() => {
               setIsExpanded((prev) => !prev);
             }}
