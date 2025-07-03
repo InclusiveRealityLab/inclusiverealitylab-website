@@ -5,6 +5,7 @@ import menu from "../assets/icons/menu.svg";
 import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
 import useScrollDirection from "../hooks/useScrollDirection";
 import Modal from "./modals/Modal";
+import { Link } from "react-router";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +67,7 @@ function Navbar() {
           } xl:flex `}
         >
           <li>home</li>
-          <li>projects</li>
+          <li><Link to="/projects" >projects</Link></li>
           <li>publications</li>
           <li>people</li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
