@@ -41,7 +41,7 @@ function LandingPage() {
         <div className="relative w-screen h-auto z-0">
           {/* for the gradient background */}
 
-          <div className="absolute top-4 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10"></div>
+          <div className="absolute top-20 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10"></div>
 
           <div className="relative z-10">
             <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">

@@ -6,6 +6,7 @@ import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
 import useScrollDirection from "../hooks/useScrollDirection";
 import Modal from "./modals/Modal";
 import { Link } from "react-router";
+import NavigationTab from "./tabs/NavigationTab";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,10 +67,18 @@ function Navbar() {
             isOpen ? "block" : "hidden"
           } xl:flex `}
         >
-          <li><Link to="/" >home</Link></li>
-          <li><Link to="/projects" >projects</Link></li>
-          <li><Link to="/publications" >publications</Link></li>
-          <li><Link to="/people" >people</Link></li>
+          <li>
+            <NavigationTab label="home" linkAddress="/" />
+          </li>
+          <li>
+            <NavigationTab label="projects" linkAddress="/projects" />
+          </li>
+          <li>
+            <NavigationTab label="publications" linkAddress="/publications" />
+          </li>
+          <li>
+            <NavigationTab label="people" linkAddress="/people" />
+          </li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
             <li>
               <button
@@ -122,11 +131,27 @@ function Navbar() {
                       </p>
                     </div>
                     <div className="flex flex-col items-center justify-between gap-1.5">
-                      <input type="text" name="contactName" placeholder="Name" className="bg-background-white w-full h-2.5 border-1 border-black px-1 body" />
-                      <input type="email" name="contactEmail" placeholder="Email" className="bg-background-white w-full h-2.5 border-1 border-black px-1 body" />
-                      <textarea type="text" name="contactEmail" placeholder="Message" className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body" />
-                      <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5">send</button>
-
+                      <input
+                        type="text"
+                        name="contactName"
+                        placeholder="Name"
+                        className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
+                      />
+                      <input
+                        type="email"
+                        name="contactEmail"
+                        placeholder="Email"
+                        className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
+                      />
+                      <textarea
+                        type="text"
+                        name="contactEmail"
+                        placeholder="Message"
+                        className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
+                      />
+                      <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5">
+                        send
+                      </button>
                     </div>
                   </div>
                 </Modal>
