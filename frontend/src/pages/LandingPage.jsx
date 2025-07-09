@@ -13,6 +13,7 @@ import PublicationContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import publications from "../sampleData/publications";
 
+
 function LandingPage() {
   const marginRef = useRef();
   useCustomCentering(marginRef);
@@ -38,75 +39,80 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="w-screen h-auto bg-[url(/gradientImage.png)] bg-cover bg-no-repeat">
+        
+
+        <div className="w-screen h-auto blurred-bg z-0">
           {/* for the gradient background */}
 
-          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">
-            <p className="heading3">Our work centers on three key themes</p>
+        
 
-            <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5 ">
-              <div className="flex flex-col justify-center items-center gap-1 ">
-                <p className="heading2">Understand</p>
-                <p className="body text-center">
-                  Exploring ways to sense and interpret cognitive, behavioral,
-                  and emotions states.
-                </p>
-              </div>
+            <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">
+              <p className="heading3">Our work centers on three key themes</p>
 
-              <div className="flex  flex-col justify-center items-center gap-1">
-                <p className="heading2">Assist</p>
-                <p className="body text-center">
-                  Designing technologies that support individuals and foster
-                  better collaboration.
-                </p>
-              </div>
+              <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5 ">
+                <div className="flex flex-col justify-center items-center gap-1 ">
+                  <p className="heading2">Understand</p>
+                  <p className="body text-center">
+                    Exploring ways to sense and interpret cognitive, behavioral,
+                    and emotions states.
+                  </p>
+                </div>
 
-              <div className="flex flex-col justify-center items-center gap-1">
-                <p className="heading2">Augment</p>
-                <p className="body text-center">
-                  Exploring ways to sense and interpret cognitive, behavioral,
-                  and emotions states.
-                </p>
+                <div className="flex  flex-col justify-center items-center gap-1">
+                  <p className="heading2">Assist</p>
+                  <p className="body text-center">
+                    Designing technologies that support individuals and foster
+                    better collaboration.
+                  </p>
+                </div>
+
+                <div className="flex flex-col justify-center items-center gap-1">
+                  <p className="heading2">Augment</p>
+                  <p className="body text-center">
+                    Exploring ways to sense and interpret cognitive, behavioral,
+                    and emotions states.
+                  </p>
+                </div>
               </div>
             </div>
+
+            <section className="relative border-2 bg-baseBlack xl:ml-8   ">
+              <Carousel movementAmount="480" />
+            </section>
+
+            <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
+              Our research explores how reality itself - both physical and digital
+              - can be leveraged to understand cognitive, behavioral, and
+              emotional states, assist individuals in their daily lives, and
+              augment human abilities. <br />
+              By designing adaptive and empowering technologies, we aim to create
+              a world where diverse individuals can thrive, connect, and reach
+              their full potential.
+            </p>
+
+            <PublicationSectionWrapper headingContent="Recent Publications">
+              <PublicationContainer publications={publications.slice(0,4)} />
+              <Link to="/publications" className="xl:self-end"><p className="labelBold">view all publications</p></Link>
+            </PublicationSectionWrapper>
+
+            <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
+              <h1 className="heading1">News</h1>
+              {/* news list items container */}
+              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll border-3 ">
+                {/* news list item */}
+                {/* will use a mapping function to return the latest news once backend is ready! */}
+
+                <NewsListItem />
+                <NewsListItem />
+                <NewsListItem />
+                <NewsListItem />
+                <NewsListItem />
+                <NewsListItem />
+              </div>
+            </section>
           </div>
-
-          <section className="relative border-2 bg-baseBlack xl:ml-8   ">
-            <Carousel movementAmount="480" />
-          </section>
-
-          <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
-            Our research explores how reality itself - both physical and digital
-            - can be leveraged to understand cognitive, behavioral, and
-            emotional states, assist individuals in their daily lives, and
-            augment human abilities. <br />
-            By designing adaptive and empowering technologies, we aim to create
-            a world where diverse individuals can thrive, connect, and reach
-            their full potential.
-          </p>
-
-          <PublicationSectionWrapper headingContent="Recent Publications">
-            <PublicationContainer publications={publications.slice(0,4)} />
-            <Link to="/publications" className="xl:self-end"><p className="labelBold">view all publications</p></Link>
-          </PublicationSectionWrapper>
-
-          <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
-            <h1 className="heading1">News</h1>
-            {/* news list items container */}
-            <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll border-3 ">
-              {/* news list item */}
-              {/* will use a mapping function to return the latest news once backend is ready! */}
-
-              <NewsListItem />
-              <NewsListItem />
-              <NewsListItem />
-              <NewsListItem />
-              <NewsListItem />
-              <NewsListItem />
-            </div>
-          </section>
-        </div>
       </div>
+      
     </>
   );
 }
