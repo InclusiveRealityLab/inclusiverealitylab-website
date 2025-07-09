@@ -1,4 +1,4 @@
-import PeopleCard from "./peopleCard";
+import PeopleCard from "./PeopleCard";
 import PeopleContainer from "./PeopleContainer";
 
 function CategoryContainer({ category, people }) {
@@ -16,7 +16,7 @@ function CategoryContainer({ category, people }) {
           </div>
 
           {/* Designer, Engineer, Mental Health Manager */}
-          <div className="flex flex-row flex-wrap w-full gap-1.5 border-2 border-amber-400">
+          <div className="flex flex-row flex-wrap w-full gap-1.5 ">
             <PeopleCard person={people.find((p) => p.role === "designer")} />
             <PeopleCard person={people.find((p) => p.role === "engineer")} />
             <PeopleCard

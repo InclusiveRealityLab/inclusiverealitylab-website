@@ -1,4 +1,4 @@
-import PeopleCard from "./peopleCard";
+import PeopleCard from "./PeopleCard";
 
 function PeopleContainer({ data }) {
   return (

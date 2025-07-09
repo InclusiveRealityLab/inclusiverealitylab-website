@@ -3,7 +3,7 @@ function PeopleCard({ person }) {
   return (
     <>
       <div
-        className={`flex flex-col items-center gap-1 border-2 
+        className={`flex flex-col items-center gap-1 
         xl:w-15  w-9.5 
         ${isActive ? "xl:h-22.5 h-20 " : "xl:h-6 h-6"}
       `}
@@ -17,7 +17,7 @@ function PeopleCard({ person }) {
             />
           </div>
         )}
-        <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] border-2 border-blue-500">
+        <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
           <div className="flex flex-col justify-between  items-center heading4 ">
             <p>{person?.givenName}</p>
             <p>{person?.familyName.toUpperCase()}</p>
