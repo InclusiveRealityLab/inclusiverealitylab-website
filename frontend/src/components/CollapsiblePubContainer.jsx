@@ -4,8 +4,8 @@ import PublicationsContainer from "./PublicationsContainer";
 import up from "../assets/icons/up.svg";
 import down from "../assets/icons/down.svg";
 
-function CollapsiblePubContainer({ data,children }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function CollapsiblePubContainer({ data,children,isExpandedContainer }) {
+  const [isExpanded, setIsExpanded] = useState(isExpandedContainer);
   
 
   return (
