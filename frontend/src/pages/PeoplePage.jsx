@@ -1,7 +1,7 @@
 import people from "../sampleData/people";
 import peopleCategories from "../sampleData/peopleCategories";
 import peopleRoles from "../sampleData/peopleRole";
-import PeopleCard from "../components/peopleCard";
+import PeopleCard from "../components/PeopleCard";
 import CategoryContainer from "../components/CategoryContainer";
 
 function PeoplePage() {
