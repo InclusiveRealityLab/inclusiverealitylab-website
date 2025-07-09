@@ -7,6 +7,7 @@ import ProjectCard from "../components/ProjectCard";
 import useCustomCentering from "../hooks/useCustomCentering";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router";
 import Carousel from "../components/Carousel";
 import PublicationContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
@@ -86,7 +87,7 @@ function LandingPage() {
 
           <PublicationSectionWrapper headingContent="Recent Publications">
             <PublicationContainer publications={publications.slice(0,4)} />
-            <p className="labelBold xl:self-end">view all publications</p>
+            <Link to="/publications" className="xl:self-end"><p className="labelBold">view all publications</p></Link>
           </PublicationSectionWrapper>
 
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
