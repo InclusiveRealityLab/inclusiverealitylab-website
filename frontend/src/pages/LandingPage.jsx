@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import gradientBackground from "../assets/gradientBackground.svg";
+
 import PublicationListItem from "../components/PublicationListItem";
 import NewsListItem from "../components/NewsListItem";
 import Footer from "../components/Footer";
@@ -38,7 +38,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="w-screen h-auto bg-[url(/gradientImage.png)] bg-cover bg-no-repeat border-2">
+        <div className="w-screen h-auto bg-[url(/gradientImage.png)] bg-cover bg-no-repeat">
           {/* for the gradient background */}
 
           <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">
