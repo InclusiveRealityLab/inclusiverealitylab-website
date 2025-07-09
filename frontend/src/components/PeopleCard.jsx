@@ -1,3 +1,4 @@
+import profilePhoto from "../assets/images/profilePhoto.jpg";
 function PeopleCard({ person }) {
   const isActive = ["lab","collaborator"].includes(person.category);
   return (
@@ -11,7 +12,7 @@ function PeopleCard({ person }) {
         {isActive && (
           <div className="xl:w-15 xl:h-15 w-9.5 h-9.5">
             <img
-              src="../profilePhoto.jpg"
+              src={person.profilePhoto ? person.profilePhoto : profilePhoto}
               alt="Profile"
               className=" rounded-full object-cover grayscale hover:grayscale-0"
             />

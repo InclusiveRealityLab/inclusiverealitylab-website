@@ -1,0 +1,20 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon/loader">
+<rect id="0 deg" opacity="0.4" x="19" y="8" width="2" height="5" fill="black">
+                                    <animate attributeName="opacity" values="0.4;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="45 deg" opacity="0.4" x="10.8076" y="12.2217" width="2" height="5" transform="rotate(-45 10.8076 12.2217)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.4;1;1;1;1;1;1;1;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="90 deg" opacity="0.4" x="8" y="21" width="2" height="5" transform="rotate(-90 8 21)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;0.4;1;1;1;1;1;1;1;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="135 deg" opacity="0.4" x="12.2217" y="29.1924" width="2" height="5" transform="rotate(-135 12.2217 29.1924)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;1;1;1;1;1;1;1;0.4;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="180 deg" opacity="0.4" x="21" y="32" width="2" height="5" transform="rotate(-180 21 32)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;1;1;1;1;1;1;1;0.4;0.4;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="225 deg" opacity="0.4" x="29.1924" y="27.7783" width="2" height="5" transform="rotate(135 29.1924 27.7783)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;1;1;1;1;1;1;1;0.4;0.4;0.4;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="270 deg" opacity="0.4" x="32" y="19" width="2" height="5" transform="rotate(90 32 19)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;1;1;1;1;1;1;1;0.4;0.4;0.4;0.4;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+<rect id="315 deg" opacity="0.4" x="27.7783" y="10.8076" width="2" height="5" transform="rotate(45 27.7783 10.8076)" fill="black">
+                                    <animate attributeName="opacity" values="0.4;0.4;1;1;1;1;1;1;1;0.4;0.4;0.4;0.4;0.4;0.4;0.4" begin="0s" dur="3.2s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.067;0.133;0.2;0.267;0.333;0.4;0.467;0.533;0.6;0.667;0.733;0.8;0.867;0.933;1"/></rect>
+</g>
+</svg>
