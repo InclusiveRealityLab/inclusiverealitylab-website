@@ -7,6 +7,8 @@ import useScrollDirection from "../hooks/useScrollDirection";
 import Modal from "./modals/Modal";
 import { Link } from "react-router";
 import NavigationTab from "./tabs/NavigationTab";
+import ButtonPrimary from "./buttons/ButtonPrimary";
+import ButtonSecondary from "./buttons/ButtonSecondary";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,12 +83,11 @@ function Navbar() {
           </li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
             <li>
-              <button
-                className="buttonPrimary bg-baseWhite xl:bg-background-black text-baseBlack xl:text-baseWhite"
+              <ButtonPrimary
+                label="join us"
                 onClick={() => handleOpenJoinModal()}
-              >
-                join us
-              </button>
+              />
+
               {isModalOpenJoin && (
                 <Modal
                   onClose={() => setIsModalOpenJoin(false)}
@@ -110,12 +111,10 @@ function Navbar() {
               )}
             </li>
             <li>
-              <button
-                className="buttonPrimary  text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack"
+              <ButtonSecondary
+                label="keep in touch"
                 onClick={() => handleOpenContactModal()}
-              >
-                keep in touch
-              </button>
+              />
               {isModalOpenContact && (
                 <Modal
                   onClose={() => setIsModalOpenContact(false)}
