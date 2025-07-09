@@ -85,8 +85,8 @@ function LandingPage() {
           </p>
 
           <PublicationSectionWrapper headingContent="Recent Publications">
-            <PublicationContainer publications={publications} />
-            <p className="labelBold">view all publications</p>
+            <PublicationContainer publications={publications.slice(0,4)} />
+            <p className="labelBold xl:self-end">view all publications</p>
           </PublicationSectionWrapper>
 
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">

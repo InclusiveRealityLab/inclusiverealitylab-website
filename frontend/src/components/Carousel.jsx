@@ -31,22 +31,18 @@ function Carousel({ movementAmount }) {
   return (
     <div
       ref={marginRef}
-      className="flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-1.5 xl:max-w-64.5  "
+      className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-1.5 xl:max-w-64.5  "
     >
       <h1 className="heading1 text-baseWhite ">Our latest works</h1>
-      <div className="relative xl:w-screen overflow-hidden overflow-x-scroll ">
-        {/* until backend is ready! */}
-        {/* <ProjectCard className="xl:w-30 flex-shrink-0" />
-                <ProjectCard className="xl:w-30 flex-shrink-0" />
-                <ProjectCard className="xl:w-30 flex-shrink-0" /> */}
+      <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll ">
         <motion.div
-          className="flex gap-1.5"
+          className="flex gap-1.5 xl:ml-5"
           initial={{ x: 0 }}
           animate={{ x: -currentIndex * movementAmount }}
           transition={{ type: "tween", duration: 0.6 }}
         >
           {projects.map((project) => (
-            <motion.div className="xl:w-30" key={project.id}>
+            <motion.div className="xl:w-30 " key={project.id}>
               <ProjectCard
                 project={project}
                 className="xl:w-30 flex-shrink-0"
@@ -58,11 +54,23 @@ function Carousel({ movementAmount }) {
       <div className="flex flex-row justify-between xl:items-center items-end gap-1.5 ">
         <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5">
           <button onClick={handleMoveLeft} className="label text-baseWhite">
-            <img src={currentIndex == 0 ? invalidLeftArrow : validLeftArrow} alt="Left arrow" className="w-2.5 h-2.5" />
+            <img
+              src={currentIndex == 0 ? invalidLeftArrow : validLeftArrow}
+              alt="Left arrow"
+              className="w-2.5 h-2.5"
+            />
           </button>
 
           <button onClick={handleMoveRight} className="label text-baseWhite">
-            <img src={currentIndex == (projects.length)-1 ? invalidRightArrow : validRightArrow} alt="Right arrow" className="w-2.5 h-2.5" />
+            <img
+              src={
+                currentIndex == projects.length - 1
+                  ? invalidRightArrow
+                  : validRightArrow
+              }
+              alt="Right arrow"
+              className="w-2.5 h-2.5"
+            />
           </button>
         </div>
 
