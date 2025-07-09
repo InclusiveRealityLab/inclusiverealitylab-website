@@ -16,6 +16,12 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const handleCloseMenuMobile = () =>{
+    if (isOpen){
+      setIsOpen(false);
+    }
+  }
+
   const [modalType, setModalType] = useState(null);
   const [isModalOpenJoin, setIsModalOpenJoin] = useState(false);
   const [isModalOpenContact, setIsModalOpenContact] = useState(false);
@@ -56,7 +62,9 @@ function Navbar() {
       >
         <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
           <li className="w-3 cursor-pointer">
-            <img src="/logoBlack.svg" alt="logo"></img>
+            <Link to="/">
+              <img src="/logoBlack.svg" alt="logo"></img>
+            </Link>
           </li>
           <li className="xl:hidden cursor-pointer" onClick={toggleMenu}>
             <img src={isOpen ? close : menu} alt="toggle menu button"></img>
@@ -70,16 +78,16 @@ function Navbar() {
           } xl:flex `}
         >
           <li>
-            <NavigationTab label="home" linkAddress="/" />
+            <NavigationTab label="home" linkAddress="/" onClick={handleCloseMenuMobile}/>
           </li>
           <li>
-            <NavigationTab label="projects" linkAddress="/projects" />
+            <NavigationTab label="projects" linkAddress="/projects" onClick={handleCloseMenuMobile}/>
           </li>
           <li>
-            <NavigationTab label="publications" linkAddress="/publications" />
+            <NavigationTab label="publications" linkAddress="/publications" onClick={handleCloseMenuMobile} />
           </li>
           <li>
-            <NavigationTab label="people" linkAddress="/people" />
+            <NavigationTab label="people" linkAddress="/people" onClick={handleCloseMenuMobile} />
           </li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
             <li>
@@ -148,7 +156,7 @@ function Navbar() {
                         placeholder="Message"
                         className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
                       />
-                      <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5">
+                      <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5 hover:text-secondary">
                         send
                       </button>
                     </div>
