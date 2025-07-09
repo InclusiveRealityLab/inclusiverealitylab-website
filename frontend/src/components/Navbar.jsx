@@ -69,7 +69,7 @@ function Navbar() {
           <li><Link to="/" >home</Link></li>
           <li><Link to="/projects" >projects</Link></li>
           <li><Link to="/publications" >publications</Link></li>
-          <li>people</li>
+          <li><Link to="/people" >people</Link></li>
           <ul className="xl:flex-row xl:justify-between xl:gap-3 gap-1.5 flex flex-col">
             <li>
               <button

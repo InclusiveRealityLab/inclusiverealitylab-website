@@ -40,7 +40,7 @@ function LandingPage() {
         <div className="w-screen h-auto bg-[url(/gradientImage.png)] bg-cover bg-no-repeat border-2">
           {/* for the gradient background */}
 
-          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto border-2 ">
+          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">
             <p className="heading3">Our work centers on three key themes</p>
 
             <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5 ">
@@ -74,7 +74,7 @@ function LandingPage() {
             <Carousel movementAmount="480" />
           </section>
 
-          <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto border-2">
+          <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
             Our research explores how reality itself - both physical and digital
             - can be leveraged to understand cognitive, behavioral, and
             emotional states, assist individuals in their daily lives, and

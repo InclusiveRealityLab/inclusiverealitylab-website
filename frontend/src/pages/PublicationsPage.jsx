@@ -4,14 +4,14 @@ import publications from "../sampleData/publications";
 
 function PublicationsPage() {
   return (
-    <>
+    <div className="mt-4 border-amber-400">
       <PublicationSectionWrapper headingContent="Publications">
         {[...new Set(publications.map((pub) => pub.year))].map((year) => {
           const items = publications.filter((pub) => pub.year === year);
           return <CollapsiblePubContainer key={year} data={{ year, items }} />;
         })}
       </PublicationSectionWrapper>
-    </>
+    </div>
   );
 }
 
