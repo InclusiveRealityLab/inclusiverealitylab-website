@@ -1,5 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
 import CREDENTIALS from "../../credentials.json" assert { type: "json" };
 import { google } from "googleapis";
+
+
 
 const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 

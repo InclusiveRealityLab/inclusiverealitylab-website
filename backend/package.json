@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "./src/app.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.js",
@@ -16,7 +16,8 @@
     "axios": "^1.10.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "googleapis": "^153.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
