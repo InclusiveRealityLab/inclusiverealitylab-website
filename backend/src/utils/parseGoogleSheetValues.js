@@ -6,7 +6,7 @@ export function parseGoogleSheetValues(data) {
   return rows.map((row) => {
     return Object.fromEntries(
       headers.map((header, i) => {
-        return [header, row[i] || ""];
+        return [header.toLowerCase(), row[i] || ""];
       })
     );
   });
