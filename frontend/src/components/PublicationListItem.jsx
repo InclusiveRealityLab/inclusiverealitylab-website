@@ -1,6 +1,6 @@
 function PublicationListItem({ publication }) {
   return (
-    <div className="flex xl:flex-row-reverse flex-col justify-between items-stretch xl:w-full xl:max-w-64.5 xl:h-12.5 flex-grow basis-17 max-w-25  gap-1 ">
+    <div className="flex xl:flex-row-reverse flex-col justify-between items-stretch xl:w-full xl:max-w-64.5 xl:h-12.5 flex-grow basis-17 max-w-25 xl:basis-0  gap-1 border-1 border-blue-500 ">
       <img
         src="/projectPhoto.png"
         className="xl:w-20 xl:h-12.5 w-full h-full "
@@ -12,7 +12,7 @@ function PublicationListItem({ publication }) {
           {publication?.conference ?? "CHI2024"}
         </p>
 
-        <p className="bodyBigBold overflow-hidden text-ellipsis line-clamp-2  xl:mb-1 mb-1.5">
+        <p className="bodyBigBold overflow-hidden text-ellipsis line-clamp-2  xl:mb-1 mb-1.5 border-1 border-pink-500">
           {publication?.title ??
             "Cymatics Cup: Shape-Changing Drinks by Leveraging Cymatics This is longer should be clamped at the end over here. Let us write more and see the result of how this works, its still showing  "}
         </p>
