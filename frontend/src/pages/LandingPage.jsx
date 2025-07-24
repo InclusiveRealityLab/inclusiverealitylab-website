@@ -5,17 +5,36 @@ import NewsListItem from "../components/NewsListItem";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import useCustomCentering from "../hooks/useCustomCentering";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import Carousel from "../components/Carousel";
 import PublicationContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import publications from "../sampleData/publications";
+import API_BASE_URL from "../sampleData/constants";
+import axios from "axios";
 
 function LandingPage() {
   const marginRef = useRef();
   useCustomCentering(marginRef);
+  const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadNews() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/news`);
+        const data = await reponse.data;
+        setNews(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching news items", error);
+      }
+    }
+    loadNews();
+  }, []);
 
   return (
     <>
@@ -98,16 +117,14 @@ function LandingPage() {
             <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
               <h1 className="heading1">News</h1>
               {/* news list items container */}
-              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll border-3 ">
-                {/* news list item */}
-                {/* will use a mapping function to return the latest news once backend is ready! */}
-
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
+              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll  ">
+                {isLoading ? (
+                  <p>loading spinner here</p>
+                ) : (
+                  news.map((newsItem, index) => {
+                    return <NewsListItem news={newsItem} key={index} />;
+                  })
+                )}
               </div>
             </section>
           </div>
