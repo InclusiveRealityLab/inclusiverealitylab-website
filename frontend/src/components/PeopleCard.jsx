@@ -1,4 +1,4 @@
-import profilePhoto from "../assets/images/profilePhoto.jpg";
+import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png"; 
 import splitName from "../utils/splitName";
 
 function PeopleCard({ person }) {
@@ -10,7 +10,7 @@ function PeopleCard({ person }) {
         <>
           <div
             className={`flex flex-col items-center gap-1 
-        xl:w-15  w-9.5 
+        xl:w-15  w-9.5 group
         ${
           ["Lab", "Collaborator"].includes(person.category)
             ? "xl:h-22.5 h-20 "
@@ -19,10 +19,10 @@ function PeopleCard({ person }) {
       `}
           >
             {["Lab", "Collaborator"].includes(person.category) && (
-              <div className="xl:w-15 xl:h-15 w-9.5 h-9.5">
+              <div className="xl:w-15 xl:h-15 w-9.5 h-9.5 ">
                 <img
-                  src={person?.profile ? person.profile : profilePhoto}
-                  className=" w-full h-full rounded-full object-cover grayscale hover:grayscale-0"
+                  src={person?.profile ? person.profile : defaultProfilePhoto}
+                  className=" w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
                 ></img>
               </div>
             )}
