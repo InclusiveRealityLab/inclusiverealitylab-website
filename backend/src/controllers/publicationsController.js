@@ -51,7 +51,7 @@ const fetchVenueData = async () => {
   return parseGoogleSheetValues(response.data.values || []);
 };
 
-// --- Express handlers ---
+
 const getPubData = async (req, res) => {
   try {
     const parsed = await fetchPubData();
@@ -74,21 +74,30 @@ const getVenueData = async (req, res) => {
 
 const getAllPublications = async (req, res) => {
   try {
+    const offset = parseInt(req.query.offset) || 0;
+    const limit = parseInt(req.query.limit) || 20;
+
     let publicationsRaw = await fetchPubData();
+    publicationsRaw = publicationsRaw.filter((pub)=>pub["status"].toLowerCase() == "accepted" && pub["publish date"] != ""); // only those which have been accepted and whose publish date is present
     let venuesRaw = await fetchVenueData();
 
-    for (let i = 0; i < publicationsRaw.length; i++) {
-      for (let j = 0; j < venuesRaw.length; j++) {
-        // users[j].product=[]
-        if (publicationsRaw[i]["vanue id"] === venuesRaw[j].id) {
-          publications[i].venue = venuesRaw[j]["venue name"];
-        }
-      }
+    
+    publicationsRaw.sort((a, b) =>
+      new Date(b["publish date"]) - new Date(a["publish date"])
+    );
+
+    // apply pagination BEFORE enrichment
+    const paginatedSlice = publicationsRaw.slice(offset, offset + limit);
+
+    
+    for (let pub of paginatedSlice) {
+      const matchingVenue = venuesRaw.find(
+        (venue) => venue.id === pub["venue id"]
+      );
+      pub.venue = matchingVenue?.["venue name"] || null;
     }
 
-    const publicationsDetailed = [...publicationsRaw];
-
-    res.json(publicationsDetailed);
+    res.json(paginatedSlice);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
