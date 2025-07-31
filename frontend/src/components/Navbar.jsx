@@ -1,4 +1,5 @@
-import { use, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 import close from "../assets/icons/close.svg";
 import menu from "../assets/icons/menu.svg";
@@ -36,8 +37,15 @@ function Navbar() {
     setModalType("contact");
   };
 
-  // Change this threshold value (in pixels) according to the design specification, current placeholder image height is 800px
-  const isScrolledBeyondVisual = useScrollBeyondVisual(800);
+  // Change this threshold value (in pixels) according to the design specification, current placeholder image height is 800px for the visual in the landing page
+
+  const location = useLocation();
+  const scrollThreshold = useMemo(() => {
+    return location.pathname === "/" ? 800 : 10;
+  }, [location.pathname]);
+
+
+  const isScrolledBeyondVisual = useScrollBeyondVisual(scrollThreshold);
 
   const scrollDirection = useScrollDirection();
 
@@ -57,7 +65,9 @@ function Navbar() {
       {/* <Modal /> */}
       <div
         className={`flex w-screen fixed top-0 left-1/2 transform -translate-x-1/2 z-50 ${bgClass}  ${
-          scrollDirection === "down" ? "hidden" : "block"
+          scrollDirection === "down" && isScrolledBeyondVisual
+            ? "hidden"
+            : "block"
         } ${!isOpen ? "min-h-fit" : "min-h-screen"} `}
       >
         <nav

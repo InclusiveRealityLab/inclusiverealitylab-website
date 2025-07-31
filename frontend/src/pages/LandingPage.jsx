@@ -40,9 +40,7 @@ function LandingPage() {
     <>
       <div className="  xl:flex xl:flex-col xl:justify-between xl:items-center ">
         {/* img container */}
-        <div className="w-screen h-50 flex">
-          {/* intro container */}
-
+        <div className="w-screen h-50 flex"> 
           <img
             src="/HeroImage.png"
             alt="Hero"
