@@ -27,7 +27,7 @@ function LandingPage() {
   useEffect(() => {
     async function loadNews() {
       try {
-        const reponse = await axios.get(`${API_BASE_URL}/news`);
+        const reponse = await axios.get(`${API_BASE_URL}/news/featured`);
         const data = await reponse.data;
         setNews(data);
         console.log(data);

@@ -1,10 +1,11 @@
 import express from 'express';
 import {
-  getNews
+  getAllNews,getFeaturedNews
 } from "../../controllers/newsController.js";
 
 const router = express.Router();
 
-router.get('/', getNews);
+router.get('/', getAllNews);
+router.get('/featured',getFeaturedNews);
 
 export default router;
