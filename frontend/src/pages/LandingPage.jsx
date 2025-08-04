@@ -19,6 +19,9 @@ function LandingPage() {
   const marginRef = useRef();
   useCustomCentering(marginRef);
   const [news, setNews] = useState([]);
+
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [featuredPublications, setFeaturedPublications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,6 +38,39 @@ function LandingPage() {
     }
     loadNews();
   }, []);
+
+
+  useEffect(() => {
+    async function loadFeaturedProjects() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/projects/featured`);
+        const data = await reponse.data;
+        setFeaturedProjects(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching featured project items", error);
+      }
+    }
+    loadFeaturedProjects();
+  }, []);
+
+   useEffect(() => {
+    async function loadFeaturedPublications() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/publications/featured`);
+        const data = await reponse.data;
+        setFeaturedPublications(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching featured publication items", error);
+      }
+    }
+    loadFeaturedPublications();
+  }, []);
+
+  
 
   return (
     <>
@@ -92,7 +128,7 @@ function LandingPage() {
             </div>
 
             <section className="relative border-2 bg-baseBlack xl:ml-8   ">
-              <Carousel movementAmount="480" />
+              <Carousel movementAmount="480" projects={featuredProjects}/>
             </section>
 
             <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
@@ -106,9 +142,9 @@ function LandingPage() {
             </p>
 
             <PublicationSectionWrapper headingContent="Recent Publications">
-              <PublicationContainer publications={publications.slice(0, 4)} />
+              <PublicationContainer publications={featuredPublications} />
               <Link to="/publications" className="xl:self-end">
-                <p className="labelBold">view all publications</p>
+                <p className="label p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40 ">view all publications</p>
               </Link>
             </PublicationSectionWrapper>
 

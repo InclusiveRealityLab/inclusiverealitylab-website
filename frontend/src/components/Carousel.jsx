@@ -9,16 +9,16 @@ import invalidLeftArrow from "../assets/icons/invalidLeftArrow.svg";
 import invalidRightArrow from "../assets/icons/invalidRightArrow.svg";
 import validLeftArrow from "../assets/icons/validLeftArrow.svg";
 
-function Carousel({ movementAmount }) {
+function Carousel({ movementAmount, projects }) {
   const marginRef = useRef();
   useCustomCentering(marginRef);
 
-  const projects = [
-    { id: 1, title: "Project one sample name" },
-    { id: 2, title: "Project two sample name" },
-    { id: 3, title: "Project three sample name" },
-    { id: 4, title: "Project four sample name" },
-  ];
+  // const projects = [
+  //   { id: 1, title: "Project one sample name" },
+  //   { id: 2, title: "Project two sample name" },
+  //   { id: 3, title: "Project three sample name" },
+  //   { id: 4, title: "Project four sample name" },
+  // ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleMoveRight = () => {
@@ -75,7 +75,7 @@ function Carousel({ movementAmount }) {
           </button>
         </div>
 
-        <Link to="/projects"><p className="label text-baseWhite">view all projects</p></Link>
+        <Link to="/projects"><p className="label px-0.5 py-[11px] text-baseWhite  justify-center transition ease-in duration-200 hover:bg-background-secondary/40 ">view all projects</p></Link>
       </div>
     </div>
   );

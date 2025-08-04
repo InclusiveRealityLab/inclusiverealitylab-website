@@ -8,22 +8,38 @@ import axios from "axios";
 import API_BASE_URL from "../sampleData/constants";
 
 function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
+  const [currentProjects, setCurrentProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [pastProjects,setPastProjects] = useState([]);
 
   useEffect(() => {
-    async function loadProjects() {
+    async function loadCurrentProjects() {
       try {
-        const reponse = await axios.get(`${API_BASE_URL}/projects`);
+        const reponse = await axios.get(`${API_BASE_URL}/projects/current`);
         const data = await reponse.data;
-        setProjects(data);
+        setCurrentProjects(data);
         console.log(data);
         setIsLoading(false);
       } catch (error) {
-        console.log("Error fetching projects items", error);
+        console.log("Error fetching current projects items", error);
       }
     }
-    loadProjects();
+    loadCurrentProjects();
+  }, []);
+
+  useEffect(() => {
+    async function loadPastProjects() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/projects/past`);
+        const data = await reponse.data;
+        setPastProjects(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching past projects items", error);
+      }
+    }
+    loadPastProjects();
   }, []);
 
   return (
@@ -32,18 +48,22 @@ function ProjectsPage() {
         <div className=" px-1.5 xl:px-0 flex flex-col justify-between items-start  py-5 gap-4 w-full xl:max-w-[1032px]  xl:mx-auto">
           <h1 className="heading1 self-start">Projects</h1>
 
-          <button className="heading4 mt-1">Current Projects</button>
+          
           {isLoading ? (
             <div className="flex min-h-screen w-full items-center justify-center">
               <img src={loading} className="w-12 h-12" />
             </div>
           ) : (
-            <ProjectsContainer
-              projects={projects.filter(
-                (project) =>
-                  project["end date"] === "" && project["type"] !== "Internal"
-              )}
-            />
+            <>
+              <button className="heading4 mt-1">Current Projects</button>
+              <ProjectsContainer
+                projects={currentProjects}
+              />
+              <button className="heading4 mt-1">Past Projects</button>
+              <ProjectsContainer
+                projects={pastProjects}
+              />
+            </>
           )}
         </div>
       </div>

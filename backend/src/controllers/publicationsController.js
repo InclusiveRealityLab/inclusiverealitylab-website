@@ -103,4 +103,17 @@ const getAllPublications = async (req, res) => {
   }
 };
 
-export { getAllPublications,getPubData,getVenueData };
+const getFeaturedPublications = async (req, res) => {
+  try {
+    const data = await fetchPubData();
+    let result = data.filter((publication)=> {
+      return publication["show on lp"] == true;
+    })
+    
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export { getAllPublications,getPubData,getVenueData, getFeaturedPublications };
