@@ -76,7 +76,7 @@ function CategoryContainer({ category, people }) {
 
   return (
     <div className="flex flex-col gap-2.5 w-full">
-      <p className="heading4">{category}</p>
+      <p className="heading4">{category === "Lab" ? "Lab members" : category}</p>
 
       {category.toLowerCase() === "lab" && (
         <>

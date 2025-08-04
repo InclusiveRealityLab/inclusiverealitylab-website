@@ -16,11 +16,11 @@ const getAllPeople = async (req, res) => {
         person.profile = formatProfilePhotoURL(person.profile);
       }
 
-      if (person.role === "Collaborator") {
+      if (person.role === "Collaborator" && person["start date"] && !person["end date"]) {
         person.category = "Collaborator";
-      } else if (person.role === "Alumni") {
+      } else if (person["start date"] && person["end date"] ) {
         person.category = "Alumni";
-      } else {
+      } else if (person.role !== "Collaborator" && person["start date"] && !person["end date"]){
         person.category = "Lab";
       }
       // this enforces ordering of profiles in the people page 

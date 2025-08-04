@@ -1,4 +1,4 @@
-import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png"; 
+import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png";
 import splitName from "../utils/splitName";
 import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
 
@@ -22,9 +22,17 @@ function PeopleCard({ person }) {
             {["Lab", "Collaborator"].includes(person.category) && (
               <div className="xl:w-15 xl:h-15 w-9.5 h-9.5 ">
                 <img
-                  src={person?.profile ? formatProfilePhotoURL(person) : defaultProfilePhoto}
-                  className=" w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
-                ></img>
+                  src={
+                    formatProfilePhotoURL(person)
+                      
+                  }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = defaultProfilePhoto;
+                  }}
+                  className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
+                  alt="Profile"
+                />
               </div>
             )}
             <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">

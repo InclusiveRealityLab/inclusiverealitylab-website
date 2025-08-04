@@ -4,10 +4,10 @@ const createProfilePhotoURL = (person) => {
   let secondaryPart = ``;
 
   person["family name"]
-    ? (secondaryPart = `_${person["family name"].toLowerCase()}.jpeg`)
-    : (secondaryPart = `.jpeg`);
+    ? (secondaryPart = `_${person["family name"].toLowerCase()}.jpg`)
+    : (secondaryPart = `.jpg`);
 
-  return baseLink + secondaryPart;
+  return baseLink + secondaryPart ;
 };
 
 export default createProfilePhotoURL;
