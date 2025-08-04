@@ -1,5 +1,6 @@
 import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png"; 
 import splitName from "../utils/splitName";
+import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
 
 function PeopleCard({ person }) {
   // const isActive = ["Lab", "Collaborator"].includes(person.category);
@@ -21,7 +22,7 @@ function PeopleCard({ person }) {
             {["Lab", "Collaborator"].includes(person.category) && (
               <div className="xl:w-15 xl:h-15 w-9.5 h-9.5 ">
                 <img
-                  src={person?.profile ? person.profile : defaultProfilePhoto}
+                  src={person?.profile ? formatProfilePhotoURL(person) : defaultProfilePhoto}
                   className=" w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
                 ></img>
               </div>

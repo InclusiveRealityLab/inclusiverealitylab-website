@@ -23,6 +23,7 @@ const getAllPeople = async (req, res) => {
       } else {
         person.category = "Lab";
       }
+      // this enforces ordering of profiles in the people page 
       switch (person.role.toLowerCase()) {
         case "director":
           person.place = 1;
