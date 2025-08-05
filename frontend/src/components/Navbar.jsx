@@ -44,7 +44,6 @@ function Navbar() {
     return location.pathname === "/" ? 800 : 10;
   }, [location.pathname]);
 
-
   const isScrolledBeyondVisual = useScrollBeyondVisual(scrollThreshold);
 
   const scrollDirection = useScrollDirection();
@@ -59,6 +58,17 @@ function Navbar() {
   } else {
     bgClass = "bg-white/10";
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
