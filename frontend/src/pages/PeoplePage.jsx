@@ -37,7 +37,7 @@ function PeoplePage() {
             <h1 className="heading1 self-start">People</h1>
 
             {isLoading ? (<div className="flex min-h-screen w-full items-center justify-center">
-                      <img src={loading} className="w-12 h-12" />
+                      <img src={loading} className="w-6 h-6" />
                     </div>) : 
 
             peopleCategories.map((cat) => {

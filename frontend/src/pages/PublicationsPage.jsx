@@ -98,10 +98,10 @@ function PublicationsPage() {
         {hasMore && (
           <div
             ref={loadMoreRef}
-            className="h-20 flex items-center justify-center"
+            className="h-22 flex items-center justify-center"
           >
             {isLoading ? (
-              <img src={loading} alt="loading..." />
+              <img src={loading} className="w-6 h-6" alt="loading..." />
             ) : (
               <div>Load More</div>
             )}
