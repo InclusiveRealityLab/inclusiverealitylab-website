@@ -1,74 +1,86 @@
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import axios from "axios";
 import CollapsiblePubContainer from "../components/CollapsiblePubContainer";
 import PublicationsContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
-import publications from "../sampleData/publications";
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import loading from "../assets/icons/loading.svg";
+import API_BASE_URL from "../sampleData/constants";
+
+const LIMIT = 20;
 
 function PublicationsPage() {
   const [loadedPublications, setLoadedPublications] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
-  const sortedPublications = [...publications].sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-
-  // Group loaded publications by year
-  const yearlyPublications = useMemo(() => {
-    const uniqueYears = [...new Set(loadedPublications.map((pub) => pub.year))];
-    const yearsSorted = [...uniqueYears].sort((a, b) => b - a);
-
-    return yearsSorted.map((year) => {
-      const items = loadedPublications.filter((pub) => pub.year === year);
-      return { year, items };
-    });
-  }, [loadedPublications]);
-
-  // load first 20 publications, irrespective of year
-  useEffect(() => {
-    const initialLoad = sortedPublications.slice(0, 20);
-    setLoadedPublications(initialLoad);
-  }, []);
-
   const loadMoreRef = useRef(null);
 
-  const loadMorePublications = useCallback(() => {
-    if (isLoading || loadedPublications.length >= sortedPublications.length)
-      return;
+  const fetchPublications = useCallback(async () => {
+    if (isLoading || !hasMore) return;
 
     setIsLoading(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/publications`, {
+        params: {
+          offset,
+          limit: LIMIT,
+        },
+      });
 
-    // Simulate loading delay (to demo the loading spinner animation)
-    setTimeout(() => {
-      const currentCount = loadedPublications.length;
-      const nextBatch = sortedPublications.slice(
-        currentCount,
-        currentCount + 20
-      );
-      setLoadedPublications((prev) => [...prev, ...nextBatch]);
+      const newPubs = res.data;
+
+      if (newPubs.length < LIMIT) {
+        setHasMore(false);
+      }
+
+      setLoadedPublications((prev) => [...prev, ...newPubs]);
+      setOffset((prev) => prev + LIMIT);
+    } catch (err) {
+      console.error("Error fetching publications:", err);
+    } finally {
       setIsLoading(false);
-    }, 500);
-  }, [loadedPublications.length, sortedPublications.length, isLoading]);
+    }
+  }, [offset, isLoading, hasMore]); // Add dependencies
 
+  // Then your useEffect can safely include it
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          loadMorePublications();
+        if (entries[0].isIntersecting && hasMore) {
+          fetchPublications();
         }
       },
       { threshold: 0.1 }
     );
+
     if (loadMoreRef.current) {
       observer.observe(loadMoreRef.current);
     }
 
     return () => observer.disconnect();
-  }, [loadMorePublications]);
+  }, [hasMore, fetchPublications]); // Now it's memoized, so it's safe
+  // Group by year
+  const yearlyPublications = useMemo(() => {
+    const grouped = {};
+    loadedPublications.forEach((pub) => {
+      const year = new Date(pub["publish date"]).getFullYear();
+      if (!grouped[year]) grouped[year] = [];
+      grouped[year].push(pub);
+    });
 
-  const yearsOpen = useMemo(() => {
-    return yearlyPublications.map(({ year }) => year);
-  }, [yearlyPublications]);
+    return Object.keys(grouped)
+      .map(Number)
+      .sort((a, b) => b - a)
+      .map((year) => ({
+        year,
+        items: grouped[year],
+      }));
+  }, [loadedPublications]);
+
+  const yearsOpen = useMemo(
+    () => yearlyPublications.map((y) => y.year),
+    [yearlyPublications]
+  );
 
   return (
     <div className="mt-4">
@@ -82,16 +94,14 @@ function PublicationsPage() {
             <PublicationsContainer publications={items} year={year} />
           </CollapsiblePubContainer>
         ))}
-        {/* Load more trigger */}
-        {loadedPublications.length < sortedPublications.length && (
+
+        {hasMore && (
           <div
             ref={loadMoreRef}
-            className="h-20 flex items-center justify-center"
+            className="h-22 flex items-center justify-center"
           >
             {isLoading ? (
-              <div>
-                <img src={loading} />
-              </div>
+              <img src={loading} className="w-6 h-6" alt="loading..." />
             ) : (
               <div>Load More</div>
             )}

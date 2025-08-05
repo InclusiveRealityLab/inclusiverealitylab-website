@@ -1,5 +1,6 @@
 import { getSheetsClient, SHEET_ID } from "../config/sheetsClient.js";
 import { parseGoogleSheetValues } from "../utils/parseGoogleSheetValues.js";
+import formatProfilePhotoURL from "../utils/formatProfilePhotoURL.js";
 
 const getAllPeople = async (req, res) => {
   try {
@@ -11,13 +12,18 @@ const getAllPeople = async (req, res) => {
     const parsed = parseGoogleSheetValues(response.data.values || []);
     // little processing to add a category field based on role
     parsed.forEach((person) => {
-      if (person.role === "Collaborator") {
+      if (person.profile) {
+        person.profile = formatProfilePhotoURL(person.profile);
+      }
+
+      if (person.role === "Collaborator" && person["start date"] && !person["end date"]) {
         person.category = "Collaborator";
-      } else if (person.role === "Alumni") {
+      } else if (person["start date"] && person["end date"] ) {
         person.category = "Alumni";
-      } else {
+      } else if (person.role !== "Collaborator" && person["start date"] && !person["end date"]){
         person.category = "Lab";
       }
+      // this enforces ordering of profiles in the people page 
       switch (person.role.toLowerCase()) {
         case "director":
           person.place = 1;
@@ -41,7 +47,6 @@ const getAllPeople = async (req, res) => {
           person.place = 5;
           break;
         default:
-          // Keep the role as is for other cases
           break;
       }
     });

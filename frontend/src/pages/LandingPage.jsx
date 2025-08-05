@@ -5,25 +5,78 @@ import NewsListItem from "../components/NewsListItem";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import useCustomCentering from "../hooks/useCustomCentering";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import Carousel from "../components/Carousel";
 import PublicationContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import publications from "../sampleData/publications";
+import API_BASE_URL from "../sampleData/constants";
+import axios from "axios";
 
 function LandingPage() {
   const marginRef = useRef();
   useCustomCentering(marginRef);
+  const [news, setNews] = useState([]);
+
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [featuredPublications, setFeaturedPublications] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadNews() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/news/featured`);
+        const data = await reponse.data;
+        setNews(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching news items", error);
+      }
+    }
+    loadNews();
+  }, []);
+
+
+  useEffect(() => {
+    async function loadFeaturedProjects() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/projects/featured`);
+        const data = await reponse.data;
+        setFeaturedProjects(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching featured project items", error);
+      }
+    }
+    loadFeaturedProjects();
+  }, []);
+
+   useEffect(() => {
+    async function loadFeaturedPublications() {
+      try {
+        const reponse = await axios.get(`${API_BASE_URL}/publications/featured`);
+        const data = await reponse.data;
+        setFeaturedPublications(data);
+        console.log(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error fetching featured publication items", error);
+      }
+    }
+    loadFeaturedPublications();
+  }, []);
+
+  
 
   return (
     <>
       <div className="  xl:flex xl:flex-col xl:justify-between xl:items-center ">
         {/* img container */}
-        <div className="w-screen h-50 flex">
-          {/* intro container */}
-
+        <div className="w-screen h-50 flex"> 
           <img
             src="/HeroImage.png"
             alt="Hero"
@@ -75,7 +128,7 @@ function LandingPage() {
             </div>
 
             <section className="relative border-2 bg-baseBlack xl:ml-8   ">
-              <Carousel movementAmount="480" />
+              <Carousel movementAmount="480" projects={featuredProjects}/>
             </section>
 
             <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
@@ -89,25 +142,23 @@ function LandingPage() {
             </p>
 
             <PublicationSectionWrapper headingContent="Recent Publications">
-              <PublicationContainer publications={publications.slice(0, 4)} />
+              <PublicationContainer publications={featuredPublications} />
               <Link to="/publications" className="xl:self-end">
-                <p className="labelBold">view all publications</p>
+                <p className="label p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40 ">view all publications</p>
               </Link>
             </PublicationSectionWrapper>
 
             <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
               <h1 className="heading1">News</h1>
               {/* news list items container */}
-              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll border-3 ">
-                {/* news list item */}
-                {/* will use a mapping function to return the latest news once backend is ready! */}
-
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
-                <NewsListItem />
+              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll  ">
+                {isLoading ? (
+                  <p>loading spinner here</p>
+                ) : (
+                  news.map((newsItem, index) => {
+                    return <NewsListItem news={newsItem} key={index} />;
+                  })
+                )}
               </div>
             </section>
           </div>

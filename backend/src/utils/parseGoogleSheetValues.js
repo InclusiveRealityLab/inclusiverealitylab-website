@@ -6,8 +6,30 @@ export function parseGoogleSheetValues(data) {
   return rows.map((row) => {
     return Object.fromEntries(
       headers.map((header, i) => {
-        return [header.toLowerCase(), row[i] || ""];
+        const field = header.toLowerCase();
+        const rawValue = row[i] || "";
+
+        return [header.toLowerCase(), parseToRelevantDataType(field, rawValue)];
       })
     );
   });
+}
+
+function parseToRelevantDataType(fieldName, value) {
+  let trimmed = value.trim();
+
+  if (trimmed.toLowerCase() === "false") return false;
+  if (trimmed.toLowerCase() === "true") return true;
+
+  // const date = new Date(trimmed);
+  // if (!isNaN(date) && /^\d{4}-\d{2}-\d{2}/.test(trimmed)) return date;
+
+  if (
+    fieldName.toLowerCase() == "research theme" ||
+    fieldName.toLowerCase() == "member name" ||
+    fieldName.toLowerCase() == "author name"
+  ) {
+    return trimmed.split(",").map((item) => item.trim());
+  }
+  return trimmed;
 }
