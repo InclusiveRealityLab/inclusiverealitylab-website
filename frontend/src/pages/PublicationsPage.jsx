@@ -40,9 +40,9 @@ function PublicationsPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [offset, isLoading, hasMore]); // Add dependencies
+  }, [offset, isLoading, hasMore]); 
 
-  // Then your useEffect can safely include it
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,8 +58,8 @@ function PublicationsPage() {
     }
 
     return () => observer.disconnect();
-  }, [hasMore, fetchPublications]); // Now it's memoized, so it's safe
-  // Group by year
+  }, [hasMore, fetchPublications]); 
+  
   const yearlyPublications = useMemo(() => {
     const grouped = {};
     loadedPublications.forEach((pub) => {

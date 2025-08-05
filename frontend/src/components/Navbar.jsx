@@ -86,7 +86,7 @@ function Navbar() {
 
           <ul
             className={`bg-background-black xl:bg-transparent text-baseWhite 
-          xl:text-baseBlack flex flex-col flex-1 justify-between items-center px-1.5 xl:py-1.5 py-8  xl:flex-row ${
+          xl:text-baseBlack flex flex-col flex-1 justify-center items-center  gap-1.5 px-1.5 xl:py-1.5 py-8  xl:flex-row ${
             isOpen ? "block" : "hidden"
           } xl:flex `}
           >
