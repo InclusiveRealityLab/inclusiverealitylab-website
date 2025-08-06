@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 import close from "../assets/icons/close.svg";
@@ -10,6 +10,9 @@ import { Link } from "react-router";
 import NavigationTab from "./tabs/NavigationTab";
 import ButtonPrimary from "./buttons/ButtonPrimary";
 import ButtonSecondary from "./buttons/ButtonSecondary";
+import axios from "axios";
+
+const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +38,42 @@ function Navbar() {
   const handleOpenContactModal = () => {
     setIsModalOpenContact(true);
     setModalType("contact");
+  };
+
+  // handling the form submission for the contact form inside the contact modal
+  const nameReference = useRef();
+  const emailReference = useRef();
+  const messageReference = useRef();
+
+  const [status, setStatus] = useState("send");
+
+  const handleFormSubmission = async (e) => {
+    e.preventDefault();
+    setStatus("Submitting...");
+
+    const form = new FormData();
+    form.append("name", nameReference.current.value);
+    form.append("email", emailReference.current.value);
+    form.append("message", messageReference.current.value);
+
+    try {
+      const response = await fetch(POST_API, {
+        method: "POST",
+        body: form, // No headers needed for FormData
+      });
+
+      const result = await response.json(); // Parses JSON string returned from Apps Script
+      console.log("✅ Server result:", result);
+
+      if (result.success) {
+        setStatus("Message sent!");
+      } else {
+        setStatus("Something went wrong.");
+      }
+    } catch (error) {
+      console.error("❌ Fetch error:", error);
+      setStatus("Submission failed.");
+    }
   };
 
   // Change this threshold value (in pixels) according to the design specification, current placeholder image height is 800px for the visual in the landing page
@@ -140,20 +179,18 @@ function Navbar() {
                     onClose={() => setIsModalOpenJoin(false)}
                     type={modalType}
                   >
-                  
-                      <h1 className="heading1">
-                        Looking for opportunities to join us?
-                      </h1>
-                      <p className="body">
-                        As a new lab, we’re open to conversations and
-                        collaborations in many forms. Feel free to explore our
-                        projects and publications, if our work at the Inclusive
-                        Reality Lab resonates with your interests, don’t
-                        hesitate to reach out at inclusiverealitylab@gmail.com.
-                        Someone from our team or our director will be happy to
-                        get back to you soon.
-                      </p>
-                 
+                    <h1 className="heading1">
+                      Looking for opportunities to join us?
+                    </h1>
+                    <p className="body">
+                      As a new lab, we’re open to conversations and
+                      collaborations in many forms. Feel free to explore our
+                      projects and publications, if our work at the Inclusive
+                      Reality Lab resonates with your interests, don’t hesitate
+                      to reach out at inclusiverealitylab@gmail.com. Someone
+                      from our team or our director will be happy to get back to
+                      you soon.
+                    </p>
                   </Modal>
                 )}
               </li>
@@ -176,29 +213,38 @@ function Navbar() {
                           soon.
                         </p>
                       </div>
-                      <div className="flex flex-col items-center justify-between gap-1.5">
+                      <form
+                        onSubmit={handleFormSubmission}
+                        className="flex flex-col items-center justify-between gap-1.5"
+                      >
                         <input
                           type="text"
                           name="contactName"
+                          ref={nameReference}
                           placeholder="Name"
                           className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
                         />
                         <input
                           type="email"
                           name="contactEmail"
+                          ref={emailReference}
                           placeholder="Email"
                           className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
                         />
                         <textarea
                           type="text"
-                          name="contactEmail"
+                          name="message"
+                          ref={messageReference}
                           placeholder="Message"
                           className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
                         />
-                        <button className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5 hover:text-secondary">
-                          send
+                        <button
+                          className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5 hover:text-secondary"
+                          type="submit"
+                        >
+                          {status}
                         </button>
-                      </div>
+                      </form>
                     </div>
                   </Modal>
                 )}
