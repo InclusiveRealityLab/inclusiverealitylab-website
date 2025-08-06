@@ -140,7 +140,7 @@ function Navbar() {
                     onClose={() => setIsModalOpenJoin(false)}
                     type={modalType}
                   >
-                    <div className="gap-2">
+                  
                       <h1 className="heading1">
                         Looking for opportunities to join us?
                       </h1>
@@ -153,7 +153,7 @@ function Navbar() {
                         Someone from our team or our director will be happy to
                         get back to you soon.
                       </p>
-                    </div>
+                 
                   </Modal>
                 )}
               </li>

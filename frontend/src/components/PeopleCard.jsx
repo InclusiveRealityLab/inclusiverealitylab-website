@@ -37,10 +37,10 @@ function PeopleCard({ person }) {
             )}
             <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
               <div className="flex flex-col justify-between  items-center heading4 ">
-                <p>{person["given name"]} </p>
-                <p>{person["family name"]} </p>
+                <p>{person["Given Name"]} </p>
+                <p>{person["Family Name"]} </p>
               </div>
-              <p className="bodySmall">{person?.role}</p>
+              <p className="bodySmall">{person["Role"]}</p>
             </div>
           </div>
         </>

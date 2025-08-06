@@ -3,22 +3,24 @@ import peopleCategories from "../sampleData/peopleCategories";
 import peopleRoles from "../sampleData/peopleRole";
 import PeopleCard from "../components/PeopleCard";
 import CategoryContainer from "../components/CategoryContainer";
-import API_BASE_URL from "../sampleData/constants";
+// import API_BASE_URL from "../sampleData/constants";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import loading from "../assets/icons/loading.svg";
+import extractData from "../utils/extractData.js"
 
 function PeoplePage() {
+   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [people, setPeopleData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     async function loadPeople() {
       try {
-        const response = await axios.get(`${API_BASE_URL}/people`);
-        const data = await response.data;
+        const response = await axios.get(`${API_BASE_URL}?entity=people&resource=all`);
+        const data = response.data;
         
-        setPeopleData(data);
+        setPeopleData(extractData(data));
         setisLoading(false);
         console.log("People data loaded:", data);
       } catch (error) {

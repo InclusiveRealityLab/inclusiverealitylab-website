@@ -17,13 +17,13 @@ function ProjectCard({ project, className = "" }) {
       style={backgroundStyle}
     >
       <h2 className="group-hover:text-text-active heading2 text-baseWhite line-clamp-2">
-        {project["project name"] ??
+        {project["Project Name"] ??
           "Enhance human-food interaction in social settings"}
       </h2>
       <div className="self-start flex flex-row flex-wrap gap-0.5 w-full">
-        {(Array.isArray(project["research theme"])
-          ? project["research theme"]
-          : [project["research theme"]]
+        {(Array.isArray(project["Research Theme"])
+          ? project["Research Theme"]
+          : [project["Research Theme"]]
         ).map((theme, index) => (
           <InfoLabel key={index} label={theme} />
         ))}

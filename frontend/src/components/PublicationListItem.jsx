@@ -7,11 +7,11 @@ function PublicationListItem({ publication }) {
       <div className="flex flex-col xl:w-full w-full items-start xl:justify-between justify-between pb-0.5 xl:pt-1 xl:pb-1 xl:gap-1.5 gap-1.5">
         <div className="flex flex-col w-full items-start xl:h-6.5 h-6 xl:gap-0.5 gap-0.5 ">
           <p className="flex bodySmall">
-            {publication["venue name"] ?? "CHI2024"}
+            {publication["Venue Name"] ?? "CHI2024"}
           </p>
 
           <p className="bodyBigBold overflow-hidden text-ellipsis line-clamp-2 ">
-            {publication?.title ??
+            {publication["Title"] ??
               "Cymatics Cup: Shape-Changing Drinks by Leveraging Cymatics This is longer should be clamped at the end over here. Let us write more and see the result of how this works, its still showing  "}
           </p>
         </div>
@@ -19,9 +19,9 @@ function PublicationListItem({ publication }) {
         {/* container for the CTA buttons : DOI and PDF links */}
         <div className="flex flex-row w-auto justify-center gap-1.5 ">
           {/* these will become separate components soon */}
-          {publication["doi"] && (
+          {publication["DOI"] && (
             <a
-              href={publication["doi"]}
+              href={publication["DOI"]}
               className="label border-1 h-2.5 w-6.5 flex items-center justify-center transition ease-in duration-200 hover:bg-background-secondary/40 "
               target="_blank"
               rel="noopener noreferrer"
@@ -29,9 +29,9 @@ function PublicationListItem({ publication }) {
               DOI
             </a>
           )}
-          {publication["pdf"] && (
+          {publication["PDF"] && (
             <a
-              href={publication["pdf"]}
+              href={publication["PDF"]}
               className="label border-1 h-2.5 w-6.5 flex items-center justify-center transition ease-in duration-200 hover:bg-background-secondary/40 "
               target="_blank"
               rel="noopener noreferrer"

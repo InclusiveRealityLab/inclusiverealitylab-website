@@ -82,15 +82,15 @@ function CategoryContainer({ category, people }) {
         <>
           {/* Director */}
           <div className="flex flex-row flex-wrap w-full ">
-            <PeopleCard person={sortedPeople.find((p) => p.role.toLowerCase() === "director")} />
+            <PeopleCard person={sortedPeople.find((p) => p["Role"].toLowerCase() === "director")} />
           </div>
 
           {/* Designer, Engineer, Mental Health Manager */}
           <div className="flex flex-row flex-wrap w-full gap-1.5 ">
-            <PeopleCard person={sortedPeople.find((p) => p.role.toLowerCase() === "designer")} />
-            <PeopleCard person={sortedPeople.find((p) => p.role.toLowerCase() === "engineer")} />
+            <PeopleCard person={sortedPeople.find((p) => p["Role"].toLowerCase() === "designer")} />
+            <PeopleCard person={sortedPeople.find((p) => p["Role"].toLowerCase() === "engineer")} />
             <PeopleCard
-              person={sortedPeople.find((p) => p.role.toLowerCase() === "wellbeing manager")}
+              person={sortedPeople.find((p) => p["Role"].toLowerCase() === "wellbeing manager")}
             />
           </div>
 
@@ -100,12 +100,12 @@ function CategoryContainer({ category, people }) {
               .filter(
                 (person) =>
                   !["director", "designer", "engineer", "wellbeing manager"].includes(
-                    person.role.toLowerCase()
+                    personp["Role"].toLowerCase()
                   )
               )
-              .map((person) => person.role)
+              .map((person) => personp["Role"])
           )].map((role) => {
-            const items = sortedPeople.filter((p) => p.role === role);
+            const items = sortedPeople.filter((p) => pp["Role"] === role);
             return <PeopleContainer key={role} data={{ role, items }} />;
           })}
         </>
