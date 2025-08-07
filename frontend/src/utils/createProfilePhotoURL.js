@@ -1,10 +1,10 @@
 const createProfilePhotoURL = (person) => {
-  let baseLink = `/images/profilePhotos/${person["given name"].toLowerCase()}`;
+  let baseLink = `/images/profilePhotos/${person["Given Name"].toLowerCase()}`;
 
   let secondaryPart = ``;
 
-  person["family name"]
-    ? (secondaryPart = `_${person["family name"].toLowerCase()}.jpg`)
+  person["Family Name"]
+    ? (secondaryPart = `_${person["Family Name"].toLowerCase()}.jpg`)
     : (secondaryPart = `.jpg`);
 
   return baseLink + secondaryPart ;

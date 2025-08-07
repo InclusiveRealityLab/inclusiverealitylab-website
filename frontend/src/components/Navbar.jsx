@@ -11,6 +11,8 @@ import NavigationTab from "./tabs/NavigationTab";
 import ButtonPrimary from "./buttons/ButtonPrimary";
 import ButtonSecondary from "./buttons/ButtonSecondary";
 import axios from "axios";
+import check from "../assets/icons/check.svg";
+import processing from "../assets/icons/processing.svg";
 
 const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
@@ -45,11 +47,12 @@ function Navbar() {
   const emailReference = useRef();
   const messageReference = useRef();
 
-  const [status, setStatus] = useState("send");
+  const [status, setStatus] = useState("Send");
+  const [sendBtnContent, setSendBtnContent] = useState();
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    setStatus("Submitting...");
+    setStatus("Sending");
 
     const form = new FormData();
     form.append("name", nameReference.current.value);
@@ -66,13 +69,19 @@ function Navbar() {
       console.log("✅ Server result:", result);
 
       if (result.success) {
-        setStatus("Message sent!");
+        setStatus("Sent");
+        setTimeout(()=>{
+          setStatus("Send");
+          nameReference.current.value = "";
+          emailReference.current.value = "";
+          messageReference.current.value = "";
+        },1000)
       } else {
-        setStatus("Something went wrong.");
+        setStatus("Failed.");
       }
     } catch (error) {
       console.error("❌ Fetch error:", error);
-      setStatus("Submission failed.");
+      setStatus("Failed");
     }
   };
 
@@ -239,10 +248,29 @@ function Navbar() {
                           className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
                         />
                         <button
-                          className="label text-white text-center px-0.5 py-0.5 bg-background-black w-full h-2.5 hover:text-secondary"
+                          className={`label text-white text-center px-0.5 py-0.5 ${status == "Sent" ? "bg-background-secondary" : "bg-background-black"} bg-background-black w-full h-2.5 hover:text-secondary`}
                           type="submit"
                         >
-                          {status}
+                          {status === "Sending" ? (
+                            <span className="flex items-center justify-center">
+                              <img
+                                src={processing}
+                                alt="processing"
+                                className="w-2 h-2"
+                              />                              
+                            </span>
+                          ) : status === "Sent" ? (
+                            <span className="flex items-center justify-center">
+                              <img
+                                src={check}
+                                alt="checkmark"
+                                className="w-2 h-2"
+                              />
+                              
+                            </span>
+                          ) : (
+                            "Send"
+                          )}
                         </button>
                       </form>
                     </div>

@@ -1,0 +1,12 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon/processing">
+<g id="Group 51">
+<ellipse id="Ellipse 2" opacity="0.4" cx="11.5" cy="20.5" rx="1.5" ry="1.5" fill="white">
+                                    <animate attributeName="opacity" values="0.4;1;1;1" begin="0s" dur="1.6s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></ellipse>
+<ellipse id="Ellipse 3" opacity="0.4" cx="19.5" cy="20.5" rx="1.5" ry="1.5" fill="white">
+                                    <animate attributeName="opacity" values="0.4;0.4;1;1" begin="0s" dur="1.6s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></ellipse>
+<ellipse id="Ellipse 4" opacity="0.4" cx="27.5" cy="20.5" rx="1.5" ry="1.5" fill="white">
+                                    <animate attributeName="opacity" values="0.4;0.4;0.4;1" begin="0s" dur="1.6s" repeatCount="indefinite" fill="freeze" calcMode="linear" keyTimes="0;0.333;0.667;1"/></ellipse>
+</g>
+</g>
+</svg>

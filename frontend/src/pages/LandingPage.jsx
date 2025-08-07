@@ -128,9 +128,14 @@ function LandingPage() {
                 <div key={idx} className="flex flex-col justify-center items-center gap-1">
                   <p className="heading2">{title}</p>
                   <p className="body text-center">
-                    {title === "Assist"
-                      ? "Designing technologies that support individuals and foster better collaboration."
-                      : "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."}
+                    {title === "Assist" ? (
+  "Designing technologies that support individuals and foster better collaboration."
+) : title === "Understand" ? (
+  "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
+) : (
+  "Empowering diverse people by enhancing their abilities in meaningful, inclusive ways."
+)}
+
                   </p>
                 </div>
               ))}
