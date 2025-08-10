@@ -121,7 +121,7 @@ function LandingPage() {
         <div className="relative z-10">
           {/* Three Themes Section */}
           <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto">
-            <p className="heading3">Our work centers on three key themes</p>
+            <p className="heading3 text-center">Our work centers on three key themes</p>
 
             <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5">
               {["Understand", "Assist", "Augment"].map((title, idx) => (
@@ -174,7 +174,7 @@ function LandingPage() {
           {/* News Section */}
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
             <h1 className="heading1">News</h1>
-            <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
+            <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
               {isNewsLoading ? (
                 <p>Loading news...</p>
               ) : news.length === 0 ? (

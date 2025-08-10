@@ -58,12 +58,16 @@
   /* TYPOGRAPHY */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-weight-medium : 400;
+  --font-weight-light:200;
+  --font-weight-semibold : 500;
 
   /* SPACING */
   --spacing: 16px;
 }
 
 @layer components {
+
   /* HEADINGS and TITLES */
   .bigTitle {
     font-family: var(--font-title);
@@ -107,12 +111,7 @@
     font-weight: var(--font-weight-medium);
   }
 
-  /* .body {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.5;
-    font-weight: var(--font-weight-light);
-  } */
+ 
 
   .label {
     font-family: var(--font-title);
@@ -191,7 +190,7 @@ body {
 }
 
 /* Add this to your CSS file or in a <style> tag */
-.blurred-bg::before {
+/* .blurred-bg::before {
   content: '';
   position: absolute;
   top: 0;
@@ -201,10 +200,31 @@ body {
   background-image: url('/background/background_desktop.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(64px); /* Adjust blur amount as needed */
+  filter: blur(64px); 
   z-index: -1;
 }
 
 .blurred-bg {
   position: relative;
+} */
+
+/* FOR CUSTOM SCROLLBAR STYLING */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color:transparent; 
+} 
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  padding: 2px;
+} 
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-baseBlack) 20%, transparent);
+  height:49px;
+  border-radius: 7px;
+  width:4px;
 }
+
+
+
+
