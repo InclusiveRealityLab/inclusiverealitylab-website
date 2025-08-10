@@ -13,6 +13,7 @@ import ButtonSecondary from "./buttons/ButtonSecondary";
 import axios from "axios";
 import check from "../assets/icons/check.svg";
 import processing from "../assets/icons/processing.svg";
+import SocialMediaHandleContainer from "./SocialMediaHandleContainer";
 
 const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
@@ -48,7 +49,7 @@ function Navbar() {
   const messageReference = useRef();
 
   const [status, setStatus] = useState("Send");
-  const [sendBtnContent, setSendBtnContent] = useState();
+ 
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -70,12 +71,12 @@ function Navbar() {
 
       if (result.success) {
         setStatus("Sent");
-        setTimeout(()=>{
+        setTimeout(() => {
           setStatus("Send");
           nameReference.current.value = "";
           emailReference.current.value = "";
           messageReference.current.value = "";
-        },1000)
+        }, 1000);
       } else {
         setStatus("Failed.");
       }
@@ -99,12 +100,15 @@ function Navbar() {
   let bgClass = "";
   bgClass = "bg-transparent";
 
+  let isGradientUnderlayAdded = false;
+
   if (isOpen) {
     bgClass = "bg-black";
   } else if (isScrolledBeyondVisual) {
     bgClass = "bg-white bg-transparent";
   } else {
-    bgClass = "bg-white/10";
+    bgClass = "bg-transparent";
+    isGradientUnderlayAdded = true;
   }
 
   useEffect(() => {
@@ -128,6 +132,10 @@ function Navbar() {
             : "block"
         } ${!isOpen ? "min-h-fit" : "min-h-screen"} `}
       >
+        {" "}
+        {isGradientUnderlayAdded && (
+          <div class="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justifiy-between px-2 -z-10"></div>
+        )}
         <nav
           className={`label flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite  xl:max-w-75.5 w-full mx-auto  `}
         >
@@ -188,7 +196,7 @@ function Navbar() {
                     onClose={() => setIsModalOpenJoin(false)}
                     type={modalType}
                   >
-                    <h1 className="heading1">
+                    <h1 className="heading1 overflow-wrap">
                       Looking for opportunities to join us?
                     </h1>
                     <p className="body">
@@ -196,10 +204,12 @@ function Navbar() {
                       collaborations in many forms. Feel free to explore our
                       projects and publications, if our work at the Inclusive
                       Reality Lab resonates with your interests, don’t hesitate
-                      to reach out at inclusiverealitylab@gmail.com. Someone
-                      from our team or our director will be happy to get back to
-                      you soon.
+                      to reach out at inclusiverealitylab[at]gmail.com.{" "}
+                      <br></br>Someone from our team or our director will be
+                      happy to get back to you soon. <br></br> Feel free to
+                      follow our social media accounts as well.
                     </p>
+                    <SocialMediaHandleContainer iconColor="blk" />
                   </Modal>
                 )}
               </li>
@@ -218,9 +228,12 @@ function Navbar() {
                         <h1 className="heading1">Let's keep in touch!</h1>
                         <p className="body">
                           Drop a message to say hi, or send an email to
-                          inclusiverealitylab@gmail.com, we will get back to you
-                          soon.
+                          inclusiverealitylab[at]gmail.com, we will get back to
+                          you soon. <br></br> Feel free to follow our social media
+                          accounts as well.
                         </p>
+                        {/* <SocialMediaHandleContainer iconColor="blk"/> */}
+
                       </div>
                       <form
                         onSubmit={handleFormSubmission}
@@ -248,7 +261,11 @@ function Navbar() {
                           className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
                         />
                         <button
-                          className={`label text-white text-center px-0.5 py-0.5 ${status == "Sent" ? "bg-background-secondary" : "bg-background-black"} bg-background-black w-full h-2.5 hover:text-secondary`}
+                          className={`label text-white text-center  ${
+                            status == "Sent"
+                              ? "bg-background-secondary py-[4px] px-3.5"
+                              : "bg-background-black py-[4px] " 
+                          } bg-background-black w-full h-2.5 hover:text-secondary`}
                           type="submit"
                         >
                           {status === "Sending" ? (
@@ -257,7 +274,7 @@ function Navbar() {
                                 src={processing}
                                 alt="processing"
                                 className="w-2 h-2"
-                              />                              
+                              />
                             </span>
                           ) : status === "Sent" ? (
                             <span className="flex items-center justify-center">
@@ -266,7 +283,6 @@ function Navbar() {
                                 alt="checkmark"
                                 className="w-2 h-2"
                               />
-                              
                             </span>
                           ) : (
                             "Send"
