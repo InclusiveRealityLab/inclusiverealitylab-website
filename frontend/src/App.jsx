@@ -9,23 +9,20 @@ import ProjectsPage from "./pages/ProjectsPage";
 import PublicationsPage from "./pages/PublicationsPage";
 import PeoplePage from "./pages/PeoplePage";
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/,"");
+
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <Navbar />
-
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/people" element={<PeoplePage />} />
         </Routes>
-
-        
-
         <Footer/>
-        
       </BrowserRouter>
     </>
   );
