@@ -3,11 +3,11 @@ import projectImagePlaceholder from "../assets/images/projectImagePlaceholder.pn
 
 function ProjectCard({ project, className = "" }) {
   // Use project image if available, otherwise use placeholder
-  const backgroundImage = project?.image || projectImagePlaceholder;
+  const backgroundImage = project["Cover"] || projectImagePlaceholder;
   
   const backgroundStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${backgroundImage})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'cover', // object-cover
     backgroundPosition: 'center'
   };
 
@@ -16,7 +16,7 @@ function ProjectCard({ project, className = "" }) {
       className={`${className} group flex flex-col justify-end  min-w-16 py-1 px-0.5 xl:px-1.5 gap-1 h-20`}
       style={backgroundStyle}
     >
-      <h2 className="group-hover:text-text-active heading2 text-baseWhite line-clamp-2">
+      <h2 className="group-hover:text-text-active heading2 text-baseWhite ">
         {project["Project Name"] ??
           "Enhance human-food interaction in social settings"}
       </h2>

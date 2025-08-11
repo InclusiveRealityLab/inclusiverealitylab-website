@@ -104,7 +104,7 @@ function PublicationsPage() {
             className="h-22 flex items-center justify-center"
           >
             {isLoading ? (
-              <img src={loading} className="w-6 h-6" alt="loading..." />
+              <img src={loading} className="w-2.5 h-2.5" alt="loading..." />
             ) : (
               <div>Load More</div>
             )}
