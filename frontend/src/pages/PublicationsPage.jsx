@@ -3,9 +3,10 @@ import axios from "axios";
 import CollapsiblePubContainer from "../components/CollapsiblePubContainer";
 import PublicationsContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
-import loading from "../assets/icons/loading.svg";
+
 import extractData from "../utils/extractData";
-// import API_BASE_URL from "../sampleData/constants";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 
 const LIMIT = 20;
 
@@ -104,7 +105,7 @@ function PublicationsPage() {
             className="h-22 flex items-center justify-center"
           >
             {isLoading ? (
-              <img src={loading} className="w-2.5 h-2.5" alt="loading..." />
+             <LoadingSpinner/>
             ) : (
               <div>Load More</div>
             )}

@@ -12,6 +12,7 @@ import PublicationContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import useCustomCentering from "../hooks/useCustomCentering";
 import extractData from "../utils/extractData";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function LandingPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -27,19 +28,6 @@ function LandingPage() {
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
   const [isPubsLoading, setIsPubsLoading] = useState(true);
 
-  // // Utility to extract safe data from response
-  // const extractData = (data) => {
-  //   if (Array.isArray(data)) return data;
-  //   if (typeof data === "string") {
-  //     try {
-  //       const parsed = JSON.parse(data);
-  //       return Array.isArray(parsed) ? parsed : parsed.result || [];
-  //     } catch (e) {
-  //       return [];
-  //     }
-  //   }
-  //   return data.result || [];
-  // };
 
   // Load News
   useEffect(() => {
@@ -85,7 +73,6 @@ function LandingPage() {
           params: { entity: "publications", resource: "featured" },
         });
         setFeaturedPublications(extractData(res.data));
-        
       } catch (error) {
         console.error("Error fetching publications:", error);
         setFeaturedPublications([]);
@@ -98,13 +85,28 @@ function LandingPage() {
 
   return (
     <div className="xl:flex xl:flex-col xl:justify-between xl:items-center">
-      {/* Hero Image */}
+      {/* Hero Image / Key Visual Section*/}
       <div className="w-screen h-50 flex">
-        <img
-          src="/HeroImage.png"
-          alt="Hero"
-          className="xl:w-full h-full object-cover block"
-        />
+        <video
+          className="xl:w-full h-full object-cover block motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          {/*  WebM  for chrome */}
+          <source
+            src="/images/keyVisual/irl_intro.webm"
+            type='video/webm; codecs="vp9,opus"'
+          />
+          {/* mp4 for Safari */}
+          <source
+            src="/images/keyVisual/irl_intro.mp4"
+            type='video/mp4; codecs="avc1.42E01E,mp4a.40.2"'
+          />
+        </video>
+
         <div className="absolute xl:left-6 mx-1.5 xl:top-27.5 top-16 max-w-37 min-w-20.45 z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
           <p className="body">Hi, welcome to Inclusive Reality Lab 👋</p>
           <p className="heading3">
@@ -121,21 +123,23 @@ function LandingPage() {
         <div className="relative z-10">
           {/* Three Themes Section */}
           <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto">
-            <p className="heading3 text-center">Our work centers on three key themes</p>
+            <p className="heading3 text-center">
+              Our work centers on three key themes
+            </p>
 
             <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5">
               {["Understand", "Assist", "Augment"].map((title, idx) => (
-                <div key={idx} className="flex flex-col justify-center items-center gap-1">
+                <div
+                  key={idx}
+                  className="flex flex-col justify-center items-center gap-1"
+                >
                   <p className="heading2">{title}</p>
                   <p className="body text-center">
-                    {title === "Assist" ? (
-  "Designing technologies that support individuals and foster better collaboration."
-) : title === "Understand" ? (
-  "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
-) : (
-  "Empowering diverse people by enhancing their abilities in meaningful, inclusive ways."
-)}
-
+                    {title === "Assist"
+                      ? "Designing technologies that support individuals and foster better collaboration."
+                      : title === "Understand"
+                      ? "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
+                      : "Empowering diverse people by enhancing their abilities in meaningful, inclusive ways."}
                   </p>
                 </div>
               ))}
@@ -145,7 +149,7 @@ function LandingPage() {
           {/* Featured Projects Carousel */}
           <section className="relative border-2 bg-baseBlack xl:ml-8">
             {isProjectsLoading ? (
-              <p className="text-center text-white p-4">Loading projects...</p>
+              <LoadingSpinner/>
             ) : (
               <Carousel movementAmount="480" projects={featuredProjects} />
             )}
@@ -153,14 +157,19 @@ function LandingPage() {
 
           {/* Mission Text */}
           <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
-            Our research explores how reality itself - both physical and digital - can be leveraged to understand cognitive, behavioral, and emotional states, assist individuals in their daily lives, and augment human abilities. <br />
-            By designing adaptive and empowering technologies, we aim to create a world where diverse individuals can thrive, connect, and reach their full potential.
+            Our research explores how reality itself - both physical and digital
+            - can be leveraged to understand cognitive, behavioral, and
+            emotional states, assist individuals in their daily lives, and
+            augment human abilities. <br />
+            By designing adaptive and empowering technologies, we aim to create
+            a world where diverse individuals can thrive, connect, and reach
+            their full potential.
           </p>
 
-          {/* Publications */}
+          {/* Featured Publications Section */}
           <PublicationSectionWrapper headingContent="Recent Publications">
             {isPubsLoading ? (
-              <p className="p-4">Loading publications...</p>
+              <LoadingSpinner/>
             ) : (
               <PublicationContainer publications={featuredPublications} />
             )}
@@ -176,7 +185,7 @@ function LandingPage() {
             <h1 className="heading1">News</h1>
             <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
               {isNewsLoading ? (
-                <p>Loading news...</p>
+                <LoadingSpinner/>
               ) : news.length === 0 ? (
                 <p>No news available at the moment.</p>
               ) : (

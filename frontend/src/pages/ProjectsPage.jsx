@@ -3,10 +3,11 @@ import projects from "../sampleData/projects";
 import ProjectsContainer from "../components/ProjectsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import { useState, useEffect } from "react";
-import loading from "../assets/icons/loading.svg";
+
 import axios from "axios";
 import extractData from "../utils/extractData";
-// import API_BASE_URL from "../sampleData/constants";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 
 function ProjectsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -56,7 +57,7 @@ function ProjectsPage() {
 
           {isLoading ? (
             <div className="flex min-h-screen w-full items-center justify-center">
-              <img src={loading} className="w-2.5 h-2.5" />
+              <LoadingSpinner/>
             </div>
           ) : (
             <>
