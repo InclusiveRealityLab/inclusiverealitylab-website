@@ -3,7 +3,7 @@ import projectImagePlaceholder from "../assets/images/projectImagePlaceholder.pn
 
 function ProjectCard({ project, className = "" }) {
   // Use project image if available, otherwise use placeholder
-  const backgroundImage = project["Cover"] || projectImagePlaceholder;
+  const backgroundImage = project["Cover"] !== "" ?  `/images/works/${project["Cover"]}`: projectImagePlaceholder;
   
   const backgroundStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${backgroundImage})`,
