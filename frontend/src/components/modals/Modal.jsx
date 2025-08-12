@@ -9,7 +9,7 @@ function Modal({ children, onClose, type }) {
           type == "join" ? "bg-background-secondary" : "bg-background-tertiary"
         }`}
       >
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center xl:gap-3 gap-[56px]">
           <button className="align xl:self-start self-end mt-1 mb-1 mr-1.5" onClick={onClose}>
             <img src={closeBlack}  />
           </button>

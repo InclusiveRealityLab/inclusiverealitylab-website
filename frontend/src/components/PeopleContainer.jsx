@@ -8,7 +8,7 @@ function PeopleContainer({ data }) {
   return (
     <>
       {data && (
-        <div className="flex flex-row flex-wrap gap-1.5">
+        <div className="flex flex-row flex-wrap gap-y-1.5 gap-x-[23px] ">
           {data.items.map((p) => {
             console.log("rendering the cards ");
             return (

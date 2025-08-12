@@ -235,7 +235,7 @@ function Navbar() {
                           you soon. <br></br> Feel free to follow our social media
                           accounts as well.
                         </p>
-                        {/* <SocialMediaHandleContainer iconColor="blk"/> */}
+                        <SocialMediaHandleContainer iconColor="blk"/>
 
                       </div>
                       <form

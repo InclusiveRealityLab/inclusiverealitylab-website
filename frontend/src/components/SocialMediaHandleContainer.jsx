@@ -11,7 +11,7 @@ import youtube_blk from "../assets/icons/youtube_blk.svg";
 
 function SocialMediaHandleContainer({iconColor}) {
   return (
-    <div className="flex flex-row gap-1 justify-between items-center w-[200px]">
+    <div className="flex flex-row gap-1 py-0.5 justify-between items-center w-[200px]">
       <a
         href="https://linkedin.com/company/inclusiverealitylab"
         target="_blank"
