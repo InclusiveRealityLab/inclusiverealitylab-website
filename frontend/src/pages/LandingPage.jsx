@@ -97,12 +97,12 @@ function LandingPage() {
         >
           {/*  WebM  for chrome */}
           <source
-            src="/images/keyVisual/irl_intro.webm"
+            src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.webm`}
             type='video/webm; codecs="vp9,opus"'
           />
           {/* mp4 for Safari */}
           <source
-            src="/images/keyVisual/irl_intro.mp4"
+            src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.mp4`}
             type='video/mp4; codecs="avc1.42E01E,mp4a.40.2"'
           />
         </video>

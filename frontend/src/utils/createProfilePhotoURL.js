@@ -1,5 +1,5 @@
 const createProfilePhotoURL = (person) => {
-  let baseLink = `/images/profilePhotos/${person["Given Name"].toLowerCase()}`;
+  let baseLink = `${import.meta.env.BASE_URL}images/profilePhotos/${person["Given Name"].toLowerCase()}`;
 
   let secondaryPart = ``;
 

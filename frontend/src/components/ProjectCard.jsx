@@ -8,7 +8,7 @@ function ProjectCard({ project, className = "" }) {
   useEffect(() => {
     if (project["Cover"]) {
       const img = new window.Image();
-      img.src = `/images/works/${project["Cover"]}`;
+      img.src = `${import.meta.env.BASE_URL}images/works/${project["Cover"]}`;
       img.onload = () => setBgImage(img.src);
       img.onerror = () => setBgImage(projectImagePlaceholder);
     } else {

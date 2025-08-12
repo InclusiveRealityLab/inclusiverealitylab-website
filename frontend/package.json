@@ -3,15 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "build:test": "vite build --mode test",
-    "deploy:test": "gh-pages -d dist -b gh-pages-test",
-    "deploy:prod": "vite build && gh-pages -d dist -b gh-pages"
-  },
+ "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "build:test": "vite build --mode test",
+  "deploy:test": "vite build --mode test && gh-pages -d dist -b gh-pages-test",
+  "deploy:prod": "vite build && gh-pages -d dist -b gh-pages"
+},
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
     "all": "^0.0.0",
