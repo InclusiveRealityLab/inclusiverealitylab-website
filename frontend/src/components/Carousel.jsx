@@ -32,7 +32,7 @@ function Carousel({ movementAmount, projects }) {
   return (
     <div
       ref={marginRef}
-      className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-1.5 xl:gap-4 xl:max-w-64.5  "
+      className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-4 xl:gap-4 xl:max-w-64.5  "
     >
       <h1 className="heading1 text-baseWhite ">Our latest works</h1>
       <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll ">

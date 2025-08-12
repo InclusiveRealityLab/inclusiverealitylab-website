@@ -147,7 +147,7 @@ function LandingPage() {
           </div>
 
           {/* Featured Projects Carousel */}
-          <section className="relative border-2 bg-baseBlack xl:ml-8">
+          <section className="relative border-2 bg-baseBlack xl:ml-8 min-h-[708px]">
             {isProjectsLoading ? (
               <LoadingSpinner/>
             ) : (

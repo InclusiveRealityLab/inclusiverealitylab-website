@@ -142,7 +142,7 @@ function Navbar() {
           <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
             <li className="w-3 cursor-pointer">
               <Link to="/">
-                <img src="/logoBlack.svg" alt="logo"></img>
+                <img src={`${import.meta.env.BASE_URL}logoBlack.svg`} alt="logo"></img>
               </Link>
             </li>
             <li className="xl:hidden cursor-pointer" onClick={toggleMenu}>
