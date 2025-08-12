@@ -83,6 +83,9 @@ function Navbar() {
     } catch (error) {
       console.error("❌ Fetch error:", error);
       setStatus("Failed");
+      // this alerts the user about an error processing the message and closes the modal
+      alert("Sorry there was an error sending your message, try again later");
+      setIsModalOpenContact(false);
     }
   };
 
