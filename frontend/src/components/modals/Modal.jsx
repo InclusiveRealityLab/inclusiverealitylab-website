@@ -5,13 +5,13 @@ function Modal({ children, onClose, type }) {
   return ReactDOM.createPortal(
     <>
       <div
-        className={`fixed top-0 right-0 w-full  xl:max-w-68 h-screen z-100  ${
+        className={`fixed top-0 right-0 w-full  xl:max-w-68 h-screen overflow-scroll z-100  ${
           type == "join" ? "bg-background-secondary" : "bg-background-tertiary"
         }`}
       >
         <div className="flex flex-col items-center gap-3">
-          <button className="align xl:self-start self-end mt-2.5 ml-1.5" onClick={onClose}>
-            <img src={closeBlack} />
+          <button className="align xl:self-start self-end mt-1 mb-1 mr-1.5" onClick={onClose}>
+            <img src={closeBlack}  />
           </button>
           <div className=" xl:w-33 w-full px-1.5 xl:px-0 flex flex-col  gap-2 xl:gap-0">
             {children}

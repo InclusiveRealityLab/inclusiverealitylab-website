@@ -196,7 +196,7 @@ function Navbar() {
                     onClose={() => setIsModalOpenJoin(false)}
                     type={modalType}
                   >
-                    <h1 className="heading1 overflow-wrap">
+                    <h1 className="heading1 overflow-wrap hyphens-auto">
                       Looking for opportunities to join us?
                     </h1>
                     <p className="body">
