@@ -142,7 +142,7 @@ function Navbar() {
         <nav
           className={`label flex flex-col xl:flex-row justify-between xl:gap-3 text-baseWhite  xl:max-w-75.5 w-full mx-auto  `}
         >
-          <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between   py-1 px-1.5 xl:items-center">
+          <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between  py-1 px-1.5 xl:items-center">
             <li className="w-3 cursor-pointer">
               <Link to="/">
                 <img src={`${import.meta.env.BASE_URL}logoBlack.svg`} alt="logo"></img>

@@ -87,7 +87,7 @@
     font-family: var(--font-title);
     font-size: 2.5rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading2 {

@@ -24,13 +24,16 @@ function ProjectCard({ project, className = "" }) {
 
   return (
     <div
-      className={`${className} group flex flex-col justify-end min-w-16 py-1 px-0.5 xl:px-1.5 gap-1 h-20`}
+      className={`${className} group flex flex-col justify-end min-w-16 py-1 px-1 xl:px-1.5 gap-1 h-20`}
       style={backgroundStyle}
     >
-      <h2 className="group-hover:text-text-active heading2 text-baseWhite ">
-        {project["Project Name"] ??
-          "Enhance human-food interaction in social settings"}
-      </h2>
+      <div className=" flex overflow-hidden  w-full h-full">
+        <h2 className="group-hover:text-text-active heading2 self-end overflow-ellipsis hyphens-auto text-baseWhite ">
+          {project["Project Name"] ??
+            "Enhance human-food interaction in social settings"}
+        </h2>
+      </div>
+
       <div className="self-start flex flex-row flex-wrap gap-0.5 w-full">
         {(Array.isArray(project["Research Theme"])
           ? project["Research Theme"]

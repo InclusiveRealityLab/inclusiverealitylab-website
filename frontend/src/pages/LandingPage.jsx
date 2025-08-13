@@ -101,13 +101,13 @@ function LandingPage() {
             type='video/webm; codecs="vp9,opus"'
           />
           {/* mp4 for Safari */}
-          <source
+          {/* <source
             src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.mp4`}
             type='video/mp4; codecs="avc1.42E01E,mp4a.40.2"'
-          />
+          /> */}
         </video>
 
-        <div className="absolute xl:left-6 mx-1.5 xl:top-27.5 top-16 max-w-37 min-w-20.45 z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
+        <div className="absolute xl:left-6 xl:top-27.5 top-[240px]   max-w-[472px] min-w-[272px] xl:max-w-[592px]  z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
           <p className="body">Hi, welcome to Inclusive Reality Lab 👋</p>
           <p className="heading3">
             We envision a future where technology seamlessly bridges social and
