@@ -110,26 +110,41 @@ export default ({ mode }) => defineConfig({
 ```
  
 3. Deployment scripts inside ```package.json```.
-Two scripts with 'deploy' prefix have been added to the scripts object.
+
+Two scripts with ```'deploy'``` prefix have been added to the scripts object.
 
 | Script | Description |
 |--------|-------------|
-| ```deploy:prod ```| Builds the React App for production, outputs the static files to the ```dist``` folder and publishes the contents of the ```dist``` folder to ```gh-pages``` branch on the repository (this is used by GitHub Pages to serve the site) |
-| ```deploy:gh-pages``` | Builds the app in test mode and deploys it to the gh-pages-test branch (useful for staging or preview). (We will mostly use the ```deploy:prod``` command.) |
+| ```deploy:prod ```| Builds the React App for production (custom domain), outputs the static files to the dist folder, creates a 404.html SPA fallback, includes the CNAME file, and publishes the contents of dist to the gh-pages branch on the repository (this is used by GitHub Pages to serve the live site at the custom domain). |
+| ```deploy:gh-pages``` | Builds the app in test/preview mode (for the GitHub Pages project URL), outputs to the dist folder, creates a 404.html, and publishes to the gh-pages-test branch (useful for staging or preview). We will mostly use the ```deploy:prod``` command. |
 
 4. Deployment to GitHub Pages.
-- To deploy the app, run the command ```npm run deploy:prod``` from ```frontend```. This will build the app and push the contents of the ```dist``` folder to the ```gh-pages``` branch of this repository (created automatically on first run).
+
+- To deploy the app from the custom domain (www.inclusiverealitylab.org), run the command ```npm run deploy:prod``` from ```frontend``` folder. This will build the app by performing the following steps: 
+  - Build the app with base: '/' for the custom domain.
+  - Copy index.html → 404.html for SPA routing.
+  - Include the ```public/CNAME ```file in the build. 
+  - Push the contents of ```dist``` to the ```gh-pages``` branch of the repository (automatically created on the first run).
 
 - Then in GitHub -> Settings -> Pages:
     - Source : Deploy from a branch
     - Branch : ```gh-pages```
     - Folder : ```/ (root)```
-   - The website will be available at ```https://[username].github.io/inclusiverealitylab-website/``` after a few minutes.
+    - Custom domain: www.inclusiverealitylab.org
+   - The website will be available at ```https://www.inclusiverealitylab.org/``` after a few minutes.
+
+- If deploying in preview mode (npm run deploy:gh-pages), the site will be available at:
+```https://inclusiverealitylab.github.io/inclusiverealitylab-website/```
 
 #### Update Steps
-Anytime you make changes to the frontend code, you will need to run : ```npm run deploy:prod```. This rebuilds and republishes the site. 
+Anytime you make changes to the frontend code that you want to deploy to the live site (production/release ready changes):
+1. Commit your changes to your working branch.
+2. Run : ```npm run deploy:prod```. 
+3. Wait ~1 minute for GitHub Pages to update the live site.
 
-**NOTE** : Pushing to ```main``` will not update Pages.
+**NOTE** :
+- Pushing to ```main``` will not update the live site, you must run the deploy script.
+- Keep ```public/CNAME``` in the repo so the custom domain stays linked after each deployment.
 
 
 ### Deployment (Backend- Google Apps Script)
