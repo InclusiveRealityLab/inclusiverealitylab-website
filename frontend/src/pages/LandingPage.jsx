@@ -101,10 +101,10 @@ function LandingPage() {
             type='video/webm; codecs="vp9,opus"'
           />
           {/* mp4 for Safari */}
-          {/* <source
+          <source
             src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.mp4`}
             type='video/mp4; codecs="avc1.42E01E,mp4a.40.2"'
-          /> */}
+          />
         </video>
 
         <div className="absolute xl:left-6 xl:top-27.5 top-[240px]   max-w-[472px] min-w-[272px] xl:max-w-[592px]  z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
@@ -118,7 +118,9 @@ function LandingPage() {
 
       <div className="relative w-screen h-auto z-0">
         {/* Gradient Background */}
-        <div className="absolute top-20 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10"></div>
+        <div className="absolute top-20 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10">
+        
+        </div>
 
         <div className="relative z-10">
           {/* Three Themes Section */}
