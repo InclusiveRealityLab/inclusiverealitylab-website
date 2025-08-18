@@ -3,22 +3,25 @@ import peopleCategories from "../sampleData/peopleCategories";
 import peopleRoles from "../sampleData/peopleRole";
 import PeopleCard from "../components/PeopleCard";
 import CategoryContainer from "../components/CategoryContainer";
-import API_BASE_URL from "../sampleData/constants";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
-import loading from "../assets/icons/loading.svg";
+
+import extractData from "../utils/extractData.js"
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
 
 function PeoplePage() {
+   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [people, setPeopleData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     async function loadPeople() {
       try {
-        const response = await axios.get(`${API_BASE_URL}/people`);
-        const data = await response.data;
+        const response = await axios.get(`${API_BASE_URL}?entity=people&resource=all`);
+        const data = response.data;
         
-        setPeopleData(data);
+        setPeopleData(extractData(data));
         setisLoading(false);
         console.log("People data loaded:", data);
       } catch (error) {
@@ -37,7 +40,7 @@ function PeoplePage() {
             <h1 className="heading1 self-start">People</h1>
 
             {isLoading ? (<div className="flex min-h-screen w-full items-center justify-center">
-                      <img src={loading} className="w-6 h-6" />
+                      <LoadingSpinner/>
                     </div>) : 
 
             peopleCategories.map((cat) => {

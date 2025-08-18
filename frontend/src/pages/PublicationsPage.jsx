@@ -3,8 +3,10 @@ import axios from "axios";
 import CollapsiblePubContainer from "../components/CollapsiblePubContainer";
 import PublicationsContainer from "../components/PublicationsContainer";
 import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
-import loading from "../assets/icons/loading.svg";
-import API_BASE_URL from "../sampleData/constants";
+
+import extractData from "../utils/extractData";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 
 const LIMIT = 20;
 
@@ -14,20 +16,23 @@ function PublicationsPage() {
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const loadMoreRef = useRef(null);
+  
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const fetchPublications = useCallback(async () => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/publications`, {
+      const res = await axios.get(API_BASE_URL, {
         params: {
+          entity: "publications",
+          resource: "all",
           offset,
           limit: LIMIT,
         },
       });
-
-      const newPubs = res.data;
+      const newPubs = extractData(res.data);
 
       if (newPubs.length < LIMIT) {
         setHasMore(false);
@@ -40,9 +45,8 @@ function PublicationsPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [offset, isLoading, hasMore]); // Add dependencies
+  }, [offset, isLoading, hasMore]);
 
-  // Then your useEffect can safely include it
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,12 +62,12 @@ function PublicationsPage() {
     }
 
     return () => observer.disconnect();
-  }, [hasMore, fetchPublications]); // Now it's memoized, so it's safe
-  // Group by year
+  }, [hasMore, fetchPublications]);
+
   const yearlyPublications = useMemo(() => {
     const grouped = {};
     loadedPublications.forEach((pub) => {
-      const year = new Date(pub["publish date"]).getFullYear();
+      const year = new Date(pub["Publish Date"]).getFullYear();
       if (!grouped[year]) grouped[year] = [];
       grouped[year].push(pub);
     });
@@ -101,7 +105,7 @@ function PublicationsPage() {
             className="h-22 flex items-center justify-center"
           >
             {isLoading ? (
-              <img src={loading} className="w-6 h-6" alt="loading..." />
+             <LoadingSpinner/>
             ) : (
               <div>Load More</div>
             )}

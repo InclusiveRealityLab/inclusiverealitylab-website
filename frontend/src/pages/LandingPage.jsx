@@ -1,170 +1,203 @@
-import Navbar from "../components/Navbar";
-
-import PublicationListItem from "../components/PublicationListItem";
-import NewsListItem from "../components/NewsListItem";
-import Footer from "../components/Footer";
-import ProjectCard from "../components/ProjectCard";
-import useCustomCentering from "../hooks/useCustomCentering";
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router";
-import Carousel from "../components/Carousel";
-import PublicationContainer from "../components/PublicationsContainer";
-import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
-import publications from "../sampleData/publications";
-import API_BASE_URL from "../sampleData/constants";
+import { motion } from "framer-motion";
 import axios from "axios";
 
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ProjectCard from "../components/ProjectCard";
+import Carousel from "../components/Carousel";
+import NewsListItem from "../components/NewsListItem";
+import PublicationContainer from "../components/PublicationsContainer";
+import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
+import useCustomCentering from "../hooks/useCustomCentering";
+import extractData from "../utils/extractData";
+import LoadingSpinner from "../components/LoadingSpinner";
+
 function LandingPage() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const marginRef = useRef();
   useCustomCentering(marginRef);
-  const [news, setNews] = useState([]);
 
+  // State
+  const [news, setNews] = useState([]);
   const [featuredProjects, setFeaturedProjects] = useState([]);
   const [featuredPublications, setFeaturedPublications] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
+  const [isNewsLoading, setIsNewsLoading] = useState(true);
+  const [isProjectsLoading, setIsProjectsLoading] = useState(true);
+  const [isPubsLoading, setIsPubsLoading] = useState(true);
+
+
+  // Load News
   useEffect(() => {
     async function loadNews() {
       try {
-        const reponse = await axios.get(`${API_BASE_URL}/news/featured`);
-        const data = await reponse.data;
-        setNews(data);
-        console.log(data);
-        setIsLoading(false);
+        const res = await axios.get(API_BASE_URL, {
+          params: { entity: "news", resource: "featured" },
+        });
+        setNews(extractData(res.data));
       } catch (error) {
-        console.log("Error fetching news items", error);
+        console.error("Error fetching news:", error);
+        setNews([]);
+      } finally {
+        setIsNewsLoading(false);
       }
     }
     loadNews();
   }, []);
 
-
+  // Load Featured Projects
   useEffect(() => {
     async function loadFeaturedProjects() {
       try {
-        const reponse = await axios.get(`${API_BASE_URL}/projects/featured`);
-        const data = await reponse.data;
-        setFeaturedProjects(data);
-        console.log(data);
-        setIsLoading(false);
+        const res = await axios.get(API_BASE_URL, {
+          params: { entity: "projects", resource: "featured" },
+        });
+        setFeaturedProjects(extractData(res.data));
       } catch (error) {
-        console.log("Error fetching featured project items", error);
+        console.error("Error fetching projects:", error);
+        setFeaturedProjects([]);
+      } finally {
+        setIsProjectsLoading(false);
       }
     }
     loadFeaturedProjects();
   }, []);
 
-   useEffect(() => {
+  // Load Featured Publications
+  useEffect(() => {
     async function loadFeaturedPublications() {
       try {
-        const reponse = await axios.get(`${API_BASE_URL}/publications/featured`);
-        const data = await reponse.data;
-        setFeaturedPublications(data);
-        console.log(data);
-        setIsLoading(false);
+        const res = await axios.get(API_BASE_URL, {
+          params: { entity: "publications", resource: "featured" },
+        });
+        setFeaturedPublications(extractData(res.data));
       } catch (error) {
-        console.log("Error fetching featured publication items", error);
+        console.error("Error fetching publications:", error);
+        setFeaturedPublications([]);
+      } finally {
+        setIsPubsLoading(false);
       }
     }
     loadFeaturedPublications();
   }, []);
 
-  
-
   return (
-    <>
-      <div className="  xl:flex xl:flex-col xl:justify-between xl:items-center ">
-        {/* img container */}
-        <div className="w-screen h-50 flex"> 
-          <img
-            src="/HeroImage.png"
-            alt="Hero"
-            className="xl:w-full h-full object-cover block"
-          ></img>
-          <div className="absolute xl:left-6 mx-1.5 xl:top-27.5 top-16 max-w-37 min-w-20.45 z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5  bg-background-white gap-1.5  ">
-            <p className="body">Hi, welcome to Inclusive Reality Lab 👋</p>
-            <p className="heading3">
-              We envision a future where technology seamlessly bridges social
-              and ability gaps, fostering an inclusive and prosocial world.
-            </p>
-          </div>
-        </div>
+    <div className="xl:flex xl:flex-col xl:justify-between xl:items-center">
+      {/* Hero Image / Key Visual Section*/}
+      <div className="w-screen h-50 flex">
+        <video
+          className="xl:w-full h-full object-cover block motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          {/*  WebM  for chrome */}
+          <source
+            src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.webm`}
+            type='video/webm; codecs="vp9,opus"'
+          />
+          {/* mp4 for Safari */}
+          {/* <source
+            src={`${import.meta.env.BASE_URL}images/keyVisual/irl_intro.mp4`}
+            type='video/mp4; codecs="avc1.42E01E,mp4a.40.2"'
+          /> */}
+        </video>
 
-        <div className="relative w-screen h-auto z-0">
-          {/* for the gradient background */}
-
-          <div className="absolute top-20 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10"></div>
-
-          <div className="relative z-10">
-            <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto  ">
-              <p className="heading3">Our work centers on three key themes</p>
-
-              <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5 ">
-                <div className="flex flex-col justify-center items-center gap-1 ">
-                  <p className="heading2">Understand</p>
-                  <p className="body text-center">
-                    Exploring ways to sense and interpret cognitive, behavioral,
-                    and emotions states.
-                  </p>
-                </div>
-
-                <div className="flex  flex-col justify-center items-center gap-1">
-                  <p className="heading2">Assist</p>
-                  <p className="body text-center">
-                    Designing technologies that support individuals and foster
-                    better collaboration.
-                  </p>
-                </div>
-
-                <div className="flex flex-col justify-center items-center gap-1">
-                  <p className="heading2">Augment</p>
-                  <p className="body text-center">
-                    Exploring ways to sense and interpret cognitive, behavioral,
-                    and emotions states.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <section className="relative border-2 bg-baseBlack xl:ml-8   ">
-              <Carousel movementAmount="480" projects={featuredProjects}/>
-            </section>
-
-            <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto ">
-              Our research explores how reality itself - both physical and
-              digital - can be leveraged to understand cognitive, behavioral,
-              and emotional states, assist individuals in their daily lives, and
-              augment human abilities. <br />
-              By designing adaptive and empowering technologies, we aim to
-              create a world where diverse individuals can thrive, connect, and
-              reach their full potential.
-            </p>
-
-            <PublicationSectionWrapper headingContent="Recent Publications">
-              <PublicationContainer publications={featuredPublications} />
-              <Link to="/publications" className="xl:self-end">
-                <p className="label p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40 ">view all publications</p>
-              </Link>
-            </PublicationSectionWrapper>
-
-            <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
-              <h1 className="heading1">News</h1>
-              {/* news list items container */}
-              <div className="flex flex-col h-12.5 gap-1.5 overflow-y-scroll  ">
-                {isLoading ? (
-                  <p>loading spinner here</p>
-                ) : (
-                  news.map((newsItem, index) => {
-                    return <NewsListItem news={newsItem} key={index} />;
-                  })
-                )}
-              </div>
-            </section>
-          </div>
+        <div className="absolute xl:left-6 xl:top-27.5 top-[240px]   max-w-[472px] min-w-[272px] xl:max-w-[592px]  z-10 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
+          <p className="body">Hi, welcome to Inclusive Reality Lab 👋</p>
+          <p className="heading3">
+            We envision a future where technology seamlessly bridges social and
+            ability gaps, fostering an inclusive and prosocial world.
+          </p>
         </div>
       </div>
-    </>
+
+      <div className="relative w-screen h-auto z-0">
+        {/* Gradient Background */}
+        <div className="absolute top-20 -left-5 right-0 bottom-4 xl:bg-[url(/background/background_desktop.svg)] bg-[url(/background/background_mobile.svg)] bg-cover bg-no-repeat blur-[240px] -z-10"></div>
+
+        <div className="relative z-10">
+          {/* Three Themes Section */}
+          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto">
+            <p className="heading3 text-center">
+              Our work centers on three key themes
+            </p>
+
+            <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5">
+              {["Understand", "Assist", "Augment"].map((title, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col justify-center items-center gap-1"
+                >
+                  <p className="heading2">{title}</p>
+                  <p className="body text-center">
+                    {title === "Assist"
+                      ? "Designing technologies that support individuals and foster better collaboration."
+                      : title === "Understand"
+                      ? "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
+                      : "Empowering diverse people by enhancing their abilities in meaningful, inclusive ways."}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Featured Projects Carousel */}
+          <section className="relative border-2 bg-baseBlack xl:ml-8 min-h-[708px]">
+            {isProjectsLoading ? (
+              <LoadingSpinner/>
+            ) : (
+              <Carousel movementAmount="480" projects={featuredProjects} />
+            )}
+          </section>
+
+          {/* Mission Text */}
+          <p className="heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
+            Our research explores how reality itself - both physical and digital
+            - can be leveraged to understand cognitive, behavioral, and
+            emotional states, assist individuals in their daily lives, and
+            augment human abilities. <br />
+            By designing adaptive and empowering technologies, we aim to create
+            a world where diverse individuals can thrive, connect, and reach
+            their full potential.
+          </p>
+
+          {/* Featured Publications Section */}
+          <PublicationSectionWrapper headingContent="Recent Publications">
+            {isPubsLoading ? (
+              <LoadingSpinner/>
+            ) : (
+              <PublicationContainer publications={featuredPublications} />
+            )}
+            <Link to="/publications" className="xl:self-end">
+              <p className="label p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40">
+                view all publications
+              </p>
+            </Link>
+          </PublicationSectionWrapper>
+
+          {/* News Section */}
+          <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4">
+            <h1 className="heading1">News</h1>
+            <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
+              {isNewsLoading ? (
+                <LoadingSpinner/>
+              ) : news.length === 0 ? (
+                <p>No news available at the moment.</p>
+              ) : (
+                news.map((newsItem, index) => (
+                  <NewsListItem news={newsItem} key={index} />
+                ))
+              )}
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
   );
 }
 
