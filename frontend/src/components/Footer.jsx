@@ -2,7 +2,7 @@ import SocialMediaHandleContainer from "./SocialMediaHandleContainer";
 
 function Footer() {
   return (
-    <div className="flex w-screen bg-background-black">
+    <div className="flex w-screen bg-background-black z-10">
       <footer className="flex flex-col xl:flex-row py-4 px-1.5 gap-2.5 xl:max-w-75.5 w-full  mx-auto justify-between">
         <div className="flex flex-col gap-1.5">
           <p className="heading4 text-baseWhite">Inclusive Reality Lab</p>
