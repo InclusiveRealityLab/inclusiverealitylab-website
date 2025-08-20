@@ -35,7 +35,7 @@ function Carousel({ movementAmount, projects }) {
       className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-4 xl:gap-4 xl:max-w-64.5  "
     >
       <h1 className="heading1 text-baseWhite ">Our latest works</h1>
-      <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll ">
+      <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll overflow-visible">
         <motion.div
           className="flex gap-1.5 xl:ml-5"
           initial={{ x: 0 }}
@@ -43,10 +43,10 @@ function Carousel({ movementAmount, projects }) {
           transition={{ type: "tween", duration: 0.6 }}
         >
           {projects.map((project) => (
-            <motion.div className="xl:w-30 " key={project.id}>
+            <motion.div className="xl:w-30 w-[267px]" key={project.id}>
               <ProjectCard
                 project={project}
-                className="xl:w-30 flex-shrink-0"
+                className="xl:w-30 w-[267px] flex-shrink-0"
               />
             </motion.div>
           ))}
