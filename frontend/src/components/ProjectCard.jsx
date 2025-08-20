@@ -24,7 +24,7 @@ function ProjectCard({ project, className = "" }) {
 
   return (
     <div
-      className={`${className} group flex flex-col justify-end min-w-16 py-1 px-1 xl:px-1.5 gap-1 h-20`}
+      className={`${className} group flex flex-col justify-end min-w-[256px] py-1 px-1 xl:px-1.5 gap-1 h-20`}
       style={backgroundStyle}
     >
       <div className=" flex overflow-hidden  w-full h-full">
