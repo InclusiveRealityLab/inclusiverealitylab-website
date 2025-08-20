@@ -14,7 +14,7 @@ function Footer() {
           <SocialMediaHandleContainer iconColor="wht"/>
         </div>
         <p className="bodySmall text-text-invalid text-right xl:self-end ">
-          © 2025 Inclusive Reality Lab. All Rights Reserved.
+          © 2025 Inclusive Reality Lab.<br></br> All Rights Reserved.
         </p>
       </footer>
     </div>
