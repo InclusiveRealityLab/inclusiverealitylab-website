@@ -13,7 +13,7 @@ import PublicationSectionWrapper from "../components/wrappers/PublicationSection
 import useCustomCentering from "../hooks/useCustomCentering";
 import extractData from "../utils/extractData";
 import LoadingSpinner from "../components/LoadingSpinner";
-import MobileBackground from "../components/animations/MobileBackground";
+import Background from "../components/animations/Background";
 import DesktopBackground from "../components/animations/DesktopBackground";
 
 function LandingPage() {
@@ -119,10 +119,8 @@ function LandingPage() {
         </div>
 
         {/* Gradient Background */}
-      
 
-        {/* For mobile  */}        
-        <MobileBackground className=""/>
+        <Background className="" />
 
         <div className="relative z-0">
           {/* Three Themes Section */}
@@ -132,7 +130,6 @@ function LandingPage() {
             </p>
 
             <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5">
-              
               {["Understand", "Assist", "Augment"].map((title, idx) => (
                 <div
                   key={idx}
@@ -150,12 +147,9 @@ function LandingPage() {
               ))}
             </div>
           </div>
-         
 
           {/* Featured Projects Carousel */}
           <section className="relative border-2 bg-baseBlack xl:ml-8 min-h-[708px]">
-            
-            
             {isProjectsLoading ? (
               <LoadingSpinner />
             ) : (
@@ -163,13 +157,10 @@ function LandingPage() {
             )}
           </section>
 
-          
-
           {/* Mission Text */}
-          <p className="z-10 heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
-            {/* <MobileBackground className=''/> */}
+          <p className="relative z-10 heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
             {/* main cause of vertical overflow of gradient background!!! */}
-            {/* <MobileBackground className=""/> */}
+            <Background className="" />
             Our research explores how reality itself - both physical and digital
             - can be leveraged to understand cognitive, behavioral, and
             emotional states, assist individuals in their daily lives, and
@@ -178,12 +169,9 @@ function LandingPage() {
             a world where diverse individuals can thrive, connect, and reach
             their full potential.
           </p>
-          
 
           {/* Featured Publications Section */}
           <PublicationSectionWrapper headingContent="Recent Publications">
-          
-          
             {isPubsLoading ? (
               <LoadingSpinner />
             ) : (
@@ -197,14 +185,11 @@ function LandingPage() {
           </PublicationSectionWrapper>
 
           {/* Gradient Background */}
-         
-          <MobileBackground className="h-[90vh]"/>
-          
+
+          <Background className="h-[90vh]" />
 
           {/* News Section */}
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-64.5 gap-4 z-100 bg-transparent ">
-            
-
             <h1 className="heading1">News</h1>
             <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
               {isNewsLoading ? (

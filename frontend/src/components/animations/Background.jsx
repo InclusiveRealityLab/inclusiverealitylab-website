@@ -1,4 +1,4 @@
-function MobileBackground({className=""}){
+function Background({className=""}){
     return (
         <> {/* Gradient Background */}
           <div
@@ -81,4 +81,4 @@ function MobileBackground({className=""}){
     )
 }
 
-export default MobileBackground;
+export default Background;
