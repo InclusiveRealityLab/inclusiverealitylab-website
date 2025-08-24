@@ -102,7 +102,7 @@ function PublicationsPage() {
         {hasMore && (
           <div
             ref={loadMoreRef}
-            className="h-22 flex items-center justify-center"
+            className="h-22 flex self-center items-center justify-center"
           >
             {isLoading ? (
              <LoadingSpinner/>

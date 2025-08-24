@@ -24,11 +24,11 @@ function ProjectCard({ project, className = "" }) {
 
   return (
     <div
-      className={`${className} group flex flex-col justify-end min-w-16 py-1 px-1 xl:px-1.5 gap-1 h-20`}
+      className={`${className} group flex flex-col justify-end min-w-[267px] py-1 px-1 xl:px-1.5 gap-1 h-20`}
       style={backgroundStyle}
     >
-      <div className=" flex overflow-hidden  w-full h-full">
-        <h2 className="group-hover:text-text-active heading2 self-end overflow-ellipsis hyphens-auto text-baseWhite ">
+      <div className=" flex overflow-hidden  w-full h-full">  
+        <h2 className="group-hover:text-text-active heading3 self-end overflow-ellipsis hyphens-auto text-baseWhite ">
           {project["Project Name"] ??
             "Enhance human-food interaction in social settings"}
         </h2>
