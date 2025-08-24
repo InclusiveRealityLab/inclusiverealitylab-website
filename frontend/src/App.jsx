@@ -8,12 +8,16 @@ import Footer from "./components/Footer";
 import ProjectsPage from "./pages/ProjectsPage";
 import PublicationsPage from "./pages/PublicationsPage";
 import PeoplePage from "./pages/PeoplePage";
+import { useScroll } from "framer-motion";
+import useScrollToTop from "./hooks/useScrollToTop";
 
 
 function App() {
+ 
   return (
     <>
       <HashRouter>
+        <ScrollToTopManager/>
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -27,4 +31,10 @@ function App() {
   );
 }
 
+function ScrollToTopManager(){
+  useScrollToTop();
+  return null;
+}
+
 export default App;
+
