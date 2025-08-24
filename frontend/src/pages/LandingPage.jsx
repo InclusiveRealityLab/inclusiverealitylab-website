@@ -110,11 +110,11 @@ function LandingPage() {
           </video>
 
           <div className="absolute xl:top-[440px] top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-            <p className="body">Hi, welcome to Inclusive Reality Lab 👋</p>
-            <p className="heading3">
+            <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
+            <div className="heading3">
               We envision a future where technology seamlessly bridges social
               and ability gaps, fostering an inclusive and prosocial world.
-            </p>
+            </div>
           </div>
         </div>
 
@@ -158,7 +158,7 @@ function LandingPage() {
           </section>
 
           {/* Mission Text */}
-          <p className="relative z-10 heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
+          <div className="relative z-10 heading3 xl:max-w-64.5 my-8 mx-1.5 xl:mx-auto">
             {/* main cause of vertical overflow of gradient background!!! */}
             <Background className="" />
             Our research explores how reality itself - both physical and digital
@@ -168,7 +168,7 @@ function LandingPage() {
             By designing adaptive and empowering technologies, we aim to create
             a world where diverse individuals can thrive, connect, and reach
             their full potential.
-          </p>
+          </div>
 
           {/* Featured Publications Section */}
           <PublicationSectionWrapper headingContent="Recent Publications">

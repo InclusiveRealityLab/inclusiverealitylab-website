@@ -15,7 +15,7 @@ function Background({className=""}){
               preserveAspectRatio="xMidYMid slice"
               
             >
-              <g id="Background" clip-path="url(#clip0_3183_3414)">
+              <g id="Background" clipPath="url(#clip0_3183_3414)">
                 <g id="Animation / shape sunny">
                   <path
                     id="Union"
