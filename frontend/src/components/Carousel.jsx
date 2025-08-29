@@ -10,8 +10,8 @@ import invalidRightArrow from "../assets/icons/invalidRightArrow.svg";
 import validLeftArrow from "../assets/icons/validLeftArrow.svg";
 
 function Carousel({ movementAmount, projects }) {
-  const marginRef = useRef();
-  useCustomCentering(marginRef);
+  // const marginRef = useRef();
+  // useCustomCentering(marginRef);
 
   // const projects = [
   //   { id: 1, title: "Project one sample name" },
@@ -31,8 +31,8 @@ function Carousel({ movementAmount, projects }) {
 
   return (
     <div
-      ref={marginRef}
-      className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-4 xl:gap-4 xl:max-w-64.5  "
+      // ref={marginRef}
+      className=" flex flex-col justify-start  mx-1.5  bg-baseBlack xl:py-5 py-5  xl:w-screen gap-4 xl:gap-4  "
     >
       <h1 className="heading1 text-baseWhite ">Our latest works</h1>
       <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll overflow-visible">
