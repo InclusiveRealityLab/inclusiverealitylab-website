@@ -12,7 +12,7 @@ function CategoryContainer({ category, people }) {
   return (
     < >{people && (
       <div className="flex flex-col gap-2.5 w-full">
-      <p className="heading4">{category === "Lab" ? "Lab members" : category}</p>
+      <p className="heading4">{category === "Lab" ? "Lab members" : category === "Collaborator" ? "Collaborators" : category}</p>
 
       {category.toLowerCase() === "lab" && (
         <>
