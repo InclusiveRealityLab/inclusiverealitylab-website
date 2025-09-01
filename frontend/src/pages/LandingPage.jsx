@@ -88,7 +88,7 @@ function LandingPage() {
     <div className="xl:flex xl:flex-col xl:justify-between xl:items-center">
       <div className="relative w-screen h-auto z-0">
         {/* Hero Image / Key Visual Section*/}
-        <div className="w-screen xl:h-50 h-[560px] z-30">
+        <div className="w-screen xl:h-50 h-[560px] z-15">
           <video
             className="xl:w-full w-full h-full object-cover block motion-reduce:hidden"
             autoPlay
@@ -116,8 +116,8 @@ function LandingPage() {
               and ability gaps, fostering an inclusive and prosocial world.
             </div>
           </div> */}
-          <div className="hidden xl:block xl:absolute xl:top-[440px] xl:w-64.5 xl:left-0 xl:right-0 xl:mx-auto ">
-            <div className="absolute xl:static top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
+          <div className="hidden xl:block xl:absolute xl:top-[440px] xl:w-[1208px] xl:left-0 xl:right-0 xl:mx-auto ">
+            <div className="absolute xl:static top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:right-0 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
             <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
             <div className="heading3">
               We envision a future where technology seamlessly bridges social
@@ -168,7 +168,7 @@ function LandingPage() {
           </div>
 
           {/* Featured Projects Carousel */}
-          <section className="relative border-2 xl:mx-auto  xl:max-w-65.5 min-h-[708px]">
+          <section className="relative xl:mx-auto bg-background-black  xl:px-0 xl:max-w-[1208px] min-h-[708px]">
             {isProjectsLoading ? (
               <LoadingSpinner />
             ) : (

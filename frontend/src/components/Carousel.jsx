@@ -32,12 +32,12 @@ function Carousel({ movementAmount, projects }) {
   return (
     <div
       // ref={marginRef}
-      className=" flex flex-col justify-start  mx-1.5  bg-baseBlack xl:py-5 py-5  xl:w-screen gap-4 xl:gap-4  "
+      className=" flex flex-col justify-start xl:px-[88px]  bg-baseBlack xl:py-5 py-5  xl:w-screen gap-4 xl:gap-4  "
     >
-      <h1 className="heading1 text-baseWhite ">Our latest works</h1>
-      <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll overflow-visible">
+      <h1 className="heading1 text-baseWhite ml-1.5">Our latest works</h1>
+      <div className="relative xl:w-screen  xl:overflow-visible  overflow-x-scroll overflow-visible">
         <motion.div
-          className="flex gap-1.5 xl:ml-5"
+          className="flex gap-1.5 xl:ml-5 ml-1.5"
           initial={{ x: 0 }}
           animate={{ x: -currentIndex * movementAmount }}
           transition={{ type: "tween", duration: 0.6 }}
@@ -52,8 +52,8 @@ function Carousel({ movementAmount, projects }) {
           ))}
         </motion.div>
       </div>
-      <div className="flex flex-row justify-between xl:items-center items-end gap-1.5 ">
-        <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5">
+      <div className="flex flex-row justify-between  xl:w-[1032px] xl:items-center items-end gap-1.5 ">
+        <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5 ml-[88px]">
           <button onClick={handleMoveLeft} className="label text-baseWhite">
             <img
               src={currentIndex == 0 ? invalidLeftArrow : validLeftArrow}
@@ -75,7 +75,7 @@ function Carousel({ movementAmount, projects }) {
           </button>
         </div>
 
-        <Link to="/projects"><p className="label px-0.5 py-[11px] text-baseWhite  justify-center transition ease-in duration-200 hover:bg-background-secondary/40 ">view all projects</p></Link>
+        <Link to="/projects"><p className="label px-0.5 ml-1.5  py-[11px] w-[242px] text-baseWhite  justify-center transition ease-in duration-200 hover:bg-background-secondary/40 ">view all projects</p></Link>
       </div>
     </div>
   );
