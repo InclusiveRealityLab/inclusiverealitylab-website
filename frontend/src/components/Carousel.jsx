@@ -74,7 +74,7 @@ function Carousel({ movementAmount, projects }) {
         </div>
 
         <Link to="/projects">
-          <p className="label px-0.5 ml-1.5  py-[11px] w-[242px] text-baseWhite  justify-center text-center transition ease-in duration-200 hover:bg-background-secondary/40 ">
+          <p className="label px-0.5 ml-1.5 w-[176px]  py-[11px] xl:w-[242px] text-baseWhite  justify-center text-center transition ease-in duration-200 hover:bg-background-secondary/40 ">
             view all projects
           </p>
         </Link>

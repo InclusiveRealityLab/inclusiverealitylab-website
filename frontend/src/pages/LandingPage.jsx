@@ -109,7 +109,7 @@ function LandingPage() {
             />
           </video>
 
-           {/* <div className="absolute xl:top-[440px] top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
+          {/* <div className="absolute xl:top-[440px] top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
             <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
             <div className="heading3">
               We envision a future where technology seamlessly bridges social
@@ -118,12 +118,14 @@ function LandingPage() {
           </div> */}
           <div className="hidden xl:block xl:absolute xl:top-[440px] xl:w-[1208px] xl:left-0 xl:right-0 xl:mx-auto ">
             <div className="absolute xl:static top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:right-0 xl:max-w-[592px]  max-w-[472px] min-w-[272px] mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-            <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
-            <div className="heading3">
-              We envision a future where technology seamlessly bridges social
-              and ability gaps, fostering an inclusive and prosocial world.
+              <div className="body">
+                Hi, welcome to Inclusive Reality Lab 👋
+              </div>
+              <div className="heading3">
+                We envision a future where technology seamlessly bridges social
+                and ability gaps, fostering an inclusive and prosocial world.
+              </div>
             </div>
-          </div>
           </div>
 
           <div className="xl:hidden absolute top-[240px]  left-1.5 right-1.5   max-w-[472px] min-w-[272px] mx-auto  z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
@@ -133,8 +135,6 @@ function LandingPage() {
               and ability gaps, fostering an inclusive and prosocial world.
             </div>
           </div>
-
-        
         </div>
 
         {/* Gradient Background */}
@@ -196,10 +196,12 @@ function LandingPage() {
             ) : (
               <PublicationContainer publications={featuredPublications} />
             )}
-            <Link to="/publications" className="xl:self-end">
-              <p className="label w-[242px] text-center p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40">
-                view all publications
-              </p>
+            <Link
+              to="/publications"
+              className="label xl:self-end xl:w-[242px] w-[176px] text-center p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40"
+            >
+              <span className="hidden xl:inline">view all publications</span>
+              <span className="xl:hidden inline">view more works</span>
             </Link>
           </PublicationSectionWrapper>
 
