@@ -197,7 +197,7 @@ function LandingPage() {
               <PublicationContainer publications={featuredPublications} />
             )}
             <Link to="/publications" className="xl:self-end">
-              <p className="label p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40">
+              <p className="label w-[242px] text-center p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40">
                 view all publications
               </p>
             </Link>

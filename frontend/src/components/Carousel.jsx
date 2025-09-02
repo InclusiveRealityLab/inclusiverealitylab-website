@@ -13,12 +13,7 @@ function Carousel({ movementAmount, projects }) {
   // const marginRef = useRef();
   // useCustomCentering(marginRef);
 
-  // const projects = [
-  //   { id: 1, title: "Project one sample name" },
-  //   { id: 2, title: "Project two sample name" },
-  //   { id: 3, title: "Project three sample name" },
-  //   { id: 4, title: "Project four sample name" },
-  // ];
+  // Logic for moving the carousel cards
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleMoveRight = () => {
@@ -52,7 +47,9 @@ function Carousel({ movementAmount, projects }) {
           ))}
         </motion.div>
       </div>
-      <div className="flex flex-row justify-between  xl:w-[1032px] xl:items-center items-end gap-1.5 ">
+      {/* Bottom Navigation Area */}
+      <div className="flex flex-row justify-between xl:w-[1032px] xl:items-center items-end gap-1.5 ">
+        {/* Forward and Backward Arro Buttons */}
         <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5 ml-[88px]">
           <button onClick={handleMoveLeft} className="label text-baseWhite">
             <img
@@ -62,6 +59,7 @@ function Carousel({ movementAmount, projects }) {
             />
           </button>
 
+          {/* View All Projects Button */}
           <button onClick={handleMoveRight} className="label text-baseWhite">
             <img
               src={
@@ -75,7 +73,11 @@ function Carousel({ movementAmount, projects }) {
           </button>
         </div>
 
-        <Link to="/projects"><p className="label px-0.5 ml-1.5  py-[11px] w-[242px] text-baseWhite  justify-center transition ease-in duration-200 hover:bg-background-secondary/40 ">view all projects</p></Link>
+        <Link to="/projects">
+          <p className="label px-0.5 ml-1.5  py-[11px] w-[242px] text-baseWhite  justify-center text-center transition ease-in duration-200 hover:bg-background-secondary/40 ">
+            view all projects
+          </p>
+        </Link>
       </div>
     </div>
   );
