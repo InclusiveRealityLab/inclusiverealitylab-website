@@ -129,7 +129,7 @@ function LandingPage() {
               Our work centers on three key themes
             </p>
 
-            <div className="flex flex-col xl:flex-row items-center justify-between gap-1.5">
+            <div className="flex flex-col xl:flex-row items-start justify-between gap-1.5">
               {["Understand", "Assist", "Augment"].map((title, idx) => (
                 <div
                   key={idx}
@@ -141,7 +141,7 @@ function LandingPage() {
                       ? "Designing technologies that support individuals and foster better collaboration."
                       : title === "Understand"
                       ? "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
-                      : "Empowering diverse people by enhancing their abilities in meaningful, inclusive ways."}
+                      : "Empowering diverse individuals by enhancing their abilities in meaningful, inclusive ways."}
                   </p>
                 </div>
               ))}
