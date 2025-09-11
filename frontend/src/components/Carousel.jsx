@@ -32,7 +32,7 @@ function Carousel({ movementAmount, projects }) {
       <h1 className="heading1 text-baseWhite ml-1.5">Our latest works</h1>
       <div className="relative xl:w-screen  xl:overflow-visible  overflow-x-scroll overflow-visible">
         <motion.div
-          className="flex gap-1.5 xl:ml-5 ml-1.5"
+          className="flex gap-1.5 xl:ml-5 mx-1.5"
           initial={{ x: 0 }}
           animate={{ x: -currentIndex * movementAmount }}
           transition={{ type: "tween", duration: 0.6 }}
