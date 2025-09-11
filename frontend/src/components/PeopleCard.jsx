@@ -20,7 +20,7 @@ function PeopleCard({ person }) {
       `}
           >
             {["Lab", "Collaborator"].includes(person.category) && (
-              <div className="xl:w-15 xl:h-15 w-[136px] h-[136px] ">
+              <div className="xl:w-12 xl:h-12 w-8 h-8 ">
                 <img
                   src={
                     formatProfilePhotoURL(person)
@@ -40,7 +40,7 @@ function PeopleCard({ person }) {
                 <p className="text-center">{person["Given Name"]} </p>
                 <p>{person["Family Name"]} </p>
               </div>
-              <p className="bodySmall">{person["Role"]}</p>
+              {person["Affiliation"] && person["Role"] == "Collaborator" ? (<p className="bodySmall">{person["Affiliation"]}</p>) : (<p className="bodySmall">{person["Role"]}</p>) }
             </div>
           </div>
         </>

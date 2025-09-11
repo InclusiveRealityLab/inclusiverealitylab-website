@@ -10,15 +10,10 @@ import invalidRightArrow from "../assets/icons/invalidRightArrow.svg";
 import validLeftArrow from "../assets/icons/validLeftArrow.svg";
 
 function Carousel({ movementAmount, projects }) {
-  const marginRef = useRef();
-  useCustomCentering(marginRef);
+  // const marginRef = useRef();
+  // useCustomCentering(marginRef);
 
-  // const projects = [
-  //   { id: 1, title: "Project one sample name" },
-  //   { id: 2, title: "Project two sample name" },
-  //   { id: 3, title: "Project three sample name" },
-  //   { id: 4, title: "Project four sample name" },
-  // ];
+  // Logic for moving the carousel cards
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleMoveRight = () => {
@@ -31,13 +26,13 @@ function Carousel({ movementAmount, projects }) {
 
   return (
     <div
-      ref={marginRef}
-      className=" flex flex-col justify-start  mx-1.5  xl:py-5 py-5  gap-4 xl:gap-4 xl:max-w-64.5  "
+      // ref={marginRef}
+      className=" flex flex-col justify-start xl:px-[88px]  bg-baseBlack xl:py-5 py-5  xl:w-screen gap-4 xl:gap-4  "
     >
-      <h1 className="heading1 text-baseWhite ">Our latest works</h1>
-      <div className="relative xl:w-screen xl:overflow-visible overflow-x-scroll overflow-visible">
+      <h1 className="heading1 text-baseWhite ml-1.5">Our latest works</h1>
+      <div className="relative xl:w-screen  xl:overflow-visible  overflow-x-scroll overflow-visible">
         <motion.div
-          className="flex gap-1.5 xl:ml-5"
+          className="flex gap-1.5 xl:ml-5 mx-1.5"
           initial={{ x: 0 }}
           animate={{ x: -currentIndex * movementAmount }}
           transition={{ type: "tween", duration: 0.6 }}
@@ -52,8 +47,10 @@ function Carousel({ movementAmount, projects }) {
           ))}
         </motion.div>
       </div>
-      <div className="flex flex-row justify-between xl:items-center items-end gap-1.5 ">
-        <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5">
+      {/* Bottom Navigation Area */}
+      <div className="flex flex-row justify-between xl:w-[1032px] xl:items-center items-end gap-1.5 ">
+        {/* Forward and Backward Arro Buttons */}
+        <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5 ml-[88px]">
           <button onClick={handleMoveLeft} className="label text-baseWhite">
             <img
               src={currentIndex == 0 ? invalidLeftArrow : validLeftArrow}
@@ -62,6 +59,7 @@ function Carousel({ movementAmount, projects }) {
             />
           </button>
 
+          {/* View All Projects Button */}
           <button onClick={handleMoveRight} className="label text-baseWhite">
             <img
               src={
@@ -75,7 +73,11 @@ function Carousel({ movementAmount, projects }) {
           </button>
         </div>
 
-        <Link to="/projects"><p className="label px-0.5 py-[11px] text-baseWhite  justify-center transition ease-in duration-200 hover:bg-background-secondary/40 ">view all projects</p></Link>
+        <Link to="/projects">
+          <p className="label px-0.5 ml-1.5 w-[176px]  py-[11px] xl:w-[242px] text-baseWhite  justify-center text-center transition ease-in duration-200 hover:bg-background-secondary/40 ">
+            view all projects
+          </p>
+        </Link>
       </div>
     </div>
   );
