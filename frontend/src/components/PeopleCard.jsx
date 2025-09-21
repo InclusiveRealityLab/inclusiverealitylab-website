@@ -40,7 +40,7 @@ function PeopleCard({ person }) {
                 <p className="text-center">{person["Given Name"]} </p>
                 <p>{person["Family Name"]} </p>
               </div>
-              {person["Affiliation"] && person["Role"] == "Collaborator" ? (<p className="bodySmall">{person["Affiliation"]}</p>) : (<p className="bodySmall">{person["Role"]}</p>) }
+              {person["Affiliation"] && person["Role"] == "Collaborator" ? (<p className="bodySmall text-center">{person["Affiliation"]}</p>) : (<p className="bodySmall">{person["Role"]}</p>) }
             </div>
           </div>
         </>
