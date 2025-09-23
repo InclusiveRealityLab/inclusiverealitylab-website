@@ -1,9 +1,12 @@
 import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png";
 import splitName from "../utils/splitName";
 import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
+import Modal from "./modals/Modal";
+import { useState } from "react";
 
 function PeopleCard({ person }) {
   // const isActive = ["Lab", "Collaborator"].includes(person.category);
+  const [isPersonModalOpen, setIsPersonModalOpen] = useState(false);
 
   return (
     <>
@@ -17,7 +20,7 @@ function PeopleCard({ person }) {
             ? "xl:h-22.5 h-20 "
             : "xl:h-6 h-6"
         }
-      `}
+      `} onClick={() => setIsPersonModalOpen(true)}
           >
             {["Lab", "Collaborator"].includes(person.category) && (
               <div className="xl:w-12 xl:h-12 w-8 h-8 ">
@@ -44,6 +47,10 @@ function PeopleCard({ person }) {
             </div>
           </div>
         </>
+      )}
+      {/* modal here */}
+      {isPersonModalOpen && (
+        <Modal onClose={() => setIsPersonModalOpen(false)} />
       )}
     </>
   );
