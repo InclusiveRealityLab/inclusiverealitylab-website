@@ -3,6 +3,8 @@ import splitName from "../utils/splitName";
 import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
 import Modal from "./modals/Modal";
 import { useState } from "react";
+import IndividualMemberModal from "./modals/IndividualMemberModal";
+import ProfilePhotoContainer from "./ProfilePhotoContainer";
 
 function PeopleCard({ person }) {
   // const isActive = ["Lab", "Collaborator"].includes(person.category);
@@ -23,20 +25,9 @@ function PeopleCard({ person }) {
       `} onClick={() => setIsPersonModalOpen(true)}
           >
             {["Lab", "Collaborator"].includes(person.category) && (
-              <div className="xl:w-12 xl:h-12 w-8 h-8 ">
-                <img
-                  src={
-                    formatProfilePhotoURL(person)
-                      
-                  }
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = defaultProfilePhoto;
-                  }}
-                  className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
-                  alt="Profile"
-                />
-              </div>
+              
+              <ProfilePhotoContainer photoStyle={"grayscale group-hover:grayscale-0"} person={person} />
+              
             )}
             <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
               <div className="flex flex-col justify-between  items-center heading4 ">
@@ -50,7 +41,7 @@ function PeopleCard({ person }) {
       )}
       {/* modal here */}
       {isPersonModalOpen && (
-        <Modal onClose={() => setIsPersonModalOpen(false)} />
+        <IndividualMemberModal onClose={() => setIsPersonModalOpen(false)} />
       )}
     </>
   );

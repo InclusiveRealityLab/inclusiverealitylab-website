@@ -2,8 +2,9 @@ import closeBlack from "../../assets/icons/closeBlack.svg";
 import ReactDOM from "react-dom";
 
 function Modal({ children, onClose, type }) {
+ 
   return ReactDOM.createPortal(
-    <>
+    <> 
       <div
         className={`fixed top-0 right-0 w-full  xl:max-w-68 h-screen overflow-scroll z-100  ${
           type == "join" ? "bg-background-secondary" : "bg-background-tertiary"
