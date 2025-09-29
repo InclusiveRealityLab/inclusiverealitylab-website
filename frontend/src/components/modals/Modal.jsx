@@ -1,16 +1,15 @@
 import closeBlack from "../../assets/icons/closeBlack.svg";
 import ReactDOM from "react-dom";
 
-function Modal({ children, onClose, type }) {
+function Modal({ children, onClose, type, backgroundColor }) {
  
   return ReactDOM.createPortal(
     <> 
       <div
-        className={`fixed top-0 right-0 w-full  xl:max-w-68 h-screen overflow-scroll z-100  ${
-          type == "join" ? "bg-background-secondary" : "bg-background-tertiary"
-        }`}
+        className={`fixed top-0 right-0 w-full   h-screen overflow-scroll z-100 bg-black/40 `}
       >
-        <div className="flex flex-col items-center xl:gap-3 gap-[56px]">
+        <div className="right-0 fixed w-full xl:max-w-64.5 h-screen ">
+          <div className="bg-white flex flex-col items-center xl:gap-3 gap-[56px] h-full ">
           <button className="align xl:self-start self-end xl:ml-2.5 xl:mt-2.5 mt-1 mb-1 mr-1.5 cursor-pointer" onClick={onClose}>
             <img src={closeBlack}  />
           </button>
@@ -18,6 +17,8 @@ function Modal({ children, onClose, type }) {
             {children}
           </div>
         </div>
+        </div>
+        
       </div>
     </>,
     document.getElementById("modal-root")
