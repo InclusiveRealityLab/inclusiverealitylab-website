@@ -14,6 +14,8 @@ import axios from "axios";
 import check from "../assets/icons/check.svg";
 import processing from "../assets/icons/processing.svg";
 import SocialMediaHandleContainer from "./SocialMediaHandleContainer";
+import JoinModal from "./modals/JoinModal";
+import ContactModal from "./modals/ContactModal";
 
 const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
@@ -49,7 +51,6 @@ function Navbar() {
   const messageReference = useRef();
 
   const [status, setStatus] = useState("Send");
- 
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
@@ -145,10 +146,16 @@ function Navbar() {
           <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between  py-1 px-1.5 xl:px-0 xl:items-center">
             <li className="w-[55px] h-[32px]  xl:w-full xl:h-full cursor-pointer">
               <Link to="/">
-                <img src={`${import.meta.env.BASE_URL}IRL_logo_icon.svg`} alt="logo"></img>
+                <img
+                  src={`${import.meta.env.BASE_URL}IRL_logo_icon.svg`}
+                  alt="logo"
+                ></img>
               </Link>
             </li>
-            <li className="xl:hidden cursor-pointer w-[40px] h-[40px]" onClick={toggleMenu}>
+            <li
+              className="xl:hidden cursor-pointer w-[40px] h-[40px]"
+              onClick={toggleMenu}
+            >
               <img src={isOpen ? close : menu} alt="toggle menu button"></img>
             </li>
           </ul>
@@ -195,25 +202,11 @@ function Navbar() {
                 />
 
                 {isModalOpenJoin && (
-                  <Modal
+                  <JoinModal
                     onClose={() => setIsModalOpenJoin(false)}
-                    type={modalType}
-                  >
-                    <h1 className="heading1 overflow-wrap hyphens-auto">
-                      Looking for opportunities to join us?
-                    </h1>
-                    <p className="body">
-                      As a new lab, we’re open to conversations and
-                      collaborations in many forms. Feel free to explore our
-                      projects and publications, if our work at the Inclusive
-                      Reality Lab resonates with your interests, don’t hesitate
-                      to reach out at inclusiverealitylab[at]gmail.com.{" "}
-                      <br></br>Someone from our team or our director will be
-                      happy to get back to you soon. <br></br> Feel free to
-                      follow our social media accounts as well.
-                    </p>
-                    <SocialMediaHandleContainer iconColor="blk" />
-                  </Modal>
+                    
+                    backgroundColor={`bg-background-secondary`}
+                  />
                 )}
               </li>
               <li>
@@ -222,78 +215,81 @@ function Navbar() {
                   onClick={() => handleOpenContactModal()}
                 />
                 {isModalOpenContact && (
-                  <Modal
-                    onClose={() => setIsModalOpenContact(false)}
-                    type={modalType}
-                  >
-                    <div className="flex flex-col gap-4">
-                      <div className="flex flex-col gap-2 ">
-                        <h1 className="heading1">Let's keep in touch!</h1>
-                        <p className="body">
-                          Drop a message to say hi, or send an email to
-                          inclusiverealitylab[at]gmail.com, we will get back to
-                          you soon. <br></br> Feel free to follow our social media
-                          accounts as well.
-                        </p>
-                        <SocialMediaHandleContainer iconColor="blk"/>
-
-                      </div>
-                      <form
-                        onSubmit={handleFormSubmission}
-                        className="flex flex-col items-center justify-between gap-1.5"
-                      >
-                        <input
-                          type="text"
-                          name="contactName"
-                          ref={nameReference}
-                          placeholder="Name"
-                          className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
-                        />
-                        <input
-                          type="email"
-                          name="contactEmail"
-                          ref={emailReference}
-                          placeholder="Email"
-                          className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
-                        />
-                        <textarea
-                          type="text"
-                          name="message"
-                          ref={messageReference}
-                          placeholder="Message"
-                          className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
-                        />
-                        <button
-                          className={`label text-white text-center  ${
-                            status == "Sent"
-                              ? "bg-background-secondary py-[4px] px-3.5"
-                              : "bg-background-black py-[4px] " 
-                          } bg-background-black w-full h-2.5 hover:text-secondary`}
-                          type="submit"
-                        >
-                          {status === "Sending" ? (
-                            <span className="flex items-center justify-center">
-                              <img
-                                src={processing}
-                                alt="processing"
-                                className="w-2 h-2"
-                              />
-                            </span>
-                          ) : status === "Sent" ? (
-                            <span className="flex items-center justify-center">
-                              <img
-                                src={check}
-                                alt="checkmark"
-                                className="w-2 h-2"
-                              />
-                            </span>
-                          ) : (
-                            "Send"
-                          )}
-                        </button>
-                      </form>
-                    </div>
-                  </Modal>
+                  // <Modal
+                  //   onClose={() => setIsModalOpenContact(false)}
+                  //   type={modalType}
+                  //   backgroundColor={`bg-background-tertiary`}
+                  // >
+                  //   <div className="flex flex-col gap-4">
+                  //     <div className="flex flex-col gap-2 ">
+                  //       <h1 className="heading1">Let's keep in touch!</h1>
+                  //       <p className="body">
+                  //         Drop a message to say hi, or send an email to
+                  //         inclusiverealitylab[at]gmail.com, we will get back to
+                  //         you soon. <br></br> Feel free to follow our social
+                  //         media accounts as well.
+                  //       </p>
+                  //       <SocialMediaHandleContainer iconColor="blk" />
+                  //     </div>
+                  //     <form
+                  //       onSubmit={handleFormSubmission}
+                  //       className="flex flex-col items-center justify-between gap-1.5"
+                  //     >
+                  //       <input
+                  //         type="text"
+                  //         name="contactName"
+                  //         ref={nameReference}
+                  //         placeholder="Name"
+                  //         className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
+                  //       />
+                  //       <input
+                  //         type="email"
+                  //         name="contactEmail"
+                  //         ref={emailReference}
+                  //         placeholder="Email"
+                  //         className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
+                  //       />
+                  //       <textarea
+                  //         type="text"
+                  //         name="message"
+                  //         ref={messageReference}
+                  //         placeholder="Message"
+                  //         className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
+                  //       />
+                  //       <button
+                  //         className={`label text-white text-center  ${
+                  //           status == "Sent"
+                  //             ? "bg-background-secondary py-[4px] px-3.5"
+                  //             : "bg-background-black py-[4px] "
+                  //         } bg-background-black w-full h-2.5 hover:text-secondary`}
+                  //         type="submit"
+                  //       >
+                  //         {status === "Sending" ? (
+                  //           <span className="flex items-center justify-center">
+                  //             <img
+                  //               src={processing}
+                  //               alt="processing"
+                  //               className="w-2 h-2"
+                  //             />
+                  //           </span>
+                  //         ) : status === "Sent" ? (
+                  //           <span className="flex items-center justify-center">
+                  //             <img
+                  //               src={check}
+                  //               alt="checkmark"
+                  //               className="w-2 h-2"
+                  //             />
+                  //           </span>
+                  //         ) : (
+                  //           "Send"
+                  //         )}
+                  //       </button>
+                  //     </form>
+                  //   </div>
+                  // </Modal>
+                  <ContactModal onClose={() => setIsModalOpenContact(false)}
+                    
+                    backgroundColor={`bg-background-tertiary`} />
                 )}
               </li>
             </ul>
