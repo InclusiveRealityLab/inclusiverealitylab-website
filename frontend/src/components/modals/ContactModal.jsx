@@ -30,7 +30,7 @@ function ContactModal({ children, onClose, backgroundColor }) {
       });
 
       const result = await response.json(); // Parses JSON string returned from Apps Script
-      console.log("✅ Server result:", result);
+      
 
       if (result.success) {
         setStatus("Sent");

@@ -23,7 +23,7 @@ function PeoplePage() {
         
         setPeopleData(extractData(data));
         setisLoading(false);
-        console.log("People data loaded:", data);
+       
       } catch (error) {
         console.error("Error fetching people data:", error);
       }
