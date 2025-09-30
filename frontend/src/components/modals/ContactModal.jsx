@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 
 const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
-function ContactModal({ children, onClose, backgroundColor }) {
+function ContactModal({ children, onClose, backgroundColor, horizontalGap }) {
   // handling the form submission for the contact form inside the contact modal
   const nameReference = useRef();
   const emailReference = useRef();
@@ -53,7 +53,7 @@ function ContactModal({ children, onClose, backgroundColor }) {
   };
   return (
     <>
-      <Modal onClose={onClose} backgroundColor="bg-background-tertiary">
+      <Modal onClose={onClose} backgroundColor="bg-background-tertiary" horizontalGap={horizontalGap}>
         <div className=" xl:w-33 w-full  px-1.5 xl:px-0 flex flex-col gap-2 xl:gap-2">
           <div className=" xl:w-33 w-full px-1.5 xl:px-0 flex flex-col gap-2 xl:gap-2">
             <div className="flex flex-col gap-4">

@@ -203,9 +203,9 @@ function Navbar() {
 
                 {isModalOpenJoin && (
                   <JoinModal
-                    onClose={() => setIsModalOpenJoin(false)}
-                    
+                    onClose={() => setIsModalOpenJoin(false)}                    
                     backgroundColor={`bg-background-secondary`}
+                    horizontalGap={`[48px]`}
                   />
                 )}
               </li>
@@ -218,7 +218,8 @@ function Navbar() {
                   
                   <ContactModal onClose={() => setIsModalOpenContact(false)}
                     
-                    backgroundColor={`bg-background-tertiary`} />
+                    backgroundColor={`bg-background-tertiary`}
+                    horizontalGap="[48px]" />
                 )}
               </li>
             </ul>

@@ -7,8 +7,13 @@ import IndividualMemberModal from "./modals/IndividualMemberModal";
 import ProfilePhotoContainer from "./ProfilePhotoContainer";
 
 function PeopleCard({ person }) {
-  // const isActive = ["Lab", "Collaborator"].includes(person.category);
+ 
   const [isPersonModalOpen, setIsPersonModalOpen] = useState(false);
+  const samplePerson = {
+    "Given Name": "John",
+    "Family Name": "Doe",
+    "Affiliation": "University of Example",
+  }
 
   return (
     <>
@@ -41,7 +46,7 @@ function PeopleCard({ person }) {
       )}
       {/* modal here */}
       {isPersonModalOpen && (
-        <IndividualMemberModal onClose={() => setIsPersonModalOpen(false)} />
+        <IndividualMemberModal onClose={() => setIsPersonModalOpen(false)} person={person}/>
       )}
     </>
   );
