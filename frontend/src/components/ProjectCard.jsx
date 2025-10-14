@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 import InfoLabel from "./labels/InfoLabel";
 import projectImagePlaceholder from "../assets/images/projectImagePlaceholder.png";
 
 function ProjectCard({ project, className = "" }) {
+  const navigate = useNavigate();
   const [bgImage, setBgImage] = useState(projectImagePlaceholder);
+  const handleCardClick = () => {
+    navigate(`/projects/${project.id}`);
+  }
 
   useEffect(() => {
     if (project["Cover"]) {
@@ -25,7 +30,7 @@ function ProjectCard({ project, className = "" }) {
   return (
     <div
       className={`${className} group flex flex-col justify-end min-w-[267px] py-1 px-1 xl:px-1.5 gap-1 h-20`}
-      style={backgroundStyle}
+      style={backgroundStyle} onClick={handleCardClick} 
     >
       <div className=" flex overflow-hidden  w-full h-full">  
         <h2 className="group-hover:text-text-active heading3 self-end overflow-ellipsis hyphens-auto text-baseWhite ">
