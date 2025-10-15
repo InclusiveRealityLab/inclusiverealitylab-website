@@ -1,38 +1,25 @@
 import { use, useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InfoLabel from "./labels/InfoLabel";
 import projectImagePlaceholder from "../assets/images/projectImagePlaceholder.png";
+import useSetProjectCover from "../hooks/useSetProjectCover";
 
 function ProjectCard({ project, className = "" }) {
   const navigate = useNavigate();
-  const [bgImage, setBgImage] = useState(projectImagePlaceholder);
+
   const handleCardClick = () => {
-    navigate(`/projects/${project.id}`);
-  }
-
-  useEffect(() => {
-    if (project["Cover"]) {
-      const img = new window.Image();
-      img.src = `${import.meta.env.BASE_URL}images/works/${project["Cover"]}`;
-      img.onload = () => setBgImage(img.src);
-      img.onerror = () => setBgImage(projectImagePlaceholder);
-    } else {
-      setBgImage(projectImagePlaceholder);
-    }
-  }, [project["Cover"]]);
-
-  const backgroundStyle = {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${bgImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    navigate(`/projects/${project.id}`,{ state:{project: project}});
   };
+
+  const [projectBackgroundStyle] = useSetProjectCover(project);
 
   return (
     <div
       className={`${className} group flex flex-col justify-end min-w-[267px] py-1 px-1 xl:px-1.5 gap-1 h-20`}
-      style={backgroundStyle} onClick={handleCardClick} 
+      style={projectBackgroundStyle}
+      onClick={handleCardClick}
     >
-      <div className=" flex overflow-hidden  w-full h-full">  
+      <div className=" flex overflow-hidden  w-full h-full">
         <h2 className="group-hover:text-text-active heading3 self-end overflow-ellipsis hyphens-auto text-baseWhite ">
           {project["Project Name"] ??
             "Enhance human-food interaction in social settings"}
