@@ -8,7 +8,7 @@ function ProjectCard({ project, className = "" }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/projects/${project.id}`,{ state:{project: project}});
+    navigate(`/projects/${project.ID}`,{ state:{project: project}});
   };
 
   const [projectBackgroundStyle] = useSetProjectCover(project);
