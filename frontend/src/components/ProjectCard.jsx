@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import InfoLabel from "./labels/InfoLabel";
 import projectImagePlaceholder from "../assets/images/projectImagePlaceholder.png";
 import useSetProjectCover from "../hooks/useSetProjectCover";
+import ProjectLabelsContainer from "./ProjectLabelsContainer";
 
 function ProjectCard({ project, className = "" }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/projects/${project.ID}`,{ state:{project: project}});
+    navigate(`/projects/${project.ID}`, { state: { project: project } });
   };
 
   const [projectBackgroundStyle] = useSetProjectCover(project);
@@ -25,15 +26,7 @@ function ProjectCard({ project, className = "" }) {
             "Enhance human-food interaction in social settings"}
         </h2>
       </div>
-
-      <div className="self-start flex flex-row flex-wrap gap-0.5 w-full">
-        {(Array.isArray(project["Research Theme"])
-          ? project["Research Theme"]
-          : [project["Research Theme"]]
-        ).map((theme, index) => (
-          <InfoLabel key={index} label={theme} />
-        ))}
-      </div>
+      <ProjectLabelsContainer researchThemes={project["Research Theme"]} />
     </div>
   );
 }
