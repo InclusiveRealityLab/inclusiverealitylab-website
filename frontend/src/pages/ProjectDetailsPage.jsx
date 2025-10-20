@@ -6,6 +6,7 @@ import extractYear from "../utils/extractYear";
 import LabelContainer from "../components/ProjectLabelsContainer";
 import ProjectLabelsContainer from "../components/ProjectLabelsContainer";
 import InfoLabel from "../components/labels/InfoLabel";
+import extractDataFromProjectInfo from "../utils/extractDataFromProjectInfo";
 
 function ProjectDetailsPage() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function ProjectDetailsPage() {
               className="xl:w-screen xl:h-50 h-[560px] z-15 self-center"
               style={projectBackgroundStyle}
             ></div>
+            {/* {project details header} */}
             <div className="flex flex-col gap-1 w-full">
               <p className="body w-full">
                 {extractYear(project["Start Date"])} -{" "}
@@ -32,11 +34,22 @@ function ProjectDetailsPage() {
                 </span>{" "}
               </p>
               <p className="heading1">{project["Project Name"]}</p>
-
               <ProjectLabelsContainer
                 researchThemes={project["Research Theme"]}
               />
             </div>
+            {/* authors section */}
+            <div className="flex xl:flex-col gap-1 "><p className="heading4">People</p>
+             <p className="body">{project["Member Name"].join(", ")}</p>
+            </div>
+            {/* intro section */}
+            <div className="flex xl:flex-col gap-1 "><p className="heading4">About this project</p>
+            <p className="body">{extractDataFromProjectInfo(project["Intro"]).intro}</p>
+            </div>
+            {/* video section */}
+        
+
+            {/* related publications section */}
           </div>
         </div>
       )}
