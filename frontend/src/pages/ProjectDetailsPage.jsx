@@ -13,6 +13,11 @@ function ProjectDetailsPage() {
   const { state } = location;
   const { project } = state;
   const [projectBackgroundStyle] = useSetProjectCover(project);
+
+  const {intro, videoTag} = extractDataFromProjectInfo(project["Intro"]);
+  console.log(videoTag);
+  
+
   return (
     <>
       {project && (
@@ -44,9 +49,17 @@ function ProjectDetailsPage() {
             </div>
             {/* intro section */}
             <div className="flex xl:flex-col gap-1 "><p className="heading4">About this project</p>
-            <p className="body">{extractDataFromProjectInfo(project["Intro"]).intro}</p>
+            <p className="body">{intro}</p>
             </div>
             {/* video section */}
+            {videoTag && (
+              <div className="w-full flex">
+                <div
+                  className="w-full "
+                  dangerouslySetInnerHTML={{ __html: videoTag }}
+                />
+              </div>
+            )}
         
 
             {/* related publications section */}

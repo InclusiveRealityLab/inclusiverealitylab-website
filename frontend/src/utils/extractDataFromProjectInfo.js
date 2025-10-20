@@ -1,8 +1,11 @@
 function extractDataFromProjectInfo(projectInformation) {
-  const videoTag = /<iframe (.*?)<\/iframe>/i;
-  const intro = projectInformation.replace(videoTag, "").trim();
+  const videoTagRegex = /<iframe\b[^>]*>[\s\S]*?<\/iframe>/i;
+  const intro = projectInformation.replace(videoTagRegex, "").trim();
 
-  return { intro: intro, videoTag: `${projectInformation.match(videoTag)}</iframe>` };
+  const videoTag = projectInformation.match(videoTagRegex);
+ 
+
+  return { intro: intro, videoTag: `${videoTag}</iframe>` };
 }
 
 export default extractDataFromProjectInfo;
