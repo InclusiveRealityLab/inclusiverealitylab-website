@@ -7,6 +7,7 @@ import LabelContainer from "../components/ProjectLabelsContainer";
 import ProjectLabelsContainer from "../components/ProjectLabelsContainer";
 import InfoLabel from "../components/labels/InfoLabel";
 import extractDataFromProjectInfo from "../utils/extractDataFromProjectInfo";
+import PublicationListItem from "../components/PublicationListItem";
 
 function ProjectDetailsPage() {
   const location = useLocation();
@@ -16,7 +17,26 @@ function ProjectDetailsPage() {
 
   const {intro, videoTag} = extractDataFromProjectInfo(project["Intro"]);
   console.log(videoTag);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [relatedPublication, setRelatedPublication] = useState("");
   
+  useEffect(() => {
+      async function loadRelatedPublications(pubTitle) {
+        try {
+          const res = await axios.get(API_BASE_URL, {
+            params: { entity: "publications", resource: "publicationByTtile", publicationTitle :pubTitle},
+          });
+          setRelatedPublication(extractData(res.data));
+        } catch (error) {
+          console.error("Error fetching related publication:", error);
+          setRelatedPublication("");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      loadRelatedPublications();
+    }, []);
 
   return (
     <>
@@ -53,7 +73,8 @@ function ProjectDetailsPage() {
             </div>
             {/* video section */}
             {videoTag && (
-              <div className="w-full flex">
+              <div className="w-full border-2 flex">
+                {/* the width is set inside the iframe, which is currently not modifiable */}
                 <div
                   className="w-full "
                   dangerouslySetInnerHTML={{ __html: videoTag }}
@@ -63,6 +84,12 @@ function ProjectDetailsPage() {
         
 
             {/* related publications section */}
+            <div className="flex xl:flex-col gap-1 "><p className="heading4">Publications</p>
+            {/* <PublicationListItem publication={} /> */}
+            {relatedPublication && <PublicationListItem publication={relatedPublication}/>}
+            
+            
+            </div>
           </div>
         </div>
       )}
