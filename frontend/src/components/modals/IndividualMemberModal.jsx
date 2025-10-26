@@ -34,7 +34,7 @@ function IndividualMemberModal({
           backgroundColor="bg-background-white"
           horizontalGap="[0px]"
         >
-          <div className="xl:w-[1008px] border-2 border-red my-[80px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
+          <div className="xl:w-[1008px] border-red my-[80px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
             <div className="w-full flex flex-col gap-[40px] items-center">
               <ProfilePhotoContainer person={person} />
               <div className="flex flex-col max-w-[640px] gap-1 items-center justify-center">
@@ -75,12 +75,12 @@ function IndividualMemberModal({
                  (
                   <>
                     <p className="heading4">Contact me</p>
-                    <div className="flex flex-row gap-1.5 border-2">
+                    <div className="flex flex-row gap-1.5  py-0.5">
                       {connectionPlatforms.map((platform) => {
                         if (person[platform.key]) {
                           return (
                             <a href={person[platform.key]} key={platform.key}>
-                              <img src={platform.icon} />
+                              <img src={platform.icon} width={32} height={32}/>
                             </a>
                           );
                         }
