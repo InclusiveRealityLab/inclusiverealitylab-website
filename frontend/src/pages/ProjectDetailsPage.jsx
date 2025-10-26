@@ -1,5 +1,6 @@
 import { use } from "react";
 import useSetProjectCover from "../hooks/useSetProjectCover";
+import { useState,useEffect } from "react";
 import { useLocation } from "react-router";
 import { formatDate } from "../utils/formatDate";
 import extractYear from "../utils/extractYear";
@@ -8,6 +9,7 @@ import ProjectLabelsContainer from "../components/ProjectLabelsContainer";
 import InfoLabel from "../components/labels/InfoLabel";
 import extractDataFromProjectInfo from "../utils/extractDataFromProjectInfo";
 import PublicationListItem from "../components/PublicationListItem";
+import axios from "axios";
 
 function ProjectDetailsPage() {
   const location = useLocation();
@@ -21,22 +23,22 @@ function ProjectDetailsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [relatedPublication, setRelatedPublication] = useState("");
   
-  useEffect(() => {
-      async function loadRelatedPublications(pubTitle) {
-        try {
-          const res = await axios.get(API_BASE_URL, {
-            params: { entity: "publications", resource: "publicationByTtile", publicationTitle :pubTitle},
-          });
-          setRelatedPublication(extractData(res.data));
-        } catch (error) {
-          console.error("Error fetching related publication:", error);
-          setRelatedPublication("");
-        } finally {
-          setIsLoading(false);
-        }
-      }
-      loadRelatedPublications();
-    }, []);
+  // useEffect(() => {
+  //     async function loadRelatedPublications() {
+  //       try {
+  //         const res = await axios.get(API_BASE_URL, {
+  //           params: { entity: "publications", resource: "publicationByTtile", publicationTitle :pubTitle},
+  //         });
+  //         setRelatedPublication(extractData(res.data));
+  //       } catch (error) {
+  //         console.error("Error fetching related publication:", error);
+  //         setRelatedPublication("");
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //     loadRelatedPublications();
+    // }, []);
 
   return (
     <>
@@ -80,13 +82,14 @@ function ProjectDetailsPage() {
                   dangerouslySetInnerHTML={{ __html: videoTag }}
                 />
               </div>
+             
             )}
         
 
             {/* related publications section */}
             <div className="flex xl:flex-col gap-1 "><p className="heading4">Publications</p>
             {/* <PublicationListItem publication={} /> */}
-            {relatedPublication && <PublicationListItem publication={relatedPublication}/>}
+            {/* {relatedPublication && <PublicationListItem publication={relatedPublication}/>} */}
             
             
             </div>
