@@ -24,7 +24,7 @@ function PeopleCard({ person }) {
         xl:w-15  w-9.5 group
         ${
           ["Lab", "Collaborator"].includes(person.category)
-            ? "xl:h-22.5 h-20 "
+            ? "xl:h-22.5 "
             : "xl:h-6 h-6"
         }
       `} onClick={() => setIsPersonModalOpen(true)}
