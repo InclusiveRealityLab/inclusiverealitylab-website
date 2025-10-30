@@ -76,13 +76,20 @@ function IndividualMemberModal({
                   <>
                     <p className="heading4">Contact me</p>
                     <div className="flex flex-row gap-1.5  py-0.5">
+                      {/* use absolute links when linking profiles */}
                       {connectionPlatforms.map((platform) => {
-                        if (person[platform.key]) {
-                          return (
-                            <a href={person[platform.key]} key={platform.key}>
+                        if (person[platform.key] && platform.key === "Email") {
+                          return (                           
+                             <a href={`mailto:${person[platform.key]}`} key={platform.key}>
                               <img src={platform.icon} width={32} height={32}/>
                             </a>
                           );
+                        } else if (person[platform.key]) {
+                          return (
+                            <a href={person[platform.key]} key={platform.key} target="_blank"> 
+                              <img src={platform.icon} width={32} height={32}/>
+                            </a>
+                          )
                         }
                       })}
                     </div>
