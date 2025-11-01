@@ -11,12 +11,17 @@ function Modal({ children, onClose, type, backgroundColor, horizontalGap }) {
           <div
             className={`${backgroundColor} overflow-y-scroll flex flex-col items-center xl:gap-${horizontalGap} h-full `}
           >
-            <button
-              className={` ${backgroundColor}  absolute  align xl:self-start self-end xl:ml-2.5 xl:mt-2.5 mt-1 mb-1 mr-1.5 cursor-pointer rounded-2xl`}
-              onClick={onClose}
+            <div
+              className={` ${backgroundColor}  xl:max-w-[1008px] w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center `}
             >
-              <img src={closeBlack} />
-            </button>
+              <button
+                className={` ${backgroundColor}  align    mt-2.5  mr-1.5 cursor-pointer border-2 border-amber-400`}
+                onClick={onClose}
+              >
+                <img src={closeBlack} />
+              </button>
+            </div>
+
             {children}
           </div>
         </div>

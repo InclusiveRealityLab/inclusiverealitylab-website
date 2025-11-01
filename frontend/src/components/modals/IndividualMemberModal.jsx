@@ -33,8 +33,8 @@ function IndividualMemberModal({
           onClose={onClose}
           backgroundColor="bg-background-white"          horizontalGap="[0px]"
         >
-          <div className="xl:w-[1008px] border-red my-[80px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
-            <div className="w-full flex flex-col xl:gap-[40px] gap-[32px] items-center">
+          <div className="xl:w-[1008px] border-red my-[160px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
+            <div className="w-full flex flex-col xl:gap-[40px] gap-[32px] items-center border-2">
               <ProfilePhotoContainer person={person} />
               <div className="flex flex-col max-w-[640px] gap-1 items-center justify-center">
                 <p className="heading2 text-center">{`${person["Given Name"]} ${person["Family Name"]}`}</p>
