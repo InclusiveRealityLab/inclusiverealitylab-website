@@ -28,11 +28,10 @@ function IndividualMemberModal({
 }) {
   return (
     <>
-      {person && (
+      {person && (       
         <Modal
           onClose={onClose}
-          backgroundColor="bg-background-white"
-          horizontalGap="[0px]"
+          backgroundColor="bg-background-white"          horizontalGap="[0px]"
         >
           <div className="xl:w-[1008px] border-red my-[80px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
             <div className="w-full flex flex-col xl:gap-[40px] gap-[32px] items-center">
@@ -80,7 +79,7 @@ function IndividualMemberModal({
                       {connectionPlatforms.map((platform) => {
                         if (person[platform.key] && platform.key === "Email") {
                           return (                           
-                             <a href={`mailto:${person[platform.key]}`} key={platform.key}>
+                             <a href={`mailto:${person[platform.key]}`} key={platform.key} rel="noopener noreferrer" onClick={console.log("mail got clicked")}>
                               <img src={platform.icon} width={32} height={32}/>
                             </a>
                           );
