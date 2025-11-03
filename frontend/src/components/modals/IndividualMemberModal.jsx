@@ -1,5 +1,6 @@
 import closeBlack from "../../assets/icons/closeBlack.svg";
 import ReactDOM from "react-dom";
+import { useState } from "react";
 import Modal from "./Modal";
 import ProfilePhotoContainer from "../ProfilePhotoContainer";
 import email_blk from "../../assets/icons/email_blk.svg";
@@ -17,8 +18,8 @@ const connectionPlatforms = [
 ];
 
 const hasContactInfo = (person) => {
-  return connectionPlatforms.some((platform)=> Boolean(person[platform.key]));
-}
+  return connectionPlatforms.some((platform) => Boolean(person[platform.key]));
+};
 
 function IndividualMemberModal({
   person,
@@ -26,12 +27,36 @@ function IndividualMemberModal({
   backgroundColor,
   horizontalGap,
 }) {
+  const [message, setMessage] = useState("");
+
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+
+    const mailtoLink = `mailto:${person["Email"]}`;
+    const newWindow = window.open(
+      `https://mail.google.com/mail/?view=cm&to=${person["Email"]}`
+    );
+
+    // If a mail client isn't configured, window.open() may return null or quickly close.
+    setTimeout(() => {
+      if (
+        !newWindow ||
+        newWindow.closed ||
+        typeof newWindow.closed === "undefined"
+      ) {
+        // Fallback: copy email to clipboard and notify the user
+        navigator.clipboard.writeText(email);
+        setMessage("No mail client detected. Email copied to clipboard!");
+      }
+    }, 500);
+  };
   return (
     <>
-      {person && (       
+      {person && (
         <Modal
           onClose={onClose}
-          backgroundColor="bg-background-white"          horizontalGap="[0px]"
+          backgroundColor="bg-background-white"
+          horizontalGap="[0px]"
         >
           <div className="xl:w-[1008px] border-red my-[160px] xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
             <div className="w-full flex flex-col xl:gap-[40px] gap-[32px] items-center border-2">
@@ -70,31 +95,39 @@ function IndividualMemberModal({
             )}
             {/* Optional contact section */}
             <div className="flex flex-col gap-1">
-              {hasContactInfo(person) && 
-                 (
-                  <>
-                    <p className="heading4">Contact me</p>
-                    <div className="flex flex-row gap-1.5  py-0.5">
-                      {/* use absolute links when linking profiles */}
-                      {connectionPlatforms.map((platform) => {
-                        if (person[platform.key] && platform.key === "Email") {
-                          return (                           
-                             <a href={`mailto:${person[platform.key]}`} key={platform.key} rel="noopener noreferrer" onClick={console.log("mail got clicked")}>
-                              <img src={platform.icon} width={32} height={32}/>
-                            </a>
-                          );
-                        } else if (person[platform.key]) {
-                          return (
-                            <a href={person[platform.key]} key={platform.key} target="_blank"> 
-                              <img src={platform.icon} width={32} height={32}/>
-                            </a>
-                          )
-                        }
-                      })}
-                    </div>
-                  </>
-                )
-             }
+              {hasContactInfo(person) && (
+                <>
+                  <p className="heading4">Contact me</p>
+                  <div className="flex flex-row gap-1.5  py-0.5">
+                    {/* use absolute links when linking profiles */}
+                    {connectionPlatforms.map((platform) => {
+                      if (person[platform.key] && platform.key === "Email") {
+                        return (
+                          <a
+                            href={`mailto:${person[platform.key]}`}
+                            key={platform.key}
+                            target="_blank"
+                            
+                          >
+                            <img src={platform.icon} width={32} height={32} />
+                            
+                          </a>
+                        );
+                      } else if (person[platform.key]) {
+                        return (
+                          <a
+                            href={person[platform.key]}
+                            key={platform.key}
+                            target="_blank"
+                          >
+                            <img src={platform.icon} width={32} height={32} />
+                          </a>
+                        );
+                      }
+                    })}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </Modal>
