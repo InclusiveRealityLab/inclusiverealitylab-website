@@ -89,7 +89,7 @@ function IndividualMemberModal({
               <div className="flex flex-col gap-1">
                 <p className="heading4">Website</p>
                 <p className="body">
-                  <a href={person["Website"]}>{person["Website"]}</a>
+                  <a href={person["Website"]} target="_blank">{person["Website"]}</a>
                 </p>
               </div>
             )}
