@@ -15,7 +15,7 @@ function Modal({ children, onClose, type, backgroundColor, horizontalGap }) {
               className={` ${backgroundColor}  xl:max-w-[1008px] w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center `}
             >
               <button
-                className={` ${backgroundColor}  align    mt-2.5  mr-1.5 cursor-pointer border-2 border-amber-400`}
+                className={` ${backgroundColor}  align    mt-2.5  mr-1.5 cursor-pointer`}
                 onClick={onClose}
               >
                 <img src={closeBlack} />
