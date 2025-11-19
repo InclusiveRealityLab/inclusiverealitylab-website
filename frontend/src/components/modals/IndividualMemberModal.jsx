@@ -2,6 +2,7 @@ import closeBlack from "../../assets/icons/closeBlack.svg";
 import ReactDOM from "react-dom";
 import { useState } from "react";
 import Modal from "./Modal";
+import formatLink from "../../utils/formatLink";
 import ProfilePhotoContainer from "../ProfilePhotoContainer";
 import email_blk from "../../assets/icons/email_blk.svg";
 import scholar from "../../assets/icons/scholar_blk.svg";
@@ -89,7 +90,7 @@ function IndividualMemberModal({
               <div className="flex flex-col gap-1">
                 <p className="heading4">Website</p>
                 <p className="body">
-                  <a href={person["Website"]} target="_blank">{person["Website"]}</a>
+                  <a href={formatLink(person["Website"])} target="_blank">{formatLink(person["Website"])}</a>
                 </p>
               </div>
             )}
@@ -116,7 +117,7 @@ function IndividualMemberModal({
                       } else if (person[platform.key]) {
                         return (
                           <a
-                            href={person[platform.key]}
+                            href={formatLink(person[platform.key])}
                             key={platform.key}
                             target="_blank"
                           >
