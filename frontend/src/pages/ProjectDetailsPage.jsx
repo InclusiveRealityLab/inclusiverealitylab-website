@@ -11,6 +11,7 @@ import extractSourceFromEmbedVideo from "../utils/extractSourceFromEmbedVideo";
 import extractData from "../utils/extractData";
 import PublicationListItem from "../components/PublicationListItem";
 import axios from "axios";
+import PublicationsContainer from "../components/PublicationsContainer";
 
 function ProjectDetailsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -22,21 +23,28 @@ function ProjectDetailsPage() {
   const videoSrc = extractSourceFromEmbedVideo(project["Embed Video"]);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [relatedPublication, setRelatedPublication] = useState("");
+  const [relatedPublication, setRelatedPublication] = useState([]);
 
   useEffect(() => {
-    const titleToGet = project["Publication Title"];
+    // const titleToGet = project["Publication Title"]; // FOR SINGLE RELATED PUBLICATION
+    const titlesToGet = project["Publication ID"]; // FOR MULTIPLE PUBLICATIONS
     console.log("Fetching related publication for title:", titleToGet);
-    if(!titleToGet){
-      return;}
+    if (!titleToGet) {
+      return;
+    }
+
+    if (titlesToGet.length ==0) {
+      return;
+    }
     async function loadRelatedPublications() {
-      
       try {
         const res = await axios.get(API_BASE_URL, {
           params: {
             entity: "publications",
-            resource: "publicationByTitle",
-            publicationTitle: titleToGet,
+            // resource: "publicationByTitle", // for single
+            resource: "multiplePublicationsID", // for multiple
+            // publicationTitle: titleToGet, // for single
+            pubList: titlesToGet, // for multiple
           },
         });
         setRelatedPublication(res.data.result);
@@ -53,7 +61,7 @@ function ProjectDetailsPage() {
 
   return (
     <>
-      {project  && (
+      {project && (
         <div className="mt-4 w-screen bg-background-white ">
           <div className=" px-1.5 xl:px-0 flex flex-col justify-between  py-5 gap-4 w-full xl:max-w-[1032px] mx-auto ">
             <div
@@ -105,7 +113,10 @@ function ProjectDetailsPage() {
             <div className="flex xl:flex-col gap-1 ">
               <p className="heading4">Publications</p>
               {/* <PublicationListItem publication={} /> */}
-              {relatedPublication && <PublicationListItem publication={relatedPublication}/>}
+              {/* {relatedPublication && (
+                <PublicationListItem publication={relatedPublication} />
+              )} */}
+              <PublicationsContainer publications={relatedPublication} />
             </div>
           </div>
         </div>
