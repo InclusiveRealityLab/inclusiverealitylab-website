@@ -28,8 +28,8 @@ function ProjectDetailsPage() {
   useEffect(() => {
     // const titleToGet = project["Publication Title"]; // FOR SINGLE RELATED PUBLICATION
     const titlesToGet = project["Publication ID"]; // FOR MULTIPLE PUBLICATIONS
-    console.log("Fetching related publication for title:", titleToGet);
-    if (!titleToGet) {
+    console.log("Fetching related publication for title:", titlesToGet);
+    if (!titlesToGet) {
       return;
     }
 
