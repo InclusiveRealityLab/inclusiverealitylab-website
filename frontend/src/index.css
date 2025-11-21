@@ -142,6 +142,13 @@
     letter-spacing: 0.04em;
     font-weight: var(--font-weight-medium);
   }
+  .bodyBig {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    font-weight: var(--font-weight-light);
+  }
 
   .bodySmall {
     font-family: var(--font-body);

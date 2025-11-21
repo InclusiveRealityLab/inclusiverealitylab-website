@@ -2,7 +2,7 @@ import PeopleCard from "./PeopleCard";
 import PeopleContainer from "./PeopleContainer";
 
 function CategoryContainer({ category, people }) {
-  console.log("Rendering", category, "people:", people);
+
 
   // Sort people by place before anything else
   const sortedPeople = [...people].sort(

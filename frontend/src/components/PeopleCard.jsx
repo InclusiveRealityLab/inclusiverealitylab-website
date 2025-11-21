@@ -1,9 +1,19 @@
 import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png";
 import splitName from "../utils/splitName";
 import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
+import Modal from "./modals/Modal";
+import { useState } from "react";
+import IndividualMemberModal from "./modals/IndividualMemberModal";
+import ProfilePhotoContainer from "./ProfilePhotoContainer";
 
 function PeopleCard({ person }) {
-  // const isActive = ["Lab", "Collaborator"].includes(person.category);
+ 
+  const [isPersonModalOpen, setIsPersonModalOpen] = useState(false);
+  const samplePerson = {
+    "Given Name": "John",
+    "Family Name": "Doe",
+    "Affiliation": "University of Example",
+  }
 
   return (
     <>
@@ -14,26 +24,15 @@ function PeopleCard({ person }) {
         xl:w-15  w-9.5 group
         ${
           ["Lab", "Collaborator"].includes(person.category)
-            ? "xl:h-22.5 h-20 "
+            ? "xl:h-22.5 "
             : "xl:h-6 h-6"
         }
-      `}
+      `} onClick={() => setIsPersonModalOpen(true)}
           >
             {["Lab", "Collaborator"].includes(person.category) && (
-              <div className="xl:w-12 xl:h-12 w-8 h-8 ">
-                <img
-                  src={
-                    formatProfilePhotoURL(person)
-                      
-                  }
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = defaultProfilePhoto;
-                  }}
-                  className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0"
-                  alt="Profile"
-                />
-              </div>
+              
+              <ProfilePhotoContainer photoStyle={"grayscale group-hover:grayscale-0"} person={person} />
+              
             )}
             <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
               <div className="flex flex-col justify-between  items-center heading4 ">
@@ -44,6 +43,10 @@ function PeopleCard({ person }) {
             </div>
           </div>
         </>
+      )}
+      {/* modal here */}
+      {isPersonModalOpen && (
+        <IndividualMemberModal onClose={() => setIsPersonModalOpen(false)} person={person}/>
       )}
     </>
   );
