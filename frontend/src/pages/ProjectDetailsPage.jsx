@@ -12,6 +12,7 @@ import extractData from "../utils/extractData";
 import PublicationListItem from "../components/PublicationListItem";
 import axios from "axios";
 import PublicationsContainer from "../components/PublicationsContainer";
+import LoadingSpinnner from "../components/LoadingSpinner";
 
 function ProjectDetailsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -33,7 +34,7 @@ function ProjectDetailsPage() {
       return;
     }
 
-    if (titlesToGet.length ==0) {
+    if (titlesToGet.length == 0) {
       return;
     }
     async function loadRelatedPublications() {
@@ -116,7 +117,14 @@ function ProjectDetailsPage() {
               {/* {relatedPublication && (
                 <PublicationListItem publication={relatedPublication} />
               )} */}
-              <PublicationsContainer publications={relatedPublication} />
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                    <LoadingSpinnner/>
+                </div>
+              
+              ) : (
+                <PublicationsContainer publications={relatedPublication} />
+              )}
             </div>
           </div>
         </div>
