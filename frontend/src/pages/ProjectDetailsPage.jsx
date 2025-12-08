@@ -65,7 +65,7 @@ function ProjectDetailsPage() {
         <div className="mt-4 w-screen bg-background-white ">
           <div className=" px-1.5 xl:px-0 flex flex-col justify-between  py-5 gap-4 w-full xl:max-w-[1032px] mx-auto ">
             <div
-              className="xl:w-screen xl:h-50 h-[560px] z-15 self-center"
+              className="xl:w-screen w-screen xl:h-50 h-[560px] z-15 self-center object-cover"
               style={projectBackgroundStyle}
             ></div>
             {/* {project details header} */}
@@ -85,18 +85,18 @@ function ProjectDetailsPage() {
               />
             </div>
             {/* authors section */}
-            <div className="flex xl:flex-col gap-1 ">
+            <div className="flex xl:flex-col flex-col gap-1 ">
               <p className="heading4">People</p>
               <p className="body">{project["Member Name"].join(", ")}</p>
             </div>
             {/* intro section */}
-            <div className="flex xl:flex-col gap-1 ">
+            <div className="flex xl:flex-col flex-col gap-1 ">
               <p className="heading4">About this project</p>
               <p className="body">{project["Intro"]}</p>
             </div>
             {/* video section */}
             {videoSrc && (
-              <div className="w-full xl:h-[580.5px] border-2 flex">
+              <div className="w-full xl:h-[580.5px] h-[184px] border-2 flex">
                 <iframe
                   width="100%"
                   height="auto"
@@ -110,7 +110,7 @@ function ProjectDetailsPage() {
             )}
 
             {/* related publications section */}
-            <div className="flex xl:flex-col gap-1 ">
+            <div className="flex xl:flex-col flex-col gap-1 ">
               <p className="heading4">Publications</p>
               {/* <PublicationListItem publication={} /> */}
               {/* {relatedPublication && (
