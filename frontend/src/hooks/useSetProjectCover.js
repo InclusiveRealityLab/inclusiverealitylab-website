@@ -10,6 +10,7 @@ function useSetProjectCover(project) {
           img.src = `${import.meta.env.BASE_URL}images/works/${project["Cover"]}`;
           img.onload = () => setBgImage(img.src);
           img.onerror = () => setBgImage(projectImagePlaceholder);
+          console.log("Loaded project cover image:", img.onerror);
         } else {
           setBgImage(projectImagePlaceholder);
         }

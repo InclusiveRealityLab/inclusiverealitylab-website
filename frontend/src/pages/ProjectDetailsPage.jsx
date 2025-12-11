@@ -65,13 +65,19 @@ function ProjectDetailsPage() {
       {project && (
         <div className="mt-4 w-screen bg-background-white ">
           <div className=" px-1.5 xl:px-0 flex flex-col justify-between  py-5 gap-4 w-full xl:max-w-[1032px] mx-auto ">
-            <div
-              className="xl:w-screen w-screen xl:h-50 h-[560px] z-15 self-center object-cover"
+            {project["Cover"] && (<div
+              className={`xl:w-screen w-screen xl:h-50 h-[560px] z-15 self-center object-cover`}
               style={projectBackgroundStyle}
-            ></div>
+
+            ></div>)}
+            
             {/* {project details header} */}
-            <div className="flex flex-col gap-1 w-full">
-              <p className="body w-full">
+            <div className="flex flex-col gap-1 w-full ">
+              <div className="xl:hidden flex"><ProjectLabelsContainer
+                researchThemes={project["Research Theme"]}
+              /></div>
+              
+              <p className="body w-full hidden xl:flex">
                 {extractYear(project["Start Date"])} -{" "}
                 <span>
                   {" "}
@@ -81,9 +87,9 @@ function ProjectDetailsPage() {
                 </span>{" "}
               </p>
               <p className="heading1">{project["Project Name"]}</p>
-              <ProjectLabelsContainer
+              <div className="xl:flex hidden"><ProjectLabelsContainer
                 researchThemes={project["Research Theme"]}
-              />
+              /></div>
             </div>
             {/* authors section */}
             <div className="flex xl:flex-col flex-col gap-1 ">
@@ -97,7 +103,7 @@ function ProjectDetailsPage() {
             </div>
             {/* video section */}
             {videoSrc && (
-              <div className="w-full xl:h-[580.5px] h-[184px] border-2 flex">
+              <div className="w-full xl:h-[580.5px] sm:h-[184px] border-2 flex">
                 <iframe
                   width="100%"
                   height="auto"
