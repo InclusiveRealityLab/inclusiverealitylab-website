@@ -9,7 +9,7 @@ This guide aims to provide information with regards to maintaining and contribut
   - [Project Setup](#project-setup)
   - [Environment Variables](#environment-variables)
 - [Deployment](#deployment)
-    - [Deployment (Frontend - GitHub Pages)](#deployment-frontend---github-pages)    
+    - [Deployment (Frontend – GitHub Pages)](#deployment-frontend---github-pages)    
     - [Deployment (Backend- Google Apps Script)](#deployment-backend--google-apps-script)
 
 ## Tech Stack
@@ -77,7 +77,7 @@ Frontend env vars are public at build time. Do not store secrets here.
 
 ## Deployment
 
-### Deployment (Frontend - GitHub Pages - Automated)
+### Deployment (Frontend - GitHub Pages)
 
 The frontend is deployed to GitHub Pages using GitHub Actions.
 Production deployment is fully automated and triggered on every push to the main branch.
