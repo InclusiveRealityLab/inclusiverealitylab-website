@@ -77,7 +77,12 @@ Frontend env vars are public at build time. Do not store secrets here.
 
 ## Deployment
 
-### Deployment (Frontend - GitHub Pages)
+### Deployment (Frontend - GitHub Pages - Automated)
+
+The frontend is deployed to GitHub Pages using GitHub Actions.
+Production deployment is fully automated and triggered on every push to the main branch.
+
+Manual deployment commands are no longer required.
 
 **Note on refactor for deployment on GitHub Pages**
 
@@ -109,42 +114,61 @@ export default ({ mode }) => defineConfig({
 });
 ```
  
-3. Deployment scripts inside ```package.json```.
+3. Deployment Setup :
+-  Hosting: GitHub Pages
+- Live branch: gh-pages
+- Trigger: Push to main
+- Build tool: Vite
+- CI/CD: GitHub Actions
+- Custom domain: www.inclusiverealitylab.org
+  
+4. Worfklow Location
+   
+   ```
+   .github/workflows/main.yml
+   ```
+5. Deployment Workflow for live site update
+   
+    On every push to main, GitHub Actions performs the following:
 
-Two scripts with ```'deploy'``` prefix have been added to the scripts object.
+-  Checks out the repository
+- Sets up Node 20.11.1 (with npm cache)
+- Installs dependencies from frontend/
+- Builds the app using:
+  ```
+   npm run build -- --mode=custom
 
-| Script | Description |
-|--------|-------------|
-| ```deploy:prod ```| Builds the React App for production (custom domain), outputs the static files to the dist folder, creates a 404.html SPA fallback, includes the CNAME file, and publishes the contents of dist to the gh-pages branch on the repository (this is used by GitHub Pages to serve the live site at the custom domain). |
-| ```deploy:gh-pages``` | Builds the app in test/preview mode (for the GitHub Pages project URL), outputs to the dist folder, creates a 404.html, and publishes to the gh-pages-test branch (useful for staging or preview). We will mostly use the ```deploy:prod``` command. |
+   ```
+- Copies index.html to 404.html for SPA routing
+- Generates a CNAME file for the custom domain
+- Publishes frontend/dist to the gh-pages branch
 
-4. Deployment to GitHub Pages.
+6. Environment Variables
+   
+   The build uses GitHub repository variables:
+   
+    ```VITE_API_BASE_URL```
 
-- To deploy the app from the custom domain (www.inclusiverealitylab.org), run the command ```npm run deploy:prod``` from ```frontend``` folder. This will build the app by performing the following steps: 
-  - Build the app with base: '/' for the custom domain.
-  - Copy index.html → 404.html for SPA routing.
-  - Include the ```public/CNAME ```file in the build. 
-  - Push the contents of ```dist``` to the ```gh-pages``` branch of the repository (automatically created on the first run).
+    ```VITE_API_POST_BASE_URL```
 
-- Then in GitHub -> Settings -> Pages:
-    - Source : Deploy from a branch
-    - Branch : ```gh-pages```
-    - Folder : ```/ (root)```
-    - Custom domain: www.inclusiverealitylab.org
-   - The website will be available at ```https://www.inclusiverealitylab.org/``` after a few minutes.
+    Configured under:
 
-- If deploying in preview mode (npm run deploy:gh-pages), the site will be available at:
-```https://inclusiverealitylab.github.io/inclusiverealitylab-website/```
+    ```
+      GitHub → Settings → Secrets and variables → Actions → Variables
+    ```
 
 #### Update Steps
-Anytime you make changes to the frontend code that you want to deploy to the live site (production/release ready changes):
+To deploy changes to the live site:
 1. Commit your changes to your working branch.
-2. Run : ```npm run deploy:prod```. 
-3. Wait ~1 minute for GitHub Pages to update the live site.
+2. Push the changes to the main branch (by making a pull request and merging with the main branch). 
+3. GitHub Actions builds and deploys automatically.
+4. Site updates within ~1–2 minutes.
 
 **NOTE** :
-- Pushing to ```main``` will not update the live site, you must run the deploy script.
+- Pushing to ```main``` will **now** update the live site.
 - Keep ```public/CNAME``` in the repo so the custom domain stays linked after each deployment.
+- The gh-pages branch should not be edited manually. 
+- ```deploy:prod``` and ```deploy:gh-pages``` scripts remain for reference only and are no longer used for production.
 
 
 ### Deployment (Backend- Google Apps Script)
