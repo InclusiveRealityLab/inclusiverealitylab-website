@@ -146,7 +146,7 @@ function LandingPage() {
 
         <div className="relative z-0">
           {/* Three Themes Section */}
-          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8  max-[400px]:mt-[240px] sm:mt-0 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto">
+          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8  max-[420px]:mt-[240px] sm:mt-0 mx-1.5 gap-1.5 xl:max-w-64.5 xl:mx-auto">
             <p className="heading3 text-center">
               Our work centers on three key themes
             </p>
