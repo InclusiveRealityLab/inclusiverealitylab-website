@@ -10,6 +10,7 @@ import PublicationsPage from "./pages/PublicationsPage";
 import PeoplePage from "./pages/PeoplePage";
 import { useScroll } from "framer-motion";
 import useScrollToTop from "./hooks/useScrollToTop";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/people" element={<PeoplePage />} />
+          <Route path="/projects/:id" element= {<ProjectDetailsPage></ProjectDetailsPage>}/>
         </Routes>
         <Footer/>
       </HashRouter>

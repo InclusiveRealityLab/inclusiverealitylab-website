@@ -1,11 +1,6 @@
-// expects date as a string in the format of "YYYY-MM-DD", formats the date into "Month Date, Year"
+// expects date as a string representation, converts it into local date then formats the date into "Month Date, Year"
 export function formatDate(givenDate) {
-  // const monthPart = givenDate.match(/-(\d{2})-/)[0];
-  // const datePart = givenDate.match(/-(\d{2})/)[0];
-  // const yearPart = givenDate.match(/(d{4})-/)[0];
-
-  const [yearPart, monthPart, dayPart] = givenDate.split("-");
-
+ 
   const months = [
     "",
     "Jan",
@@ -22,9 +17,14 @@ export function formatDate(givenDate) {
     "Dec",
   ];
 
-  const monthIndex = parseInt(monthPart,10);
 
-  const day = parseInt(dayPart,10);
+  const dateObj = new Date(givenDate);
 
-  return `${months[monthIndex]} ${day}, ${yearPart}`;
+  const date = dateObj.getDate();
+  const monthIndex = dateObj.getMonth()+1;
+  const year = dateObj.getFullYear();
+
+  return `${months[monthIndex]} ${date}, ${year}`;
+
+  
 }

@@ -22,7 +22,7 @@ function CategoryContainer({ category, people }) {
           </div>
 
           {/* Designer, Engineer, Mental Health Manager */}
-          <div className="flex flex-row flex-wrap w-full gap-x-[23px] ">
+          <div className="flex flex-row flex-wrap w-full gap-x-[23px]  ">
             <PeopleCard person={sortedPeople.find((p) => p["Role"].toLowerCase() === "designer")} />
             <PeopleCard person={sortedPeople.find((p) => p["Role"].toLowerCase() === "engineer")} />
             <PeopleCard
