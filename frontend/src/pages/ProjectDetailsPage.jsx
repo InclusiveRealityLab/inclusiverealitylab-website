@@ -64,9 +64,9 @@ function ProjectDetailsPage() {
     <>
       {project && (
         <div className="mt-4 w-screen bg-background-white ">
-          <div className=" px-1.5 xl:px-0 flex flex-col justify-between  py-5 gap-4 w-full xl:max-w-[1032px] mx-auto ">
+          <div className=" px-1.5 xl:px-0 flex flex-col justify-between  py-5 gap-4 w-full xl:max-w-content mx-auto ">
             {project["Cover"] && (<div
-              className={`xl:w-screen w-screen xl:h-50 h-[560px] z-15 self-center object-cover`}
+              className={`xl:w-screen w-screen xl:h-50 h-hero z-15 self-center object-cover`}
               style={projectBackgroundStyle}
 
             ></div>)}

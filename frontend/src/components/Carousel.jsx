@@ -38,17 +38,17 @@ function Carousel({ movementAmount, projects }) {
           transition={{ type: "tween", duration: 0.6 }}
         >
           {projects.map((project) => (
-            <motion.div className="xl:w-30 w-[267px]" key={project.id}>
+            <motion.div className="xl:w-30 w-cardMin" key={project.id}>
               <ProjectCard
                 project={project}
-                className="xl:w-30 w-[267px] flex-shrink-0"
+                className="xl:w-30 w-cardMin flex-shrink-0"
               />
             </motion.div>
           ))}
         </motion.div>
       </div>
       {/* Bottom Navigation Area */}
-      <div className="flex flex-row justify-between xl:w-[1032px] xl:items-center items-end gap-1.5 ">
+      <div className="flex flex-row justify-between xl:w-content xl:items-center items-end gap-1.5 ">
         {/* Forward and Backward Arro Buttons */}
         <div className="hidden xl:flex flex-row justify-start xl:items-center items-end gap-1.5 ml-[88px]">
           <button onClick={handleMoveLeft} className="label text-baseWhite">

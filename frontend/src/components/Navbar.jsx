@@ -153,7 +153,7 @@ function Navbar() {
               </Link>
             </li>
             <li
-              className="xl:hidden cursor-pointer w-[40px] h-[40px]"
+              className="xl:hidden cursor-pointer w-control h-control"
               onClick={toggleMenu}
             >
               <img src={isOpen ? close : menu} alt="toggle menu button"></img>

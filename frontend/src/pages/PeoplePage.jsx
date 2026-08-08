@@ -36,7 +36,7 @@ function PeoplePage() {
       {" "}
       
         <div className="mt-4 w-screen h-auto">
-          <div className=" flex flex-col px-1.5 xl:px-0 justify-between items-start py-5 gap-4 w-full xl:max-w-[1032px]  xl:mx-auto">
+          <div className=" flex flex-col px-1.5 xl:px-0 justify-between items-start py-5 gap-4 w-full xl:max-w-content  xl:mx-auto">
             <h1 className="heading1 self-start">People</h1>
 
             {isLoading ? (<div className="flex min-h-screen w-full items-center justify-center">

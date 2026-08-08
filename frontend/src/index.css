@@ -63,6 +63,25 @@
 
   /* SPACING */
   --spacing: 16px;
+
+  /* LAYOUT
+     Named design constants. Every value here was previously repeated as an
+     arbitrary utility (e.g. max-w-[1032px]) across several files — change the
+     spec here rather than find-and-replacing through the JSX.
+     Note --spacing: 16px above also means numeric utilities are 16px multiples,
+     so xl:max-w-64.5 and xl:max-w-[1032px] were the same value written two ways;
+     both are now xl:max-w-content. */
+  --spacing-content: 1032px; /* main page column */
+  --spacing-wide: 1208px; /* landing hero + carousel outer shell */
+  --spacing-modal: 1008px; /* modal shell */
+  --spacing-hero: 560px; /* mobile hero / project cover height */
+  --spacing-heroText: 592px; /* desktop intro box */
+  --spacing-introMax: 472px; /* mobile intro box max width */
+  --spacing-introMin: 272px; /* mobile intro box min width */
+  --spacing-cardMin: 267px; /* project card min width */
+  --spacing-btnW: 144px; /* primary/secondary button width */
+  --spacing-control: 40px; /* button height, icon button, tap target */
+  --spacing-peopleGutter: 23px; /* people grid column gap (off-grid, from spec) */
 }
 
 @layer components {
@@ -181,12 +200,6 @@
     font-weight: var(--font-weight-regular);
   }
 
-  .buttonPrimary {
-    width: 144px;
-    height: 40px;
-    border: 1px solid var(--color-baseWhite);
-    padding: 8px;
-  }
 }
 
 body {
