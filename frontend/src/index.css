@@ -200,6 +200,16 @@
     font-weight: var(--font-weight-regular);
   }
 
+  /* LAYOUT */
+
+  /* The standard page column: full-bleed with gutters on mobile, centred and
+     capped at the content width on desktop. Carries only what every page
+     shares -- callers add their own alignment (items-start, mx-auto vs
+     xl:mx-auto), and since utilities outrank @layer components those always
+     win over anything set here. */
+  .pageShell {
+    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:px-0 xl:max-w-content;
+  }
 }
 
 body {
