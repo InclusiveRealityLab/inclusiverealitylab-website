@@ -1,0 +1,3 @@
+# frontend/ and backend/ have their own .gitignore files.
+# This one only covers the repo root, which had none.
+.DS_Store
