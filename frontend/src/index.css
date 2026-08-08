@@ -33,8 +33,6 @@
   --color-background-white: var(--color-baseWhite);
   --color-background-black: var(--color-baseBlack);
   --color-background-invalid: var(--color-baseLightGrey);
-  --color-background-secondary: var(--color-secondary);
-  --color-background-tertiary: var(--color-tertiary);
 
   --color-element-black: var(--color-baseBlack);
   --color-element-white: var(--color-baseWhite);
@@ -58,9 +56,10 @@
   /* TYPOGRAPHY */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
-  --font-weight-medium : 400;
-  --font-weight-light:200;
-  --font-weight-semibold : 500;
+  --font-weight-regular: 400;
+  --font-weight-medium: 400;
+  --font-weight-light: 200;
+  --font-weight-semibold: 500;
 
   /* SPACING */
   --spacing: 16px;
