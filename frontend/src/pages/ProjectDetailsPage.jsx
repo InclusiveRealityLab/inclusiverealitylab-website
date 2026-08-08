@@ -73,10 +73,14 @@ function ProjectDetailsPage() {
             
             {/* {project details header} */}
             <div className="flex flex-col gap-1 w-full ">
-              <div className="xl:hidden flex"><ProjectLabelsContainer
-                researchThemes={project["Research Theme"]}
-              /></div>
-              
+              {/* Labels sit above the title on mobile and below it on desktop.
+                  Rendered once and reordered rather than rendered twice. */}
+              <div className="flex xl:order-last">
+                <ProjectLabelsContainer
+                  researchThemes={project["Research Theme"]}
+                />
+              </div>
+
               <p className="body w-full hidden xl:flex">
                 {extractYear(project["Start Date"])} -{" "}
                 <span>
@@ -87,9 +91,6 @@ function ProjectDetailsPage() {
                 </span>{" "}
               </p>
               <p className="heading1">{project["Project Name"]}</p>
-              <div className="xl:flex hidden"><ProjectLabelsContainer
-                researchThemes={project["Research Theme"]}
-              /></div>
             </div>
             {/* authors section */}
             <div className="flex xl:flex-col flex-col gap-1 ">

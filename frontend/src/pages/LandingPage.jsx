@@ -109,34 +109,20 @@ function LandingPage() {
             />
           </video>
 
-          {/* <div className="absolute xl:top-[440px] top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:max-w-heroText  max-w-introMax min-w-introMin mx-auto xl:m-0 z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-            <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
-            <div className="heading3">
-              We envision a future where technology seamlessly bridges social
-              and ability gaps, fostering an inclusive and prosocial world.
-            </div>
-          </div> */}
+          {/* Intro box. Mobile and desktop are positioned too differently to
+              share one element, so the two wrappers stay -- but the copy lives
+              in HeroIntro below so it only has to be edited once. */}
 
           {/* Desktop version intro box */}
           <div className="hidden xl:block xl:absolute xl:top-[440px] xl:w-wide xl:left-0 xl:right-0 xl:mx-auto ">
             <div className="absolute xl:static top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:right-0 xl:max-w-heroText  max-w-introMax min-w-introMin mx-auto xl:m-0 z-100 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-              <div className="body">
-                Hi, welcome to Inclusive Reality Lab 👋
-              </div>
-              <div className="heading3">
-                We envision a future where technology seamlessly bridges social
-                and ability gaps, fostering an inclusive and prosocial world.
-              </div>
+              <HeroIntro />
             </div>
           </div>
           {/* Mobile version intro box */}
 
           <div className="xl:hidden absolute top-[240px]  left-1.5 right-1.5   max-w-introMax min-w-introMin mx-auto  z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-            <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
-            <div className="heading3">
-              We envision a future where technology seamlessly bridges social
-              and ability gaps, fostering an inclusive and prosocial world.
-            </div>
+            <HeroIntro />
           </div>
         </div>
 
@@ -230,6 +216,20 @@ function LandingPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Rendered inside both the mobile and desktop intro boxes, which are
+// positioned differently but carry the same copy.
+function HeroIntro() {
+  return (
+    <>
+      <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
+      <div className="heading3">
+        We envision a future where technology seamlessly bridges social and
+        ability gaps, fostering an inclusive and prosocial world.
+      </div>
+    </>
   );
 }
 
