@@ -157,11 +157,11 @@ function LandingPage() {
           </div>
 
           {/* Featured Projects Carousel */}
-          <section className="relative xl:mx-auto bg-background-black  xl:px-0 xl:max-w-wide min-h-[708px]">
+          <section className="relative">
             {isProjectsLoading ? (
               <LoadingSpinner />
             ) : (
-              <Carousel movementAmount="480" projects={featuredProjects} />
+              <Carousel projects={featuredProjects} />
             )}
           </section>
 
@@ -198,8 +198,9 @@ function LandingPage() {
 
           {/* News Section */}
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-content gap-4 z-100 bg-transparent ">
-            <h1 className="heading1">News</h1>
-            <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll">
+            <h1 className="heading1 text-center">Lab News</h1>
+            {/* list narrows and centres within the column */}
+            <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll w-full xl:w-50 mx-auto">
               {isNewsLoading ? (
                 <LoadingSpinner />
               ) : news.length === 0 ? (
