@@ -9,14 +9,19 @@
   --color-baseDarkGrey: #737373;
   --color-baseLightGrey: #efefef;
 
-  /* BRAND COLORS */
+  /* BRAND COLORS
+     Values come from the Figma variables (Brand/*). The "light" tints back the
+     research-theme chips: primary=Understand, secondary=Assist, tertiary=Augment. */
   --color-primary: #0087bd;
   --color-secondary: #7cfe7c;
   --color-tertiary: #f3ff69;
 
-  --color-brandDarkBlueStandard: #0087bd;
-  --color-brandDarkGreen: #76ff7a;
-  --color-brandDarkYellow: #f3ff69;
+  --color-primaryLight: #b3dbeb;
+  --color-secondaryLight: #bbffbd;
+  --color-tertiaryLight: #f9ffb4;
+
+  --color-secondaryExtraLight: #f1fff2;
+  --color-secondaryDark: #275428;
 
   /* SEMANTIC */
   --color-error: #ff276f;
@@ -43,23 +48,19 @@
   --color-element-secondary: var(--color-secondary);
   --color-element-tertiary: var(--color-tertiary);
 
-  /* TO BE CONFIRMED : shades of brand colors*/
-  --color-brandDarkBlueStandardLight: #ffffff;
-  --color-brandDarkBlueStandardLighter: #005f8a;
+  --color-background-primaryLight: var(--color-primaryLight);
+  --color-background-secondaryLight: var(--color-secondaryLight);
+  --color-background-tertiaryLight: var(--color-tertiaryLight);
 
-  --color-brandDarkGreenStandardLight: #ffffff;
-  --color-brandDarkGreenStandardLighter: #005f8a;
-
-  --color-brandDarkYellowStandardLight: #ffffff;
-  --color-brandDarkYellowStandardLighter: #005f8a;
-
-  /* TYPOGRAPHY */
+  /* TYPOGRAPHY
+     Three weights, matching the Figma text styles:
+     Light 300 (body*), Regular 400 (heading 2/3, caption), Medium 500
+     (heading 4, label, *bold). */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-medium: 400;
-  --font-weight-light: 200;
-  --font-weight-semibold: 500;
+  --font-weight-medium: 500;
 
   /* SPACING */
   --spacing: 16px;
@@ -91,14 +92,14 @@
     font-family: var(--font-title);
     font-size: 4rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .title {
     font-family: var(--font-title);
     font-size: 2.5rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading1 {
@@ -112,14 +113,14 @@
     font-family: var(--font-title);
     font-size: 2rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading3 {
     font-family: var(--font-title);
     font-size: 1.5rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading4 {
@@ -135,7 +136,7 @@
     font-family: var(--font-title);
     font-size: 0.75rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-medium);
   }
 
   .labelBold {
@@ -189,7 +190,7 @@
     font-size: 0.875rem;
     line-height: 1.5;
     letter-spacing: 0.04em;
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
   }
 
   .caption {
@@ -217,6 +218,19 @@ body {
   display: flex;
   place-items: center;
   overflow-x: hidden;
+
+  /* Match Figma's text rendering. macOS browsers default to subpixel
+     antialiasing, which thickens strokes and makes every weight read heavier
+     than the design; Figma rasterises with grayscale antialiasing. Without
+     this, the type looks bold even when the computed weight is correct.
+     No effect on Windows, which uses DirectWrite regardless. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Real 300/400/500 cuts exist in both variable fonts, so never let the
+     browser fake a weight -- a synthesised bold would reintroduce exactly the
+     heaviness this rule removes. */
+  font-synthesis: none;
 
   /* min-width: 320px;
   min-height: 100vh; */
