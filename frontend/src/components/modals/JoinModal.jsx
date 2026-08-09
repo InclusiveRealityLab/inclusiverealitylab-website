@@ -19,7 +19,7 @@ function JoinModal({ children, onClose, backgroundColor, horizontalGap }) {
             you soon. <br></br> Feel free to follow our social media accounts as
             well.
           </p>
-          <SocialMediaHandleContainer iconColor="blk" />
+          <SocialMediaHandleContainer />
         </div>
       </Modal>
     </>

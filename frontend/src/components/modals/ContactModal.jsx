@@ -65,7 +65,7 @@ function ContactModal({ children, onClose, backgroundColor, horizontalGap }) {
                   soon. <br></br> Feel free to follow our social media accounts
                   as well.
                 </p>
-                <SocialMediaHandleContainer iconColor="blk" />
+                <SocialMediaHandleContainer />
               </div>
               <form
                 onSubmit={handleFormSubmission}
