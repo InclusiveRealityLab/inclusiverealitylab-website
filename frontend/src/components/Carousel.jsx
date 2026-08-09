@@ -1,7 +1,7 @@
 import ProjectCard from "../components/ProjectCard";
 import useCustomCentering from "../hooks/useCustomCentering";
 import { useRef, useState } from "react";
-import { Link } from "react-router";
+import ButtonText from "./buttons/ButtonText";
 import { motion } from "framer-motion";
 
 import validRightArrow from "../assets/icons/validRightArrow.svg";
@@ -73,11 +73,11 @@ function Carousel({ movementAmount, projects }) {
           </button>
         </div>
 
-        <Link to="/projects">
-          <p className="label px-0.5 ml-1.5 w-[176px]  py-[11px] xl:w-[242px] text-baseWhite  justify-center text-center transition ease-in duration-200 hover:bg-background-secondary/40 ">
-            view all projects
-          </p>
-        </Link>
+        <ButtonText
+          label="View All Projects"
+          linkAddress="/projects"
+          className="w-full max-w-17 mx-auto xl:mx-0 xl:w-15 text-baseWhite"
+        />
       </div>
     </div>
   );

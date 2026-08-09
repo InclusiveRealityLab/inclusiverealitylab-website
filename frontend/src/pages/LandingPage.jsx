@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router";
 import { motion } from "framer-motion";
 import axios from "axios";
 
@@ -13,6 +12,7 @@ import PublicationSectionWrapper from "../components/wrappers/PublicationSection
 import useCustomCentering from "../hooks/useCustomCentering";
 import extractData from "../utils/extractData";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ButtonText from "../components/buttons/ButtonText";
 import Background from "../components/animations/Background";
 import DesktopBackground from "../components/animations/DesktopBackground";
 
@@ -185,13 +185,11 @@ function LandingPage() {
             ) : (
               <PublicationContainer publications={featuredPublications} />
             )}
-            <Link
-              to="/publications"
-              className="label xl:self-end xl:w-[242px] w-[176px] text-center p-0.5 py-[11px] transition ease-in duration-200 hover:bg-background-secondary/40"
-            >
-              <span className="hidden xl:inline">view all publications</span>
-              <span className="xl:hidden inline">view more works</span>
-            </Link>
+            <ButtonText
+              label="View All Publications"
+              linkAddress="/publications"
+              className="w-full max-w-17 self-center xl:self-end xl:max-w-none xl:w-15"
+            />
           </PublicationSectionWrapper>
 
           {/* Gradient Background */}
