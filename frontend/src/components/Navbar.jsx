@@ -138,7 +138,7 @@ function Navbar() {
       >
         {" "}
         {isGradientUnderlayAdded && (
-          <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justifiy-between px-2 -z-10"></div>
+          <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justify-between px-2 -z-10"></div>
         )}
         <nav
           className={`label flex flex-col xl:flex-row justify-between  text-baseWhite xl:max-w-75.5 w-full mx-auto xl:py-0.25 `}
@@ -153,7 +153,7 @@ function Navbar() {
               </Link>
             </li>
             <li
-              className="xl:hidden cursor-pointer w-[40px] h-[40px]"
+              className="xl:hidden cursor-pointer w-control h-control"
               onClick={toggleMenu}
             >
               <img src={isOpen ? close : menu} alt="toggle menu button"></img>

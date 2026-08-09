@@ -33,8 +33,6 @@
   --color-background-white: var(--color-baseWhite);
   --color-background-black: var(--color-baseBlack);
   --color-background-invalid: var(--color-baseLightGrey);
-  --color-background-secondary: var(--color-secondary);
-  --color-background-tertiary: var(--color-tertiary);
 
   --color-element-black: var(--color-baseBlack);
   --color-element-white: var(--color-baseWhite);
@@ -58,12 +56,32 @@
   /* TYPOGRAPHY */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
-  --font-weight-medium : 400;
-  --font-weight-light:200;
-  --font-weight-semibold : 500;
+  --font-weight-regular: 400;
+  --font-weight-medium: 400;
+  --font-weight-light: 200;
+  --font-weight-semibold: 500;
 
   /* SPACING */
   --spacing: 16px;
+
+  /* LAYOUT
+     Named design constants. Every value here was previously repeated as an
+     arbitrary utility (e.g. max-w-[1032px]) across several files — change the
+     spec here rather than find-and-replacing through the JSX.
+     Note --spacing: 16px above also means numeric utilities are 16px multiples,
+     so xl:max-w-64.5 and xl:max-w-[1032px] were the same value written two ways;
+     both are now xl:max-w-content. */
+  --spacing-content: 1032px; /* main page column */
+  --spacing-wide: 1208px; /* landing hero + carousel outer shell */
+  --spacing-modal: 1008px; /* modal shell */
+  --spacing-hero: 560px; /* mobile hero / project cover height */
+  --spacing-heroText: 592px; /* desktop intro box */
+  --spacing-introMax: 472px; /* mobile intro box max width */
+  --spacing-introMin: 272px; /* mobile intro box min width */
+  --spacing-cardMin: 267px; /* project card min width */
+  --spacing-btnW: 144px; /* primary/secondary button width */
+  --spacing-control: 40px; /* button height, icon button, tap target */
+  --spacing-peopleGutter: 23px; /* people grid column gap (off-grid, from spec) */
 }
 
 @layer components {
@@ -182,11 +200,15 @@
     font-weight: var(--font-weight-regular);
   }
 
-  .buttonPrimary {
-    width: 144px;
-    height: 40px;
-    border: 1px solid var(--color-baseWhite);
-    padding: 8px;
+  /* LAYOUT */
+
+  /* The standard page column: full-bleed with gutters on mobile, centred and
+     capped at the content width on desktop. Carries only what every page
+     shares -- callers add their own alignment (items-start, mx-auto vs
+     xl:mx-auto), and since utilities outrank @layer components those always
+     win over anything set here. */
+  .pageShell {
+    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:px-0 xl:max-w-content;
   }
 }
 

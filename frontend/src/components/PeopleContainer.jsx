@@ -8,7 +8,7 @@ function PeopleContainer({ data }) {
   return (
     <>
       {data && (
-        <div className="flex flex-row flex-wrap gap-y-1.5 gap-x-[23px] ">
+        <div className="flex flex-row flex-wrap gap-y-1.5 gap-x-peopleGutter ">
           {data.items.map((p) => {
             
             return (

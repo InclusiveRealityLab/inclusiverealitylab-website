@@ -1,7 +1,7 @@
 function PublicationListItem({ publication }) {
   return publication ? (
     
-    <div className={`flex xl:flex-row-reverse flex-col justify-between items-stretch xl:w-full xl:max-w-64.5 xl:h-12.5 ${publication["Cover"] ? `h-27` : `h-[176px]`} flex-grow basis-17 max-w-25 xl:basis-0  xl:gap-2 gap-1  `}>
+    <div className={`flex xl:flex-row-reverse flex-col justify-between items-stretch xl:w-full xl:max-w-content xl:h-12.5 ${publication["Cover"] ? `h-27` : `h-[176px]`} flex-grow basis-17 max-w-25 xl:basis-0  xl:gap-2 gap-1  `}>
       {publication["Cover"] && (<img src={`${import.meta.env.BASE_URL}images/works/${publication["Cover"]}` } className="xl:w-20 xl:h-12.5 h-15 w-full" />)}
 
       {/* container for pub details */}

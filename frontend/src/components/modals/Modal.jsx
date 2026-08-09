@@ -12,7 +12,7 @@ function Modal({ children, onClose, type, backgroundColor, horizontalGap }) {
             className={`${backgroundColor} overflow-y-scroll flex flex-col items-center xl:gap-${horizontalGap} h-full `}
           >
             <div
-              className={` ${backgroundColor}  xl:max-w-[1008px] w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center `}
+              className={` ${backgroundColor}  xl:max-w-modal w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center `}
             >
               <button
                 className={` ${backgroundColor}  align    mt-2.5  mr-1.5 cursor-pointer`}
