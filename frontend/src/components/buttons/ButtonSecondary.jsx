@@ -1,13 +1,11 @@
 function ButtonSecondary({ label, onClick }) {
   return (
-    <>
-      <button
-        className="w-btnW h-control p-0.5 border-1 text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack transition ease-in duration-200 hover:bg-background-secondary/40 cursor-pointer "
-        onClick={onClick}
-      >
-        {label}
-      </button>
-    </>
+    <button
+      className="label w-btnW h-control rounded-lg bg-background-white text-baseBlack border-1 border-baseBlack hover:bg-background-secondary/40 transition ease-in duration-200 cursor-pointer"
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 }
 

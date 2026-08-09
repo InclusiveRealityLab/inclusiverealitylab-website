@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-import close from "../assets/icons/close.svg";
+import closeBlack from "../assets/icons/closeBlack.svg";
 import menu from "../assets/icons/menu.svg";
 import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
 import useScrollDirection from "../hooks/useScrollDirection";
@@ -107,7 +107,7 @@ function Navbar() {
   let isGradientUnderlayAdded = false;
 
   if (isOpen) {
-    bgClass = "bg-black";
+    bgClass = "bg-background-white";
   } else if (isScrolledBeyondVisual) {
     bgClass = "bg-white bg-transparent";
   } else {
@@ -141,14 +141,16 @@ function Navbar() {
           <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justify-between px-2 -z-10"></div>
         )}
         <nav
-          className={`label flex flex-col xl:flex-row justify-between  text-baseWhite xl:max-w-75.5 w-full mx-auto xl:py-0.25 `}
+          className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-content w-full mx-auto xl:py-0.25 `}
         >
-          <ul className="flex flex-row justify-between items-end flex-none xl:flex-row xl:justify-between  py-1 px-1.5 xl:px-0 xl:items-center">
-            <li className="w-[55px] h-[32px]  xl:w-full xl:h-full cursor-pointer">
+          <ul className="flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 px-1.5 xl:px-0 xl:items-center">
+            {/* logo is a fixed 56x32 per the design -- it must not stretch */}
+            <li className="w-3.5 h-2 cursor-pointer">
               <Link to="/">
                 <img
                   src={`${import.meta.env.BASE_URL}IRL_logo_icon.svg`}
                   alt="logo"
+                  className="w-full h-full object-contain"
                 ></img>
               </Link>
             </li>
@@ -156,48 +158,51 @@ function Navbar() {
               className="xl:hidden cursor-pointer w-control h-control"
               onClick={toggleMenu}
             >
-              <img src={isOpen ? close : menu} alt="toggle menu button"></img>
+              <img
+                src={isOpen ? closeBlack : menu}
+                alt="toggle menu button"
+              ></img>
             </li>
           </ul>
 
           <ul
-            className={`bg-background-black xl:bg-transparent text-baseWhite 
-          xl:text-baseBlack flex flex-col flex-1 xl:justify-end justify-center items-center  xl:gap-2.5 gap-1.5 xl:px-0 xl:py-1.5   py-8  xl:flex-row ${
+            className={`bg-background-white xl:bg-transparent text-baseBlack
+          flex flex-col flex-1 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:px-0 xl:py-1.5   py-8  xl:flex-row ${
             isOpen ? "block" : "hidden"
           } xl:flex `}
           >
             <li>
               <NavigationTab
-                label="home"
+                label="Home"
                 linkAddress="/"
                 onClick={handleCloseMenuMobile}
               />
             </li>
             <li>
               <NavigationTab
-                label="projects"
+                label="Projects"
                 linkAddress="/projects"
                 onClick={handleCloseMenuMobile}
               />
             </li>
             <li>
               <NavigationTab
-                label="publications"
+                label="Publications"
                 linkAddress="/publications"
                 onClick={handleCloseMenuMobile}
               />
             </li>
             <li>
               <NavigationTab
-                label="people"
+                label="People"
                 linkAddress="/people"
                 onClick={handleCloseMenuMobile}
               />
             </li>
-            <ul className="xl:flex-row xl:justify-between xl:gap-2.5 gap-1.5 flex flex-col">
+            <ul className="xl:flex-row xl:justify-between xl:gap-1 gap-1.5 flex flex-col items-center">
               <li>
                 <ButtonPrimary
-                  label="join us"
+                  label="Join Us"
                   onClick={() => handleOpenJoinModal()}
                 />
 
@@ -211,7 +216,7 @@ function Navbar() {
               </li>
               <li>
                 <ButtonSecondary
-                  label="keep in touch"
+                  label="Keep in Touch"
                   onClick={() => handleOpenContactModal()}
                 />
                 {isModalOpenContact && (
