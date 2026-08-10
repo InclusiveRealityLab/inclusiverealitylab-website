@@ -7,7 +7,7 @@ function ButtonText({ label, linkAddress, className = "" }) {
   return (
     <Link
       to={linkAddress}
-      className={`label w-btnW h-control rounded-lg flex items-center justify-center text-center text-baseBlack hover:bg-background-secondary/40 transition ease-in duration-200 ${className}`}
+      className={`label w-btnW h-control rounded-sm flex items-center justify-center text-center text-baseBlack hover:bg-background-secondary/40 transition ease-in duration-200 ${className}`}
     >
       {label}
     </Link>

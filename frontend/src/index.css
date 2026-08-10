@@ -85,6 +85,10 @@
      the content inside still measures exactly --spacing-content on a wide
      screen while shrinking with a gutter intact below 1080. */
   --spacing-contentBox: 1080px;
+  /* The narrower measure used for reading-width blocks -- the themes columns,
+     the mission text, the publication list, the project details body. Same
+     padding-box trick: 912 of content plus a 24px gutter each side. */
+  --spacing-narrowBox: 960px;
   --spacing-wide: 1208px; /* landing hero + carousel outer shell */
   --spacing-modal: 1008px; /* modal shell */
   --spacing-hero: 560px; /* mobile hero / project cover height */

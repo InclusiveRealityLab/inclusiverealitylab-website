@@ -8,12 +8,26 @@ import ProjectCard from "../components/ProjectCard";
 import Carousel from "../components/Carousel";
 import NewsListItem from "../components/NewsListItem";
 import PublicationContainer from "../components/PublicationsContainer";
-import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import useCustomCentering from "../hooks/useCustomCentering";
 import extractData from "../utils/extractData";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ButtonText from "../components/buttons/ButtonText";
 import Background from "../components/animations/Background";
+
+const THEMES = [
+  {
+    title: "Understand",
+    description: "understanding cognitive and emotional states",
+  },
+  {
+    title: "Assist",
+    description: "designing and developing tools to assist users",
+  },
+  {
+    title: "Augment",
+    description: "augmenting abilities to push beyond human limitations",
+  },
+];
 
 function LandingPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -89,9 +103,9 @@ function LandingPage() {
       <Background />
       <div className="relative w-screen h-auto z-0">
         {/* Hero Image / Key Visual Section*/}
-        <div className="w-screen xl:h-50 h-hero z-15">
+        <div className="relative w-screen z-15">
           <video
-            className="xl:w-full w-full h-full object-cover block motion-reduce:hidden"
+            className="w-full h-hero xl:h-50 object-cover block motion-reduce:hidden"
             autoPlay
             muted
             loop
@@ -110,50 +124,52 @@ function LandingPage() {
             />
           </video>
 
-          {/* Intro box. Mobile and desktop are positioned too differently to
-              share one element, so the two wrappers stay -- but the copy lives
-              in HeroIntro below so it only has to be edited once. */}
-
-          {/* Desktop version intro box */}
-          <div className="hidden xl:block xl:absolute xl:top-[440px] xl:w-wide xl:left-0 xl:right-0 xl:mx-auto ">
-            <div className="absolute xl:static top-[240px] xl:left-[116px] left-1.5 right-1.5 xl:right-0 xl:max-w-heroText  max-w-introMax min-w-introMin mx-auto xl:m-0 z-100 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-              <HeroIntro />
+          {/* One 560px box at both breakpoints -- centred on mobile, aligned to
+              the left of the content column on desktop. Previously this was two
+              duplicated wrappers because the old design positioned them
+              differently enough that they could not share an element.
+              It sits in normal flow pulled up over the video rather than being
+              absolutely positioned: the copy wraps much taller at a real phone
+              width than at the width the mobile frame is drawn at, and an
+              absolute box would overhang into the section below -- which is
+              what the old max-[420px]:mt-[240px] on the themes section was
+              compensating for. In flow, whatever follows simply starts beneath
+              it. The offsets are the video height less the design's y for the
+              box: 560-240 and 800-350. */}
+          <div className="relative -mt-20 xl:-mt-[450px] w-full xl:max-w-contentBox mx-auto px-1.5 z-20">
+            <div className="w-full max-w-35 mx-auto xl:mx-0 flex flex-col gap-1.5 bg-background-white border-1 border-baseBlack rounded-lg px-2.5 py-3 xl:px-4 xl:py-5">
+              <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
+              <div className="heading3">
+                We envision a seamless world where the physical and virtual blur
+                to dissolve all barriers - a prosocial space where age, ability,
+                and even species no longer limit how we connect and empower one
+                another.
+              </div>
             </div>
-          </div>
-          {/* Mobile version intro box */}
-
-          <div className="xl:hidden absolute top-[240px]  left-1.5 right-1.5   max-w-introMax min-w-introMin mx-auto  z-20 flex flex-col justify-center items-start px-1.5 py-3 xl:p-5 bg-background-white gap-1.5">
-            <HeroIntro />
           </div>
         </div>
 
 
 
         <div className="relative z-0">
-          {/* Three Themes Section */}
-          <div className="flex flex-col justify-between items-center xl:my-8 xl:py-0 py-8  max-[420px]:mt-[240px] sm:mt-0 mx-1.5 gap-1.5 xl:max-w-content xl:mx-auto">
+          {/* Three Themes Section, at the narrower 912 measure. */}
+          <section className="flex flex-col gap-4 w-full xl:max-w-narrowBox mx-auto px-1.5 pt-8 pb-4">
             <p className="heading3 text-center">
-              Our work centers on three key themes
+              Our work is broken down into three categories
             </p>
 
-            <div className="flex flex-col xl:flex-row items-start justify-between gap-1.5">
-              {["Understand", "Assist", "Augment"].map((title, idx) => (
+            <div className="w-full flex flex-col xl:flex-row gap-2.5">
+              {THEMES.map(({ title, description }) => (
                 <div
-                  key={idx}
-                  className="flex flex-col justify-center items-center gap-1"
+                  key={title}
+                  className="flex-1 flex flex-col gap-1 text-center"
                 >
                   <p className="heading2">{title}</p>
-                  <p className="body text-center">
-                    {title === "Assist"
-                      ? "Designing technologies that support individuals and foster better collaboration."
-                      : title === "Understand"
-                      ? "Exploring ways to sense and interpret cognitive, behavioral, and emotional states."
-                      : "Empowering diverse individuals by enhancing their abilities in meaningful, inclusive ways."}
-                  </p>
+                  <p className="body">{description}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Featured Projects Carousel */}
           <section className="relative">
@@ -164,19 +180,21 @@ function LandingPage() {
             )}
           </section>
 
-          {/* Mission Text */}
-          <div className="relative z-10 heading3 xl:max-w-content my-8 mx-1.5 xl:mx-auto">
+          {/* Mission Text, at the same 912 measure as the themes section */}
+          <section className="heading3 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
             Our research explores how reality itself - both physical and digital
             - can be leveraged to understand cognitive, behavioral, and
             emotional states, assist individuals in their daily lives, and
             augment human abilities. <br />
+            <br />
             By designing adaptive and empowering technologies, we aim to create
             a world where diverse individuals can thrive, connect, and reach
             their full potential.
-          </div>
+          </section>
 
-          {/* Featured Publications Section */}
-          <PublicationSectionWrapper headingContent="Recent Publications">
+          {/* Featured Publications. No heading in the updated design -- the
+              list follows the mission text directly, at the same 912 measure. */}
+          <section className="flex flex-col gap-2.5 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
             {isPubsLoading ? (
               <LoadingSpinner />
             ) : (
@@ -187,43 +205,31 @@ function LandingPage() {
               linkAddress="/publications"
               className="w-full max-w-17 self-center xl:self-end xl:max-w-none xl:w-15"
             />
-          </PublicationSectionWrapper>
+          </section>
 
 
 
-          {/* News Section */}
-          <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-content gap-4 z-100 bg-transparent ">
-            <h1 className="heading1 text-center">Lab News</h1>
-            {/* list narrows and centres within the column */}
-            <div className="custom-scrollbar flex flex-col h-12.5 gap-1.5 overflow-y-scroll w-full xl:w-50 mx-auto">
-              {isNewsLoading ? (
-                <LoadingSpinner />
-              ) : news.length === 0 ? (
-                <p>No news available at the moment.</p>
-              ) : (
-                news.map((newsItem, index) => (
-                  <NewsListItem news={newsItem} key={index} />
-                ))
-              )}
+          {/* News. A bordered 800px panel centred in the column, holding a
+              fixed-height scrolling list. */}
+          <section className="w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
+            <div className="flex flex-col gap-1.5 w-full xl:max-w-50 mx-auto border-1 border-baseBlack rounded-lg px-1 xl:px-2.5 py-3">
+              <h2 className="heading4 text-center">Lab News</h2>
+              <div className="custom-scrollbar flex flex-col gap-1.5 p-1 h-20 xl:h-12.5 overflow-y-auto">
+                {isNewsLoading ? (
+                  <LoadingSpinner />
+                ) : news.length === 0 ? (
+                  <p className="bodySmall">No news available at the moment.</p>
+                ) : (
+                  news.map((newsItem, index) => (
+                    <NewsListItem news={newsItem} key={index} />
+                  ))
+                )}
+              </div>
             </div>
           </section>
         </div>
       </div>
     </div>
-  );
-}
-
-// Rendered inside both the mobile and desktop intro boxes, which are
-// positioned differently but carry the same copy.
-function HeroIntro() {
-  return (
-    <>
-      <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
-      <div className="heading3">
-        We envision a future where technology seamlessly bridges social and
-        ability gaps, fostering an inclusive and prosocial world.
-      </div>
-    </>
   );
 }
 

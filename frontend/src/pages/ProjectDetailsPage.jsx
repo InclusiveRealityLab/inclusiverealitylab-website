@@ -92,7 +92,7 @@ function ProjectDetailsPage() {
 
   if (notFound || !project) {
     return (
-      <div className="pageShell items-start mx-auto xl:max-w-60 min-h-screen">
+      <div className="pageShell items-start mx-auto xl:max-w-narrowBox min-h-screen">
         <h1 className="heading2">Project not found</h1>
         <p className="body">
           This project may have been removed, or the link may be incorrect.
@@ -114,7 +114,7 @@ function ProjectDetailsPage() {
         </div>
       )}
 
-      <div className="pageShell items-start mx-auto xl:max-w-60">
+      <div className="pageShell items-start mx-auto xl:max-w-narrowBox">
         <div className="flex flex-col gap-1 w-full">
           <p className="body">
             {extractYear(project["Start Date"])} -{" "}

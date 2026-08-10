@@ -1,5 +1,5 @@
 // Desktop: 256x160 cover flush right, 160px content block, 24px padding.
-// Mobile: 240px cover on top, 168px content block, 16px padding.
+// Mobile: 5:3 cover on top, 168px content block, 16px padding.
 // The content block is a fixed height either way, so items line up whether or
 // not a publication has a cover.
 function PublicationListItem({ publication }) {
@@ -8,15 +8,15 @@ function PublicationListItem({ publication }) {
   const cover = publication["Cover"];
 
   const linkClass =
-    "label w-6.5 h-2.5 rounded-lg border-1 border-baseBlack flex items-center justify-center transition ease-in duration-200 hover:bg-background-secondary/40";
+    "label w-6.5 h-2.5 rounded-sm border-1 border-baseBlack flex items-center justify-center transition ease-in duration-200 hover:bg-background-secondary/40";
 
   return (
-    <div className="flex flex-col xl:flex-row-reverse w-full xl:max-w-content rounded-2xl border-1 border-baseBlack bg-background-white overflow-hidden">
+    <div className="flex flex-col xl:flex-row-reverse w-full max-w-25 xl:max-w-content rounded-lg border-1 border-baseBlack bg-background-white overflow-hidden">
       {cover && (
         <img
           src={`${import.meta.env.BASE_URL}images/works/${cover}`}
           alt=""
-          className="w-full h-15 xl:w-16 xl:h-10 object-cover shrink-0"
+          className="w-full aspect-[5/3] xl:aspect-auto xl:w-16 xl:h-10 object-cover shrink-0"
         />
       )}
 
