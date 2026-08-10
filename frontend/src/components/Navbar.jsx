@@ -207,8 +207,7 @@ function Navbar() {
 
                 {isModalOpenJoin && (
                   <JoinModal
-                    onClose={() => setIsModalOpenJoin(false)}                    
-                    backgroundColor={`bg-background-secondary`}
+                    onClose={() => setIsModalOpenJoin(false)}
                     horizontalGap={`[48px]`}
                   />
                 )}
@@ -220,10 +219,10 @@ function Navbar() {
                 />
                 {isModalOpenContact && (
                   
-                  <ContactModal onClose={() => setIsModalOpenContact(false)}
-                    
-                    backgroundColor={`bg-background-tertiary`}
-                    horizontalGap="[48px]" />
+                  <ContactModal
+                    onClose={() => setIsModalOpenContact(false)}
+                    horizontalGap="[48px]"
+                  />
                 )}
               </li>
             </ul>
