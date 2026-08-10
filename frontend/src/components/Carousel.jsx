@@ -23,14 +23,14 @@ function Carousel({ projects }) {
 
   useEffect(() => {
     const measure = () => {
-      setStep(window.innerWidth >= 1280 ? STEP_DESKTOP : STEP_MOBILE);
+      setStep(window.innerWidth >= 1024 ? STEP_DESKTOP : STEP_MOBILE);
       const viewport = viewportRef.current?.clientWidth ?? 0;
       const track = trackRef.current?.scrollWidth ?? 0;
       // How far the track can travel before its right edge meets the
       // container's -- scrolling past this would leave dead space.
       setMaxOffset(Math.max(0, track - viewport));
       // Compared against the screen, not the container: the container is
-      // capped at 1032, so it never grows with the display. clientWidth
+      // capped at the content width, so it never grows with the display. clientWidth
       // excludes the scrollbar, unlike innerWidth.
       const screen = document.documentElement.clientWidth;
       setFitsOnScreen(track > 0 && track <= screen);
@@ -65,10 +65,14 @@ function Carousel({ projects }) {
   return (
     // Container is the 1032 content column; the track sits flush to its left
     // and right edges and bleeds past them rather than being inset.
-    <div className="flex flex-col justify-start gap-4 py-5 w-full xl:max-w-content mx-auto px-1.5 xl:px-0">
+    <div className="flex flex-col justify-start gap-4 py-5 w-full xl:max-w-contentBox mx-auto px-1.5">
+      {/* The scroll viewport cancels the container's gutter with -mx and puts
+          it back as padding, so the track still starts flush with the column
+          but cards run out to the screen edge instead of being clipped 24px
+          short of it. */}
       <div
         ref={viewportRef}
-        className="relative overflow-x-scroll xl:overflow-visible"
+        className="relative -mx-1.5 px-1.5 overflow-x-scroll xl:overflow-visible"
       >
         <motion.div
           ref={trackRef}
@@ -89,8 +93,11 @@ function Carousel({ projects }) {
 
       {/* controls: arrows left, view-all right */}
       <div className="flex flex-row justify-between items-center gap-1.5 w-full">
+        {/* Arrows are for pointing devices. Touch screens swipe the track
+            instead, whatever their width -- plenty of tablets are wider than
+            the xl breakpoint in landscape. */}
         {canScroll && (
-          <div className="hidden xl:flex flex-row justify-start items-center gap-1.5">
+          <div className="hidden pointer-fine:flex flex-row justify-start items-center gap-1.5">
             <button onClick={handleMoveLeft} className="label cursor-pointer">
               <img
                 src={validLeftArrow}

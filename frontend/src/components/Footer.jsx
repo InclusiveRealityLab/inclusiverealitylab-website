@@ -7,7 +7,9 @@ function Footer() {
           copyright. Desktop splits into two columns and lets the right one
           stretch to the left column's height so the social row and copyright
           sit at its top and bottom edges. */}
-      <div className="flex flex-col xl:flex-row justify-between gap-1.5 xl:gap-0 py-5 px-1.5 xl:px-0 w-full xl:max-w-content mx-auto">
+      {/* same gutter treatment as the navbar: padding at every width, capped
+          on the padding box so the content still measures the column width */}
+      <div className="flex flex-col xl:flex-row justify-between gap-1.5 xl:gap-0 py-5 px-1.5 w-full xl:max-w-contentBox mx-auto">
         {/* lab name + affiliation */}
         <div className="flex flex-col gap-1.5">
           <p className="heading4">Inclusive Reality Lab</p>

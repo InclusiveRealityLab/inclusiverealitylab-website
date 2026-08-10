@@ -1,10 +1,8 @@
-/*  will keep this put will have to eventually remove */
 #root {
-
   margin: 0 auto;
-  overflow-x:hidden;
-  
-  /* padding: 2rem;
-  text-align: center; */
-}
 
+  /* clip, not hidden: overflow-x: hidden turns this into a scroll container,
+     which silently stops position: sticky working for anything inside it.
+     clip suppresses the horizontal overflow without that side effect. */
+  overflow-x: clip;
+}

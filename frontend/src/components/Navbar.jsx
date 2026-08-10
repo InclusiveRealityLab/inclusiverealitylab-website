@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import closeBlack from "../assets/icons/closeBlack.svg";
 import menu from "../assets/icons/menu.svg";
 import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
-import useScrollDirection from "../hooks/useScrollDirection";
+import useNavbarHidden from "../hooks/useNavbarHidden";
 import Modal from "./modals/Modal";
 import { Link } from "react-router";
 import NavigationTab from "./tabs/NavigationTab";
@@ -99,7 +99,8 @@ function Navbar() {
 
   const isScrolledBeyondVisual = useScrollBeyondVisual(scrollThreshold);
 
-  const scrollDirection = useScrollDirection();
+  // Same rule the sticky page title uses, so the two can never disagree.
+  const isHidden = useNavbarHidden();
 
   let bgClass = "";
   bgClass = "bg-transparent";
@@ -131,9 +132,7 @@ function Navbar() {
       {/* <Modal /> */}
       <div
         className={`flex w-screen fixed top-0 left-1/2 transform -translate-x-1/2 z-50 ${bgClass}  ${
-          scrollDirection === "down" && isScrolledBeyondVisual
-            ? "hidden"
-            : "block"
+          isHidden ? "hidden" : "block"
         } ${!isOpen ? "min-h-fit" : "min-h-screen"} `}
       >
         {" "}
@@ -141,9 +140,9 @@ function Navbar() {
           <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justify-between px-2 -z-10"></div>
         )}
         <nav
-          className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-content w-full mx-auto xl:py-0.25 `}
+          className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-contentBox w-full mx-auto px-1.5 xl:py-0.25 `}
         >
-          <ul className="flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 px-1.5 xl:px-0 xl:items-center">
+          <ul className="flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 xl:items-center">
             {/* logo is a fixed 56x32 per the design -- it must not stretch */}
             <li className="w-3.5 h-2 cursor-pointer">
               <Link to="/">
@@ -167,7 +166,7 @@ function Navbar() {
 
           <ul
             className={`bg-background-white xl:bg-transparent text-baseBlack
-          flex flex-col flex-1 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:px-0 xl:py-1.5   py-8  xl:flex-row ${
+          flex flex-col flex-1 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:py-1.5   py-8  xl:flex-row ${
             isOpen ? "block" : "hidden"
           } xl:flex `}
           >

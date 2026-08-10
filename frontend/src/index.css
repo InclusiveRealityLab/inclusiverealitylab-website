@@ -62,6 +62,13 @@
   --font-weight-regular: 400;
   --font-weight-medium: 500;
 
+  /* BREAKPOINTS
+     xl is the desktop switch throughout this codebase. Overriding the token
+     moves every existing xl: utility at once rather than renaming ~150 of
+     them. Note this makes xl equal to Tailwind's default lg, so prefer xl:
+     for "desktop" and leave lg: alone to avoid two names for one width. */
+  --breakpoint-xl: 1024px;
+
   /* SPACING */
   --spacing: 16px;
 
@@ -73,6 +80,11 @@
      so xl:max-w-64.5 and xl:max-w-[1032px] were the same value written two ways;
      both are now xl:max-w-content. */
   --spacing-content: 1032px; /* main page column */
+  /* The column plus a 24px gutter each side. Used as the max-width on
+     border-box elements that keep their horizontal padding at every width, so
+     the content inside still measures exactly --spacing-content on a wide
+     screen while shrinking with a gutter intact below 1080. */
+  --spacing-contentBox: 1080px;
   --spacing-wide: 1208px; /* landing hero + carousel outer shell */
   --spacing-modal: 1008px; /* modal shell */
   --spacing-hero: 560px; /* mobile hero / project cover height */
@@ -209,7 +221,7 @@
      xl:mx-auto), and since utilities outrank @layer components those always
      win over anything set here. */
   .pageShell {
-    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:px-0 xl:max-w-content;
+    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:max-w-contentBox;
   }
 
   /* BACKGROUND
@@ -340,7 +352,10 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  overflow-x: hidden;
+
+  /* clip rather than hidden, so descendants can still use position: sticky --
+     overflow-x: hidden would make this a scroll container and break it. */
+  overflow-x: clip;
 
   /* Match Figma's text rendering. macOS browsers default to subpixel
      antialiasing, which thickens strokes and makes every weight read heavier

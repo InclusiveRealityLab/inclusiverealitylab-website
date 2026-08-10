@@ -1,75 +1,76 @@
-import ProjectCard from "../components/ProjectCard";
-import projects from "../sampleData/projects";
-import ProjectsContainer from "../components/ProjectsContainer";
-import PublicationSectionWrapper from "../components/wrappers/PublicationSectionWrapper";
 import { useState, useEffect } from "react";
-
 import axios from "axios";
+
+import ProjectsContainer from "../components/ProjectsContainer";
+import PageTitleSection from "../components/PageTitleSection";
+import WorkFilter from "../components/filters/WorkFilter";
 import extractData from "../utils/extractData";
 import LoadingSpinner from "../components/LoadingSpinner";
+import scrollListToTop from "../utils/scrollListToTop";
 
+const FILTERS = ["Current", "Past"];
 
 function ProjectsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [currentProjects, setCurrentProjects] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [pastProjects, setPastProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [filter, setFilter] = useState(FILTERS[0]);
 
   useEffect(() => {
-    async function loadCurrentProjects() {
+    async function loadProjects() {
       try {
-        const res = await axios.get(API_BASE_URL, {
-          params: { entity: "projects", resource: "current" },
-        });
-        setCurrentProjects(extractData(res.data));
+        const [current, past] = await Promise.all([
+          axios.get(API_BASE_URL, {
+            params: { entity: "projects", resource: "current" },
+          }),
+          axios.get(API_BASE_URL, {
+            params: { entity: "projects", resource: "past" },
+          }),
+        ]);
+        setCurrentProjects(extractData(current.data));
+        setPastProjects(extractData(past.data));
       } catch (error) {
-        console.error("Error fetching current projects:", error);
+        console.error("Error fetching projects:", error);
         setCurrentProjects([]);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    loadCurrentProjects();
-  }, []);
-
-  useEffect(() => {
-    async function loadPastProjects() {
-      try {
-        const res = await axios.get(API_BASE_URL, {
-          params: { entity: "projects", resource: "past" },
-        });
-        setPastProjects(extractData(res.data));
-      } catch (error) {
-        console.error("Error fetching past projects:", error);
         setPastProjects([]);
       } finally {
         setIsLoading(false);
       }
     }
-    loadPastProjects();
+    loadProjects();
   }, []);
 
-  return (
-    <>
-      <div className="mt-4 w-screen bg-background-white">
-        <div className="pageShell items-start xl:mx-auto">
-          <h1 className="heading1 self-start">Projects</h1>
+  const handleFilterChange = (next) => {
+    setFilter(next);
+    scrollListToTop();
+  };
 
-          {isLoading ? (
-            <div className="flex min-h-screen w-full items-center justify-center">
-              <LoadingSpinner/>
-            </div>
-          ) : (
-            <>
-              <button className="heading4 mt-1">Current Projects</button>
-              <ProjectsContainer projects={currentProjects} />
-              <button className="heading4 mt-1">Past Projects</button>
-              <ProjectsContainer projects={pastProjects} />
-            </>
-          )}
-        </div>
+  const shown = filter === "Current" ? currentProjects : pastProjects;
+
+  return (
+    <div className="w-screen">
+      <PageTitleSection title="Projects">
+        <WorkFilter
+          options={FILTERS}
+          value={filter}
+          onChange={handleFilterChange}
+          label="Filter projects"
+        />
+      </PageTitleSection>
+
+      <div className="pageShell items-start xl:mx-auto">
+        {isLoading ? (
+          <div className="flex min-h-screen w-full items-center justify-center">
+            <LoadingSpinner />
+          </div>
+        ) : shown.length === 0 ? (
+          <p className="body">No {filter.toLowerCase()} projects to show.</p>
+        ) : (
+          <ProjectsContainer projects={shown} />
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
