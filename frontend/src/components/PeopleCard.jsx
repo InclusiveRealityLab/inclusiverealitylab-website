@@ -20,7 +20,7 @@ function PeopleCard({ person }) {
       {person && (
         <>
           <div
-            className={`flex flex-col items-center gap-1 
+            className={`flex flex-col items-center gap-1 cursor-pointer
         xl:w-15  w-9.5 group
         ${
           ["Lab", "Collaborator"].includes(person.category)

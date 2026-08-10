@@ -1,70 +1,55 @@
-// import people from "../sampleData/people";
-import peopleCategories from "../sampleData/peopleCategories";
-import peopleRoles from "../sampleData/peopleRole";
-import PeopleCard from "../components/PeopleCard";
-import CategoryContainer from "../components/CategoryContainer";
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import extractData from "../utils/extractData.js"
+import peopleCategories from "../sampleData/peopleCategories";
+import CategoryContainer from "../components/CategoryContainer";
+import PageTitleSection from "../components/PageTitleSection";
+import extractData from "../utils/extractData.js";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
 
 function PeoplePage() {
-   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [people, setPeopleData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     async function loadPeople() {
       try {
-        const response = await axios.get(`${API_BASE_URL}?entity=people&resource=all`);
-        const data = response.data;
-        
-        setPeopleData(extractData(data));
-        setisLoading(false);
-       
+        const response = await axios.get(
+          `${API_BASE_URL}?entity=people&resource=all`
+        );
+        setPeopleData(extractData(response.data));
       } catch (error) {
         console.error("Error fetching people data:", error);
+        setPeopleData([]);
+      } finally {
+        setisLoading(false);
       }
     }
     loadPeople();
   }, []);
 
   return (
-    <>
-      {" "}
-      
-        <div className="mt-4 w-screen h-auto">
-          <div className="pageShell items-start xl:mx-auto">
-            <h1 className="heading1 self-start">People</h1>
+    <div className="w-screen">
+      {/* Same sticky title as Projects and Publications, without a filter */}
+      <PageTitleSection title="People" />
 
-            {isLoading ? (<div className="flex min-h-screen w-full items-center justify-center">
-                      <LoadingSpinner/>
-                    </div>) : 
-
-            peopleCategories.map((cat) => {
-              const filteredPeople = people.filter(
-                (p) => p.category === cat.name
-              );
-
-              return (
-                <>
-                  <CategoryContainer
-                    key={cat.id}
-                    category={cat.name}
-                    people={filteredPeople}
-                  />
-                 
-                </>
-              );
-            })}
-
-            {/* <PeopleCard person={people.find((p) => p.category == "lab")} /> */}
+      <div className="pageShell items-start xl:mx-auto">
+        {isLoading ? (
+          <div className="flex min-h-screen w-full items-center justify-center">
+            <LoadingSpinner />
           </div>
-        </div>
-      
-    </>
+        ) : (
+          peopleCategories.map((cat) => (
+            <CategoryContainer
+              key={cat.id}
+              category={cat.name}
+              people={people.filter((p) => p.category === cat.name)}
+            />
+          ))
+        )}
+      </div>
+    </div>
   );
 }
 
