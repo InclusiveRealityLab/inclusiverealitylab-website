@@ -1,7 +1,9 @@
 function PublicationSectionWrapper({headingContent,children}) {
   return (
     <>
-      <section className="flex flex-col bg-background-white items-start w-screen z-0">
+      {/* transparent so the landing page's fixed background shows through;
+          on the other pages the ground is white anyway */}
+      <section className="flex flex-col items-start w-screen z-0">
         <div className="pageShell items-start mx-auto">
           {/* optional: the updated landing page drops both section headings */}
           {headingContent && (

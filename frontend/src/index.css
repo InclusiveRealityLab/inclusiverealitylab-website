@@ -211,6 +211,129 @@
   .pageShell {
     @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:px-0 xl:max-w-content;
   }
+
+  /* BACKGROUND
+     Three colour fields drifting behind the page. Softness comes from the
+     gradients' own falloff rather than a blur filter -- animating transforms
+     under filter: blur() forces the subtree to re-rasterise every frame,
+     which is what made the previous SVG version expensive. These animate
+     transform only, so they stay on the compositor. */
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+
+  /* Deliberately larger than the viewport and elliptical, so rotation reads
+     as the field stretching and twisting rather than a circle spinning. */
+  .blobGreen {
+    width: 120vw;
+    height: 95vh;
+    left: -35%;
+    top: -25%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-secondaryLight) 0%,
+      color-mix(in srgb, var(--color-secondaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftA 15s ease-in-out infinite;
+  }
+
+  .blobYellow {
+    width: 110vw;
+    height: 125vh;
+    right: -40%;
+    top: -20%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-tertiaryLight) 0%,
+      color-mix(in srgb, var(--color-tertiaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftB 20s ease-in-out infinite;
+  }
+
+  .blobBlue {
+    /* 1.3x the other fields */
+    width: 137vw;
+    height: 130vh;
+    left: -25%;
+    bottom: -40%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-primaryLight) 0%,
+      color-mix(in srgb, var(--color-primaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftC 25s ease-in-out infinite;
+  }
+}
+
+/* Each field zigzags across the full viewport on its own axis -- green
+   horizontally, yellow vertically, blue on the reverse diagonal -- while
+   rotating and scaling unevenly, which is what stretches and twists it.
+   Travel is in vw/vh so it is viewport-relative; transform percentages would
+   be relative to each element's own (differing) size instead.
+   15 / 20 / 29 share only small factors (15 and 20 realign every 60s, 29 is
+   prime), so the full composite takes ~29 minutes to repeat. All transform,
+   so it stays composited. */
+@keyframes blobDriftA {
+  0%,
+  100% {
+    transform: translate3d(-12vw, -6vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(38vw, 14vh, 0) rotate(30deg) scale(1.3, 0.8);
+  }
+  50% {
+    transform: translate3d(-24vw, 34vh, 0) rotate(-20deg) scale(0.82, 1.36);
+  }
+  75% {
+    transform: translate3d(34vw, -12vh, 0) rotate(16deg) scale(1.2, 1.02);
+  }
+}
+
+/* Yellow is anchored off the right edge, so reaching the left of the screen
+   needs a large negative sweep -- it zigzags vertically on the way across. */
+@keyframes blobDriftB {
+  0%,
+  100% {
+    transform: translate3d(0vw, -12vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(-44vw, 32vh, 0) rotate(-26deg) scale(0.84, 1.3);
+  }
+  50% {
+    transform: translate3d(-72vw, -18vh, 0) rotate(22deg) scale(1.34, 0.88);
+  }
+  75% {
+    transform: translate3d(-26vw, 28vh, 0) rotate(-12deg) scale(1.04, 1.18);
+  }
+}
+
+/* Blue is anchored off the left edge, so the mirror of the above: a large
+   positive sweep to carry it across to the right. */
+@keyframes blobDriftC {
+  0%,
+  100% {
+    transform: translate3d(0vw, 8vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(30vw, -26vh, 0) rotate(24deg) scale(1.24, 1.08);
+  }
+  50% {
+    transform: translate3d(54vw, 20vh, 0) rotate(-28deg) scale(0.86, 1.32);
+  }
+  75% {
+    transform: translate3d(20vw, -14vh, 0) rotate(18deg) scale(1.16, 0.88);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
 }
 
 body {

@@ -14,7 +14,6 @@ import extractData from "../utils/extractData";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ButtonText from "../components/buttons/ButtonText";
 import Background from "../components/animations/Background";
-import DesktopBackground from "../components/animations/DesktopBackground";
 
 function LandingPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -86,6 +85,8 @@ function LandingPage() {
 
   return (
     <div className="xl:flex xl:flex-col xl:justify-between xl:items-center">
+      {/* one fixed layer for the whole page; content scrolls over it */}
+      <Background />
       <div className="relative w-screen h-auto z-0">
         {/* Hero Image / Key Visual Section*/}
         <div className="w-screen xl:h-50 h-hero z-15">
@@ -126,9 +127,7 @@ function LandingPage() {
           </div>
         </div>
 
-        {/* Gradient Background */}
 
-        <Background className="" />
 
         <div className="relative z-0">
           {/* Three Themes Section */}
@@ -167,8 +166,6 @@ function LandingPage() {
 
           {/* Mission Text */}
           <div className="relative z-10 heading3 xl:max-w-content my-8 mx-1.5 xl:mx-auto">
-            {/* main cause of vertical overflow of gradient background!!! */}
-            <Background className="" />
             Our research explores how reality itself - both physical and digital
             - can be leveraged to understand cognitive, behavioral, and
             emotional states, assist individuals in their daily lives, and
@@ -192,9 +189,7 @@ function LandingPage() {
             />
           </PublicationSectionWrapper>
 
-          {/* Gradient Background */}
 
-          <Background className="h-[90vh]" />
 
           {/* News Section */}
           <section className="flex flex-col mx-auto py-5 px-1.5 xl:max-w-content gap-4 z-100 bg-transparent ">
