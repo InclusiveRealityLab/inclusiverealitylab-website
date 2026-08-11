@@ -64,7 +64,7 @@ function Carousel({ projects = [], isLoading = false }) {
           keeps a 24px gutter once the viewport is narrower than the column. */}
       <div
         ref={viewportRef}
-        className="flex gap-1.5 xl:gap-2 w-full overflow-x-auto px-1.5 xl:px-[max(24px,calc((100vw-1032px)/2))] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="noScrollbar flex gap-1.5 xl:gap-2 w-full overflow-x-auto px-1.5 xl:px-[max(24px,calc((100vw-1032px)/2))]"
       >
         {isLoading
           ? Array.from({ length: SKELETON_COUNT }, (_, i) => (

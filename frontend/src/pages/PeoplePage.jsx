@@ -4,14 +4,18 @@ import axios from "axios";
 import peopleCategories from "../sampleData/peopleCategories";
 import CategoryContainer from "../components/CategoryContainer";
 import PageTitleSection from "../components/PageTitleSection";
+import SectionTabs from "../components/tabs/SectionTabs";
 import extractData from "../utils/extractData.js";
-import Skeleton from "../components/skeletons/Skeleton.jsx";
+import scrollListToTop from "../utils/scrollListToTop.js";
 import PeopleCardSkeleton from "../components/skeletons/PeopleCardSkeleton.jsx";
+
+const SECTIONS = peopleCategories.map((c) => c.label);
 
 function PeoplePage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [people, setPeopleData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+  const [section, setSection] = useState(SECTIONS[0]);
 
   useEffect(() => {
     async function loadPeople() {
@@ -30,30 +34,43 @@ function PeoplePage() {
     loadPeople();
   }, []);
 
+  const handleSectionChange = (next) => {
+    setSection(next);
+    scrollListToTop();
+  };
+
+  // The tab carries the label; the sheet stores the name.
+  const category = peopleCategories.find((c) => c.label === section);
+
   return (
     <div className="w-screen">
-      {/* Same sticky title as Projects and Publications, without a filter */}
-      <PageTitleSection title="People" />
+      {/* Same sticky title as Projects and Publications. The three options are
+          fixed rather than derived from the data, so they need no placeholder
+          while the people load. */}
+      <PageTitleSection title="People">
+        <SectionTabs
+          options={SECTIONS}
+          value={section}
+          onChange={handleSectionChange}
+          label="People groups"
+        />
+      </PageTitleSection>
 
       <div className="pageShell items-start xl:mx-auto">
         {isLoading ? (
-          /* one category block, mirroring CategoryContainer's heading + wrap */
-          <div className="flex flex-col gap-2.5 w-full" aria-busy="true">
-            <Skeleton className="w-8 h-2 rounded-sm" />
-            <div className="flex flex-row flex-wrap gap-1.5 w-full">
-              {Array.from({ length: 6 }, (_, i) => (
-                <PeopleCardSkeleton key={i} />
-              ))}
-            </div>
+          <div
+            className="flex flex-row flex-wrap gap-y-1.5 gap-x-peopleGutter xl:gap-x-1.5 w-full"
+            aria-busy="true"
+          >
+            {Array.from({ length: 8 }, (_, i) => (
+              <PeopleCardSkeleton key={i} />
+            ))}
           </div>
         ) : (
-          peopleCategories.map((cat) => (
-            <CategoryContainer
-              key={cat.id}
-              category={cat.name}
-              people={people.filter((p) => p.category === cat.name)}
-            />
-          ))
+          <CategoryContainer
+            category={category.name}
+            people={people.filter((p) => p.category === category.name)}
+          />
         )}
       </div>
     </div>

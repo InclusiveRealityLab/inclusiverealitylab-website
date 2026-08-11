@@ -1,6 +1,6 @@
 import useNavbarHidden from "../hooks/useNavbarHidden";
 
-// Heading plus filter, pinned to the top so the filter stays reachable while
+// Heading plus section tabs, pinned to the top so the tabs stay reachable while
 // the list scrolls.
 //
 // It sticks at top: 0 with a spacer standing in for the navbar, rather than

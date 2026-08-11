@@ -3,18 +3,18 @@ import axios from "axios";
 
 import ProjectsContainer from "../components/ProjectsContainer";
 import PageTitleSection from "../components/PageTitleSection";
-import WorkFilter from "../components/filters/WorkFilter";
+import SectionTabs from "../components/tabs/SectionTabs";
 import extractData from "../utils/extractData";
 import scrollListToTop from "../utils/scrollListToTop";
 
-const FILTERS = ["Current", "Past"];
+const SECTIONS = ["Current", "Past"];
 
 function ProjectsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [currentProjects, setCurrentProjects] = useState([]);
   const [pastProjects, setPastProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [filter, setFilter] = useState(FILTERS[0]);
+  const [section, setSection] = useState(SECTIONS[0]);
 
   useEffect(() => {
     async function loadProjects() {
@@ -40,27 +40,27 @@ function ProjectsPage() {
     loadProjects();
   }, []);
 
-  const handleFilterChange = (next) => {
-    setFilter(next);
+  const handleSectionChange = (next) => {
+    setSection(next);
     scrollListToTop();
   };
 
-  const shown = filter === "Current" ? currentProjects : pastProjects;
+  const shown = section === "Current" ? currentProjects : pastProjects;
 
   return (
     <div className="w-screen">
       <PageTitleSection title="Projects">
-        <WorkFilter
-          options={FILTERS}
-          value={filter}
-          onChange={handleFilterChange}
-          label="Filter projects"
+        <SectionTabs
+          options={SECTIONS}
+          value={section}
+          onChange={handleSectionChange}
+          label="Project groups"
         />
       </PageTitleSection>
 
       <div className="pageShell items-start xl:mx-auto">
         {!isLoading && shown.length === 0 ? (
-          <p className="body">No {filter.toLowerCase()} projects to show.</p>
+          <p className="body">No {section.toLowerCase()} projects to show.</p>
         ) : (
           <ProjectsContainer projects={shown} isLoading={isLoading} />
         )}

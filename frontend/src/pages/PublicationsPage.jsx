@@ -3,7 +3,7 @@ import axios from "axios";
 
 import PublicationsContainer from "../components/PublicationsContainer";
 import PageTitleSection from "../components/PageTitleSection";
-import WorkFilter from "../components/filters/WorkFilter";
+import SectionTabs from "../components/tabs/SectionTabs";
 import extractData from "../utils/extractData";
 import scrollListToTop from "../utils/scrollListToTop";
 
@@ -17,7 +17,7 @@ function PublicationsPage() {
   const [year, setYear] = useState(null);
 
   // Everything is fetched up front rather than paged on scroll: the year
-  // filter has to know every year, and deriving that from a partial list would
+  // tabs have to know every year, and deriving that from a partial list would
   // mean fetching it all anyway. The whole set is a few tens of KB.
   //
   // resource=all is still paged server-side and silently caps at 20 when no
@@ -79,11 +79,11 @@ function PublicationsPage() {
   return (
     <div className="w-screen">
       <PageTitleSection title="Publications">
-        <WorkFilter
+        <SectionTabs
           options={years}
           value={activeYear}
           onChange={handleYearChange}
-          label="Filter publications by year"
+          label="Publication years"
           isLoading={isLoading}
         />
       </PageTitleSection>

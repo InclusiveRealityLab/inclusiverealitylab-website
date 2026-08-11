@@ -400,6 +400,16 @@ body {
   position: relative;
 } */
 
+/* Scrolls, but shows no scrollbar -- for rows that overflow sideways and are
+   driven by dragging, arrows or a trackpad rather than by the bar itself. */
+.noScrollbar {
+  scrollbar-width: none;
+}
+
+.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* FOR CUSTOM SCROLLBAR STYLING */
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color:transparent; 
