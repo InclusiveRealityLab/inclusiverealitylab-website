@@ -30,7 +30,7 @@ function PublicationListItem({ publication }) {
           </p>
         </div>
 
-        <div className="flex flex-row gap-1.5">
+        <div className="flex flex-row gap-1 xl:gap-1.5">
           {publication["DOI"] && (
             <a
               href={publication["DOI"]}

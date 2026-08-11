@@ -58,7 +58,7 @@ function ProjectsPage() {
         />
       </PageTitleSection>
 
-      <div className="pageShell items-start xl:mx-auto">
+      <div className="pageShell items-start xl:mx-auto xl:max-w-narrowBox">
         {!isLoading && shown.length === 0 ? (
           <p className="body">No {section.toLowerCase()} projects to show.</p>
         ) : (

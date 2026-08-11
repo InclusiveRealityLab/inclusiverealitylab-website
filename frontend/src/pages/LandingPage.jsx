@@ -179,10 +179,11 @@ function LandingPage() {
 
           {/* Mission Text, at the same 912 measure as the themes section */}
           <section className="heading3 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
-            Our research explores how reality itself - both physical and digital
-            - can be leveraged to understand cognitive, behavioral, and
-            emotional states, assist individuals in their daily lives, and
-            augment human abilities. <br />
+            We study how technology can understand human needs so it can assist and 
+            augment our natural abilities. <br />
+            <br />
+            We’re bridging the gaps between what people want to do and 
+            what their current environment or body allows them to do.<br />
             <br />
             By designing adaptive and empowering technologies, we aim to create
             a world where diverse individuals can thrive, connect, and reach

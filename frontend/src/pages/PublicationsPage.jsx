@@ -88,7 +88,7 @@ function PublicationsPage() {
         />
       </PageTitleSection>
 
-      <div className="pageShell items-start xl:mx-auto">
+      <div className="pageShell items-start xl:mx-auto xl:max-w-narrowBox">
         <PublicationsContainer
           publications={shown}
           year={year}

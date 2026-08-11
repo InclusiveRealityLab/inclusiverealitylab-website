@@ -112,9 +112,15 @@ function Navbar() {
             </li>
           </ul>
 
+          {/* The open mobile menu centres on the whole screen, per the design:
+              the items span 226..586 of an 812 frame, which is dead centre.
+              It sits after the 72px header row in the column, so centring on
+              the space that is left would put it 36px low -- hence the full
+              viewport height pulled back up over the header. Desktop is a row
+              in the bar itself and opts out of both. */}
           <ul
             className={`bg-background-white xl:bg-transparent text-baseBlack
-          flex flex-col flex-1 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:py-1.5   py-8  xl:flex-row ${
+          flex flex-col flex-1 h-screen -mt-4.5 xl:h-auto xl:mt-0 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:py-1.5 py-4 xl:flex-row ${
             isOpen ? "block" : "hidden"
           } xl:flex `}
           >
