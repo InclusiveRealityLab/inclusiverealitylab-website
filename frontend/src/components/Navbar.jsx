@@ -88,7 +88,10 @@ function Navbar() {
         <nav
           className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-contentBox w-full mx-auto px-1.5 xl:py-0.25 `}
         >
-          <ul className="flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 xl:items-center">
+          {/* Above the menu: when open, the menu spans the whole viewport and
+              is pulled up over this row, so its white fill would otherwise
+              cover the logo and the close button -- and swallow the click. */}
+          <ul className="relative z-10 flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 xl:items-center">
             {/* 24 tall on mobile, 32 on desktop. The width follows the logo's
                 own 84x48 ratio rather than being pinned, so it can never
                 stretch: 42x24 and 56x32. */}
