@@ -115,7 +115,7 @@ function ProjectDetailsPage() {
       )}
 
       <div className="pageShell items-start mx-auto xl:max-w-narrowBox">
-        <div className="flex flex-col gap-1 w-full">
+        <div className="flex flex-col gap-1.5 w-full">
           <p className="body">
             {extractYear(project["Start Date"])} -{" "}
             {project["End Date"] ? extractYear(project["End Date"]) : "Present"}
@@ -127,14 +127,14 @@ function ProjectDetailsPage() {
         </div>
 
         {memberNames && (
-          <section className="flex flex-col gap-2 w-full">
+          <section className="flex flex-col gap-1.5 w-full">
             <h2 className="heading4">People</h2>
             <p className="body">{memberNames}</p>
           </section>
         )}
 
         {project["Intro"] && (
-          <section className="flex flex-col gap-2 w-full">
+          <section className="flex flex-col gap-1.5 w-full">
             <h2 className="heading4">About this project</h2>
             <p className="body whitespace-pre-line">{project["Intro"]}</p>
           </section>
@@ -154,15 +154,12 @@ function ProjectDetailsPage() {
         )}
 
         {(isLoadingPublications || relatedPublications.length > 0) && (
-          <section className="flex flex-col gap-2 w-full">
+          <section className="flex flex-col gap-1.5 w-full">
             <h2 className="heading4">Publications</h2>
-            {isLoadingPublications ? (
-              <div className="flex items-center justify-center w-full">
-                <LoadingSpinner />
-              </div>
-            ) : (
-              <PublicationsContainer publications={relatedPublications} />
-            )}
+            <PublicationsContainer
+              publications={relatedPublications}
+              isLoading={isLoadingPublications}
+            />
           </section>
         )}
       </div>

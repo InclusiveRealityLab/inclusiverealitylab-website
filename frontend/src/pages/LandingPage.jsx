@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import axios from "axios";
 
 import Navbar from "../components/Navbar";
@@ -105,7 +104,7 @@ function LandingPage() {
         {/* Hero Image / Key Visual Section*/}
         <div className="relative w-screen z-15">
           <video
-            className="w-full h-hero xl:h-50 object-cover block motion-reduce:hidden"
+            className="w-full h-hero xl:h-45.5 object-cover block motion-reduce:hidden"
             autoPlay
             muted
             loop
@@ -134,14 +133,13 @@ function LandingPage() {
               absolute box would overhang into the section below -- which is
               what the old max-[420px]:mt-[240px] on the themes section was
               compensating for. In flow, whatever follows simply starts beneath
-              it. The offsets are the video height less the design's y for the
-              box: 560-240 and 800-350. */}
-          <div className="relative -mt-20 xl:-mt-[450px] w-full xl:max-w-contentBox mx-auto px-1.5 z-20">
-            <div className="w-full max-w-35 mx-auto xl:mx-0 flex flex-col gap-1.5 bg-background-white border-1 border-baseBlack rounded-lg px-2.5 py-3 xl:px-4 xl:py-5">
+              it. See heroPull/heroPullLg for where the offsets come from. */}
+          <div className="relative -mt-heroPull xl:-mt-heroPullLg w-full xl:max-w-contentBox mx-auto px-1.5 z-20">
+            <div className="w-full max-w-32.5 mx-auto xl:mx-0 flex flex-col gap-1.5 bg-background-white border-1 border-baseBlack rounded-lg px-2.5 py-3 xl:px-3.5 xl:py-4">
               <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
               <div className="heading3">
                 We envision a seamless world where the physical and virtual blur
-                to dissolve all barriers - a prosocial space where age, ability,
+                to dissolve all barriers - <br />a prosocial space where age, ability,
                 and even species no longer limit how we connect and empower one
                 another.
               </div>
@@ -173,11 +171,10 @@ function LandingPage() {
 
           {/* Featured Projects Carousel */}
           <section className="relative">
-            {isProjectsLoading ? (
-              <LoadingSpinner />
-            ) : (
-              <Carousel projects={featuredProjects} />
-            )}
+            <Carousel
+              projects={featuredProjects}
+              isLoading={isProjectsLoading}
+            />
           </section>
 
           {/* Mission Text, at the same 912 measure as the themes section */}
@@ -195,11 +192,10 @@ function LandingPage() {
           {/* Featured Publications. No heading in the updated design -- the
               list follows the mission text directly, at the same 912 measure. */}
           <section className="flex flex-col gap-2.5 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
-            {isPubsLoading ? (
-              <LoadingSpinner />
-            ) : (
-              <PublicationContainer publications={featuredPublications} />
-            )}
+            <PublicationContainer
+              publications={featuredPublications}
+              isLoading={isPubsLoading}
+            />
             <ButtonText
               label="View All Publications"
               linkAddress="/publications"
@@ -216,7 +212,11 @@ function LandingPage() {
               <h2 className="heading4 text-center">Lab News</h2>
               <div className="custom-scrollbar flex flex-col gap-1.5 p-1 h-20 xl:h-12.5 overflow-y-auto">
                 {isNewsLoading ? (
-                  <LoadingSpinner />
+                  /* the panel is already a fixed height, so nothing can shift
+                     here -- a centred spinner is enough */
+                  <div className="flex grow items-center justify-center">
+                    <LoadingSpinner />
+                  </div>
                 ) : news.length === 0 ? (
                   <p className="bodySmall">No news available at the moment.</p>
                 ) : (

@@ -50,7 +50,7 @@ function CategoryContainer({ category, people }) {
       {category.toLowerCase() !== "lab" && (
         <div className="flex flex-row flex-wrap gap-1.5 w-full ">
           {sortedPeople.map((person) => (
-            <PeopleCard key={person.id} person={person} />
+            <PeopleCard key={person.ID} person={person} />
           ))}
         </div>
       )}

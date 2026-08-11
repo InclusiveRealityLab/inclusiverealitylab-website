@@ -5,7 +5,6 @@ import ProjectsContainer from "../components/ProjectsContainer";
 import PageTitleSection from "../components/PageTitleSection";
 import WorkFilter from "../components/filters/WorkFilter";
 import extractData from "../utils/extractData";
-import LoadingSpinner from "../components/LoadingSpinner";
 import scrollListToTop from "../utils/scrollListToTop";
 
 const FILTERS = ["Current", "Past"];
@@ -60,14 +59,10 @@ function ProjectsPage() {
       </PageTitleSection>
 
       <div className="pageShell items-start xl:mx-auto">
-        {isLoading ? (
-          <div className="flex min-h-screen w-full items-center justify-center">
-            <LoadingSpinner />
-          </div>
-        ) : shown.length === 0 ? (
+        {!isLoading && shown.length === 0 ? (
           <p className="body">No {filter.toLowerCase()} projects to show.</p>
         ) : (
-          <ProjectsContainer projects={shown} />
+          <ProjectsContainer projects={shown} isLoading={isLoading} />
         )}
       </div>
     </div>

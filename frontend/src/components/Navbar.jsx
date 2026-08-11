@@ -1,23 +1,17 @@
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
 import closeBlack from "../assets/icons/closeBlack.svg";
 import menu from "../assets/icons/menu.svg";
 import useScrollBeyondVisual from "../hooks/useScrollBeyondVisual";
 import useNavbarHidden from "../hooks/useNavbarHidden";
-import Modal from "./modals/Modal";
 import { Link } from "react-router";
 import NavigationTab from "./tabs/NavigationTab";
 import ButtonPrimary from "./buttons/ButtonPrimary";
 import ButtonSecondary from "./buttons/ButtonSecondary";
-import axios from "axios";
-import check from "../assets/icons/check.svg";
-import processing from "../assets/icons/processing.svg";
 import SocialMediaHandleContainer from "./SocialMediaHandleContainer";
 import JoinModal from "./modals/JoinModal";
 import ContactModal from "./modals/ContactModal";
-
-const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,64 +25,17 @@ function Navbar() {
     }
   };
 
-  const [modalType, setModalType] = useState(null);
   const [isModalOpenJoin, setIsModalOpenJoin] = useState(false);
   const [isModalOpenContact, setIsModalOpenContact] = useState(false);
 
   const handleOpenJoinModal = () => {
     setIsModalOpenJoin(true);
-    setModalType("join");
   };
 
   const handleOpenContactModal = () => {
     setIsModalOpenContact(true);
-    setModalType("contact");
   };
 
-  // handling the form submission for the contact form inside the contact modal
-  const nameReference = useRef();
-  const emailReference = useRef();
-  const messageReference = useRef();
-
-  const [status, setStatus] = useState("Send");
-
-  const handleFormSubmission = async (e) => {
-    e.preventDefault();
-    setStatus("Sending");
-
-    const form = new FormData();
-    form.append("name", nameReference.current.value);
-    form.append("email", emailReference.current.value);
-    form.append("message", messageReference.current.value);
-
-    try {
-      const response = await fetch(POST_API, {
-        method: "POST",
-        body: form, // No headers needed for FormData
-      });
-
-      const result = await response.json(); // Parses JSON string returned from Apps Script
-     
-
-      if (result.success) {
-        setStatus("Sent");
-        setTimeout(() => {
-          setStatus("Send");
-          nameReference.current.value = "";
-          emailReference.current.value = "";
-          messageReference.current.value = "";
-        }, 1000);
-      } else {
-        setStatus("Failed.");
-      }
-    } catch (error) {
-      console.error("❌ Fetch error:", error);
-      setStatus("Failed");
-      // this alerts the user about an error processing the message and closes the modal
-      alert("Sorry there was an error sending your message, try again later");
-      setIsModalOpenContact(false);
-    }
-  };
 
   // Change this threshold value (in pixels) according to the design specification, current placeholder image height is 800px for the visual in the landing page
 
@@ -129,7 +76,6 @@ function Navbar() {
 
   return (
     <>
-      {/* <Modal /> */}
       <div
         className={`flex w-screen fixed top-0 left-1/2 transform -translate-x-1/2 z-50 ${bgClass}  ${
           isHidden ? "hidden" : "block"
@@ -143,13 +89,15 @@ function Navbar() {
           className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-contentBox w-full mx-auto px-1.5 xl:py-0.25 `}
         >
           <ul className="flex flex-row justify-between items-center flex-none xl:flex-row xl:justify-between py-1 xl:items-center">
-            {/* logo is a fixed 56x32 per the design -- it must not stretch */}
-            <li className="w-3.5 h-2 cursor-pointer">
+            {/* 24 tall on mobile, 32 on desktop. The width follows the logo's
+                own 84x48 ratio rather than being pinned, so it can never
+                stretch: 42x24 and 56x32. */}
+            <li className="cursor-pointer">
               <Link to="/">
                 <img
                   src={`${import.meta.env.BASE_URL}IRL_logo_icon.svg`}
                   alt="logo"
-                  className="w-full h-full object-contain"
+                  className="h-1.5 xl:h-2 w-auto"
                 ></img>
               </Link>
             </li>
@@ -206,10 +154,7 @@ function Navbar() {
                 />
 
                 {isModalOpenJoin && (
-                  <JoinModal
-                    onClose={() => setIsModalOpenJoin(false)}
-                    horizontalGap={`[48px]`}
-                  />
+                  <JoinModal onClose={() => setIsModalOpenJoin(false)} />
                 )}
               </li>
               <li>
@@ -219,10 +164,7 @@ function Navbar() {
                 />
                 {isModalOpenContact && (
                   
-                  <ContactModal
-                    onClose={() => setIsModalOpenContact(false)}
-                    horizontalGap="[48px]"
-                  />
+                  <ContactModal onClose={() => setIsModalOpenContact(false)} />
                 )}
               </li>
             </ul>

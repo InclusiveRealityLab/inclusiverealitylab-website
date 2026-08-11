@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import ProjectCard from "../components/ProjectCard";
+import ProjectCardSkeleton from "./skeletons/ProjectCardSkeleton";
 import ButtonText from "./buttons/ButtonText";
 
 import leftArrow from "../assets/icons/left.svg";
@@ -11,7 +12,11 @@ import rightArrow from "../assets/icons/right.svg";
 const STEP_DESKTOP = 536;
 const STEP_MOBILE = 344;
 
-function Carousel({ projects }) {
+// Enough to overflow the track at desktop width, so the placeholder row reads
+// as a carousel rather than a short list.
+const SKELETON_COUNT = 3;
+
+function Carousel({ projects = [], isLoading = false }) {
   const viewportRef = useRef(null);
   const [step, setStep] = useState(STEP_DESKTOP);
   const [canScroll, setCanScroll] = useState(false);
@@ -30,7 +35,7 @@ function Carousel({ projects }) {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [projects.length]);
+  }, [projects.length, isLoading]);
 
   // The track is a real scroll container rather than a transform, so a
   // trackpad swipe, a touch drag and the arrows all drive the same thing.
@@ -61,20 +66,25 @@ function Carousel({ projects }) {
         ref={viewportRef}
         className="flex gap-1.5 xl:gap-2 w-full overflow-x-auto px-1.5 xl:px-[max(24px,calc((100vw-1032px)/2))] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            className="w-20 xl:w-31.5 shrink-0"
-          />
-        ))}
+        {isLoading
+          ? Array.from({ length: SKELETON_COUNT }, (_, i) => (
+              <ProjectCardSkeleton key={i} className="w-20 xl:w-31.5 shrink-0" />
+            ))
+          : projects.map((project) => (
+              <ProjectCard
+                key={project.ID}
+                project={project}
+                className="w-20 xl:w-31.5 shrink-0"
+              />
+            ))}
       </div>
 
       {/* controls: arrows left, view-all right */}
       <div className="flex flex-row justify-between items-center gap-1.5 w-full xl:max-w-contentBox mx-auto px-1.5 pl-4">
         {/* Arrows are for pointing devices; touch and trackpad scroll the
-            track directly. Hidden entirely when nothing overflows. */}
-        {canScroll && (
+            track directly. Hidden entirely when nothing overflows, and while
+            loading -- there is nothing to page through yet. */}
+        {canScroll && !isLoading && (
           <div className="hidden pointer-fine:flex flex-row justify-start items-center gap-1.5">
             <button
               onClick={() => scrollByStep(-1)}

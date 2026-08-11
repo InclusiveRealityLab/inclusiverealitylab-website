@@ -1,10 +1,10 @@
 import Modal from "./Modal";
 import SocialMediaHandleContainer from "../SocialMediaHandleContainer";
 
-function JoinModal({ children, onClose, horizontalGap }) {
+function JoinModal({ onClose }) {
   return (
     <>
-      <Modal onClose={onClose} backgroundColor="bg-background-tertiaryLight" horizontalGap={horizontalGap}>
+      <Modal onClose={onClose} backgroundColor="bg-background-tertiaryLight">
         <div className=" xl:w-33 w-full px-1.5 my-10 xl:px-0 flex flex-col gap-2 xl:gap-2">
           <h2 className="heading2 overflow-wrap hyphens-auto">
             Looking for opportunities to join us?

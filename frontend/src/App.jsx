@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { BrowserRouter, HashRouter, Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import "./App.css";
 
@@ -8,7 +7,6 @@ import Footer from "./components/Footer";
 import ProjectsPage from "./pages/ProjectsPage";
 import PublicationsPage from "./pages/PublicationsPage";
 import PeoplePage from "./pages/PeoplePage";
-import { useScroll } from "framer-motion";
 import useScrollToTop from "./hooks/useScrollToTop";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 

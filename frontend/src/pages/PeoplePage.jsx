@@ -5,7 +5,8 @@ import peopleCategories from "../sampleData/peopleCategories";
 import CategoryContainer from "../components/CategoryContainer";
 import PageTitleSection from "../components/PageTitleSection";
 import extractData from "../utils/extractData.js";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import Skeleton from "../components/skeletons/Skeleton.jsx";
+import PeopleCardSkeleton from "../components/skeletons/PeopleCardSkeleton.jsx";
 
 function PeoplePage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -36,8 +37,14 @@ function PeoplePage() {
 
       <div className="pageShell items-start xl:mx-auto">
         {isLoading ? (
-          <div className="flex min-h-screen w-full items-center justify-center">
-            <LoadingSpinner />
+          /* one category block, mirroring CategoryContainer's heading + wrap */
+          <div className="flex flex-col gap-2.5 w-full" aria-busy="true">
+            <Skeleton className="w-8 h-2 rounded-sm" />
+            <div className="flex flex-row flex-wrap gap-1.5 w-full">
+              {Array.from({ length: 6 }, (_, i) => (
+                <PeopleCardSkeleton key={i} />
+              ))}
+            </div>
           </div>
         ) : (
           peopleCategories.map((cat) => (

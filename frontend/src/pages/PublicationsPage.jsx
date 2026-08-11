@@ -5,7 +5,6 @@ import PublicationsContainer from "../components/PublicationsContainer";
 import PageTitleSection from "../components/PageTitleSection";
 import WorkFilter from "../components/filters/WorkFilter";
 import extractData from "../utils/extractData";
-import LoadingSpinner from "../components/LoadingSpinner";
 import scrollListToTop from "../utils/scrollListToTop";
 
 const publishYear = (publication) =>
@@ -61,10 +60,11 @@ function PublicationsPage() {
     [publications]
   );
 
-  // Default to the most recent year once the data arrives.
-  useEffect(() => {
-    if (year === null && years.length) setYear(years[0]);
-  }, [years, year]);
+  // The default year is derived during render rather than set in an effect.
+  // An effect runs after paint, so there would be a painted frame where the
+  // data had arrived but year was still null -- which filters to nothing and
+  // flashes an empty list before refilling.
+  const activeYear = year ?? years[0] ?? null;
 
   const handleYearChange = (next) => {
     setYear(next);
@@ -72,8 +72,8 @@ function PublicationsPage() {
   };
 
   const shown = useMemo(
-    () => publications.filter((p) => String(publishYear(p)) === year),
-    [publications, year]
+    () => publications.filter((p) => String(publishYear(p)) === activeYear),
+    [publications, activeYear]
   );
 
   return (
@@ -81,20 +81,19 @@ function PublicationsPage() {
       <PageTitleSection title="Publications">
         <WorkFilter
           options={years}
-          value={year}
+          value={activeYear}
           onChange={handleYearChange}
           label="Filter publications by year"
+          isLoading={isLoading}
         />
       </PageTitleSection>
 
       <div className="pageShell items-start xl:mx-auto">
-        {isLoading ? (
-          <div className="flex min-h-screen w-full items-center justify-center">
-            <LoadingSpinner />
-          </div>
-        ) : (
-          <PublicationsContainer publications={shown} year={year} />
-        )}
+        <PublicationsContainer
+          publications={shown}
+          year={year}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

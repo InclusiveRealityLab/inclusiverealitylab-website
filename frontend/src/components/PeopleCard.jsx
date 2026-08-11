@@ -1,7 +1,3 @@
-import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png";
-import splitName from "../utils/splitName";
-import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
-import Modal from "./modals/Modal";
 import { useState } from "react";
 import IndividualMemberModal from "./modals/IndividualMemberModal";
 import ProfilePhotoContainer from "./ProfilePhotoContainer";
@@ -9,11 +5,6 @@ import ProfilePhotoContainer from "./ProfilePhotoContainer";
 function PeopleCard({ person }) {
  
   const [isPersonModalOpen, setIsPersonModalOpen] = useState(false);
-  const samplePerson = {
-    "Given Name": "John",
-    "Family Name": "Doe",
-    "Affiliation": "University of Example",
-  }
 
   return (
     <>

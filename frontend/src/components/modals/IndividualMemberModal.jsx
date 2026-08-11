@@ -1,6 +1,3 @@
-import closeBlack from "../../assets/icons/closeBlack.svg";
-import ReactDOM from "react-dom";
-import { useState } from "react";
 import Modal from "./Modal";
 import formatLink from "../../utils/formatLink";
 import ProfilePhotoContainer from "../ProfilePhotoContainer";
@@ -24,43 +21,11 @@ const hasContactInfo = (person) => {
   return connectionPlatforms.some((platform) => Boolean(person[platform.key]));
 };
 
-function IndividualMemberModal({
-  person,
-  onClose,
-  backgroundColor,
-  horizontalGap,
-}) {
-  const [message, setMessage] = useState("");
-
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-
-    const mailtoLink = `mailto:${person["Email"]}`;
-    const newWindow = window.open(
-      `https://mail.google.com/mail/?view=cm&to=${person["Email"]}`
-    );
-
-    // If a mail client isn't configured, window.open() may return null or quickly close.
-    setTimeout(() => {
-      if (
-        !newWindow ||
-        newWindow.closed ||
-        typeof newWindow.closed === "undefined"
-      ) {
-        // Fallback: copy email to clipboard and notify the user
-        navigator.clipboard.writeText(email);
-        setMessage("No mail client detected. Email copied to clipboard!");
-      }
-    }, 500);
-  };
+function IndividualMemberModal({ person, onClose }) {
   return (
     <>
       {person && (
-        <Modal
-          onClose={onClose}
-          backgroundColor="bg-background-white"
-          horizontalGap="[0px]"
-        >
+        <Modal onClose={onClose} backgroundColor="bg-background-white">
           <div className="w-full xl:max-w-narrowBox mx-auto my-10 px-1.5 flex flex-col gap-4">
             <div className="w-full flex flex-col gap-2 xl:gap-2.5 items-center">
               <ProfilePhotoContainer person={person} />

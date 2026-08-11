@@ -89,13 +89,16 @@
      the mission text, the publication list, the project details body. Same
      padding-box trick: 912 of content plus a 24px gutter each side. */
   --spacing-narrowBox: 960px;
-  --spacing-wide: 1208px; /* landing hero + carousel outer shell */
   --spacing-modal: 1008px; /* modal shell */
   --spacing-hero: 560px; /* mobile hero / project cover height */
-  --spacing-heroText: 592px; /* desktop intro box */
-  --spacing-introMax: 472px; /* mobile intro box max width */
-  --spacing-introMin: 272px; /* mobile intro box min width */
-  --spacing-cardMin: 267px; /* project card min width */
+  /* The intro box hangs off the bottom of the key visual. The design fixes its
+     distance from the top of the hero -- 320 desktop, 240 mobile -- so the pull
+     is the video height less that: 728-320 and 560-240. It is a negative margin
+     rather than absolute positioning because the copy wraps far taller at a real
+     phone width than at the width the mobile frame is drawn at, and an absolute
+     box would overhang the section below instead of pushing it down. */
+  --spacing-heroPull: 320px; /* mobile intro box pull-up */
+  --spacing-heroPullLg: 408px; /* desktop intro box pull-up */
   --spacing-btnW: 144px; /* primary/secondary button width */
   --spacing-control: 40px; /* button height, icon button, tap target */
   --spacing-peopleGutter: 23px; /* people grid column gap (off-grid, from spec) */
@@ -120,21 +123,21 @@
 
   .heading1 {
     font-family: var(--font-title);
-    font-size: 2.5rem;
+    font-size: 2.125rem; /* 34px */
     line-height: 1.5;
     font-weight: var(--font-weight-regular);
   }
 
   .heading2 {
     font-family: var(--font-title);
-    font-size: 2rem;
+    font-size: 1.75rem; /* 28px */
     line-height: 1.5;
     font-weight: var(--font-weight-regular);
   }
 
   .heading3 {
     font-family: var(--font-title);
-    font-size: 1.5rem;
+    font-size: 1.375rem; /* 22px */
     line-height: 1.5;
     font-weight: var(--font-weight-regular);
   }
