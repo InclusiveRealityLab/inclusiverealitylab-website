@@ -1,7 +1,3 @@
-import defaultProfilePhoto from "../assets/images/defaultProfilePhotoPlaceholder.png";
-import splitName from "../utils/splitName";
-import formatProfilePhotoURL from "../utils/createProfilePhotoURL";
-import Modal from "./modals/Modal";
 import { useState } from "react";
 import IndividualMemberModal from "./modals/IndividualMemberModal";
 import ProfilePhotoContainer from "./ProfilePhotoContainer";
@@ -9,18 +5,13 @@ import ProfilePhotoContainer from "./ProfilePhotoContainer";
 function PeopleCard({ person }) {
  
   const [isPersonModalOpen, setIsPersonModalOpen] = useState(false);
-  const samplePerson = {
-    "Given Name": "John",
-    "Family Name": "Doe",
-    "Affiliation": "University of Example",
-  }
 
   return (
     <>
       {person && (
         <>
           <div
-            className={`flex flex-col items-center gap-1 
+            className={`flex flex-col items-center gap-1 cursor-pointer
         xl:w-15  w-9.5 group
         ${
           ["Lab", "Collaborator"].includes(person.category)

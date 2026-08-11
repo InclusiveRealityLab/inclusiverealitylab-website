@@ -2,22 +2,33 @@ import SocialMediaHandleContainer from "./SocialMediaHandleContainer";
 
 function Footer() {
   return (
-    <div className="flex w-screen bg-background-black z-10">
-      <footer className="flex flex-col xl:flex-row py-4 px-1.5 gap-2.5 xl:max-w-75.5 w-full  mx-auto justify-between">
+    <footer className="flex w-screen bg-transparent z-10">
+      {/* Mobile stacks everything 24px apart, then drops 40px before the
+          copyright. Desktop splits into two columns and lets the right one
+          stretch to the left column's height so the social row and copyright
+          sit at its top and bottom edges. */}
+      {/* same gutter treatment as the navbar: padding at every width, capped
+          on the padding box so the content still measures the column width */}
+      <div className="flex flex-col xl:flex-row justify-between gap-1.5 xl:gap-0 py-5 px-1.5 w-full xl:max-w-contentBox mx-auto">
+        {/* lab name + affiliation */}
         <div className="flex flex-col gap-1.5">
-          <p className="heading4 text-baseWhite">Inclusive Reality Lab</p>
-          <p className="bodySmall text-baseWhite">
+          <p className="heading4">Inclusive Reality Lab</p>
+          <p className="bodySmall">
             School of Computer Science <br />
             University of Auckland
           </p>
-          {/* Created a container for handling social media icons which accepts a property named iconColor needs to be either 'wht' for white or 'blk' for black */}
-          <SocialMediaHandleContainer iconColor="wht"/>
         </div>
-        <p className="bodySmall text-text-invalid text-right xl:self-end ">
-          © 2025 Inclusive Reality Lab.<br></br> All Rights Reserved.
-        </p>
-      </footer>
-    </div>
+
+        {/* social row + copyright */}
+        <div className="flex flex-col gap-2.5 xl:gap-0 xl:justify-between items-start xl:items-end">
+          <SocialMediaHandleContainer />
+          <p className="bodySmall w-full text-right">
+            © {new Date().getFullYear()} Inclusive Reality Lab. All Rights
+            Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 

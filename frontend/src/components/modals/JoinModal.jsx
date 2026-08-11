@@ -1,14 +1,14 @@
 import Modal from "./Modal";
 import SocialMediaHandleContainer from "../SocialMediaHandleContainer";
 
-function JoinModal({ children, onClose, backgroundColor, horizontalGap }) {
+function JoinModal({ onClose }) {
   return (
     <>
-      <Modal onClose={onClose} backgroundColor="bg-background-secondary" horizontalGap={horizontalGap}>
+      <Modal onClose={onClose} backgroundColor="bg-background-tertiaryLight">
         <div className=" xl:w-33 w-full px-1.5 my-10 xl:px-0 flex flex-col gap-2 xl:gap-2">
-          <h1 className="heading1 overflow-wrap hyphens-auto">
+          <h2 className="heading2 overflow-wrap hyphens-auto">
             Looking for opportunities to join us?
-          </h1>
+          </h2>
           <p className="body">
             As a new lab, we’re open to conversations and collaborations in many
             forms. Feel free to explore our projects and publications, if our
@@ -19,7 +19,7 @@ function JoinModal({ children, onClose, backgroundColor, horizontalGap }) {
             you soon. <br></br> Feel free to follow our social media accounts as
             well.
           </p>
-          <SocialMediaHandleContainer iconColor="blk" />
+          <SocialMediaHandleContainer />
         </div>
       </Modal>
     </>

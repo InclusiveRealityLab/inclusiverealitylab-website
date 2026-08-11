@@ -9,14 +9,19 @@
   --color-baseDarkGrey: #737373;
   --color-baseLightGrey: #efefef;
 
-  /* BRAND COLORS */
+  /* BRAND COLORS
+     Values come from the Figma variables (Brand/*). The "light" tints back the
+     research-theme chips: primary=Understand, secondary=Assist, tertiary=Augment. */
   --color-primary: #0087bd;
   --color-secondary: #7cfe7c;
   --color-tertiary: #f3ff69;
 
-  --color-brandDarkBlueStandard: #0087bd;
-  --color-brandDarkGreen: #76ff7a;
-  --color-brandDarkYellow: #f3ff69;
+  --color-primaryLight: #b3dbeb;
+  --color-secondaryLight: #bbffbd;
+  --color-tertiaryLight: #f9ffb4;
+
+  --color-secondaryExtraLight: #f1fff2;
+  --color-secondaryDark: #275428;
 
   /* SEMANTIC */
   --color-error: #ff276f;
@@ -43,23 +48,26 @@
   --color-element-secondary: var(--color-secondary);
   --color-element-tertiary: var(--color-tertiary);
 
-  /* TO BE CONFIRMED : shades of brand colors*/
-  --color-brandDarkBlueStandardLight: #ffffff;
-  --color-brandDarkBlueStandardLighter: #005f8a;
+  --color-background-primaryLight: var(--color-primaryLight);
+  --color-background-secondaryLight: var(--color-secondaryLight);
+  --color-background-tertiaryLight: var(--color-tertiaryLight);
 
-  --color-brandDarkGreenStandardLight: #ffffff;
-  --color-brandDarkGreenStandardLighter: #005f8a;
-
-  --color-brandDarkYellowStandardLight: #ffffff;
-  --color-brandDarkYellowStandardLighter: #005f8a;
-
-  /* TYPOGRAPHY */
+  /* TYPOGRAPHY
+     Three weights, matching the Figma text styles:
+     Light 300 (body*), Regular 400 (heading 2/3, caption), Medium 500
+     (heading 4, label, *bold). */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-medium: 400;
-  --font-weight-light: 200;
-  --font-weight-semibold: 500;
+  --font-weight-medium: 500;
+
+  /* BREAKPOINTS
+     xl is the desktop switch throughout this codebase. Overriding the token
+     moves every existing xl: utility at once rather than renaming ~150 of
+     them. Note this makes xl equal to Tailwind's default lg, so prefer xl:
+     for "desktop" and leave lg: alone to avoid two names for one width. */
+  --breakpoint-xl: 1024px;
 
   /* SPACING */
   --spacing: 16px;
@@ -72,13 +80,25 @@
      so xl:max-w-64.5 and xl:max-w-[1032px] were the same value written two ways;
      both are now xl:max-w-content. */
   --spacing-content: 1032px; /* main page column */
-  --spacing-wide: 1208px; /* landing hero + carousel outer shell */
+  /* The column plus a 24px gutter each side. Used as the max-width on
+     border-box elements that keep their horizontal padding at every width, so
+     the content inside still measures exactly --spacing-content on a wide
+     screen while shrinking with a gutter intact below 1080. */
+  --spacing-contentBox: 1080px;
+  /* The narrower measure used for reading-width blocks -- the themes columns,
+     the mission text, the publication list, the project details body. Same
+     padding-box trick: 912 of content plus a 24px gutter each side. */
+  --spacing-narrowBox: 960px;
   --spacing-modal: 1008px; /* modal shell */
   --spacing-hero: 560px; /* mobile hero / project cover height */
-  --spacing-heroText: 592px; /* desktop intro box */
-  --spacing-introMax: 472px; /* mobile intro box max width */
-  --spacing-introMin: 272px; /* mobile intro box min width */
-  --spacing-cardMin: 267px; /* project card min width */
+  /* The intro box hangs off the bottom of the key visual. The design fixes its
+     distance from the top of the hero -- 320 desktop, 240 mobile -- so the pull
+     is the video height less that: 728-320 and 560-240. It is a negative margin
+     rather than absolute positioning because the copy wraps far taller at a real
+     phone width than at the width the mobile frame is drawn at, and an absolute
+     box would overhang the section below instead of pushing it down. */
+  --spacing-heroPull: 320px; /* mobile intro box pull-up */
+  --spacing-heroPullLg: 408px; /* desktop intro box pull-up */
   --spacing-btnW: 144px; /* primary/secondary button width */
   --spacing-control: 40px; /* button height, icon button, tap target */
   --spacing-peopleGutter: 23px; /* people grid column gap (off-grid, from spec) */
@@ -91,35 +111,35 @@
     font-family: var(--font-title);
     font-size: 4rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .title {
     font-family: var(--font-title);
     font-size: 2.5rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading1 {
     font-family: var(--font-title);
-    font-size: 2.5rem;
+    font-size: 2.125rem; /* 34px */
     line-height: 1.5;
     font-weight: var(--font-weight-regular);
   }
 
   .heading2 {
     font-family: var(--font-title);
-    font-size: 2rem;
+    font-size: 1.75rem; /* 28px */
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading3 {
     font-family: var(--font-title);
-    font-size: 1.5rem;
+    font-size: 1.375rem; /* 22px */
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
   }
 
   .heading4 {
@@ -135,7 +155,7 @@
     font-family: var(--font-title);
     font-size: 0.75rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-medium);
   }
 
   .labelBold {
@@ -189,7 +209,7 @@
     font-size: 0.875rem;
     line-height: 1.5;
     letter-spacing: 0.04em;
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
   }
 
   .caption {
@@ -208,7 +228,130 @@
      xl:mx-auto), and since utilities outrank @layer components those always
      win over anything set here. */
   .pageShell {
-    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:px-0 xl:max-w-content;
+    @apply flex flex-col justify-between py-5 gap-4 w-full px-1.5 xl:max-w-contentBox;
+  }
+
+  /* BACKGROUND
+     Three colour fields drifting behind the page. Softness comes from the
+     gradients' own falloff rather than a blur filter -- animating transforms
+     under filter: blur() forces the subtree to re-rasterise every frame,
+     which is what made the previous SVG version expensive. These animate
+     transform only, so they stay on the compositor. */
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+
+  /* Deliberately larger than the viewport and elliptical, so rotation reads
+     as the field stretching and twisting rather than a circle spinning. */
+  .blobGreen {
+    width: 120vw;
+    height: 95vh;
+    left: -35%;
+    top: -25%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-secondaryLight) 0%,
+      color-mix(in srgb, var(--color-secondaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftA 15s ease-in-out infinite;
+  }
+
+  .blobYellow {
+    width: 110vw;
+    height: 125vh;
+    right: -40%;
+    top: -20%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-tertiaryLight) 0%,
+      color-mix(in srgb, var(--color-tertiaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftB 20s ease-in-out infinite;
+  }
+
+  .blobBlue {
+    /* 1.3x the other fields */
+    width: 137vw;
+    height: 130vh;
+    left: -25%;
+    bottom: -40%;
+    background: radial-gradient(
+      ellipse closest-side,
+      var(--color-primaryLight) 0%,
+      color-mix(in srgb, var(--color-primaryLight) 45%, transparent) 55%,
+      transparent 100%
+    );
+    animation: blobDriftC 25s ease-in-out infinite;
+  }
+}
+
+/* Each field zigzags across the full viewport on its own axis -- green
+   horizontally, yellow vertically, blue on the reverse diagonal -- while
+   rotating and scaling unevenly, which is what stretches and twists it.
+   Travel is in vw/vh so it is viewport-relative; transform percentages would
+   be relative to each element's own (differing) size instead.
+   15 / 20 / 29 share only small factors (15 and 20 realign every 60s, 29 is
+   prime), so the full composite takes ~29 minutes to repeat. All transform,
+   so it stays composited. */
+@keyframes blobDriftA {
+  0%,
+  100% {
+    transform: translate3d(-12vw, -6vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(38vw, 14vh, 0) rotate(30deg) scale(1.3, 0.8);
+  }
+  50% {
+    transform: translate3d(-24vw, 34vh, 0) rotate(-20deg) scale(0.82, 1.36);
+  }
+  75% {
+    transform: translate3d(34vw, -12vh, 0) rotate(16deg) scale(1.2, 1.02);
+  }
+}
+
+/* Yellow is anchored off the right edge, so reaching the left of the screen
+   needs a large negative sweep -- it zigzags vertically on the way across. */
+@keyframes blobDriftB {
+  0%,
+  100% {
+    transform: translate3d(0vw, -12vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(-44vw, 32vh, 0) rotate(-26deg) scale(0.84, 1.3);
+  }
+  50% {
+    transform: translate3d(-72vw, -18vh, 0) rotate(22deg) scale(1.34, 0.88);
+  }
+  75% {
+    transform: translate3d(-26vw, 28vh, 0) rotate(-12deg) scale(1.04, 1.18);
+  }
+}
+
+/* Blue is anchored off the left edge, so the mirror of the above: a large
+   positive sweep to carry it across to the right. */
+@keyframes blobDriftC {
+  0%,
+  100% {
+    transform: translate3d(0vw, 8vh, 0) rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: translate3d(30vw, -26vh, 0) rotate(24deg) scale(1.24, 1.08);
+  }
+  50% {
+    transform: translate3d(54vw, 20vh, 0) rotate(-28deg) scale(0.86, 1.32);
+  }
+  75% {
+    transform: translate3d(20vw, -14vh, 0) rotate(18deg) scale(1.16, 0.88);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
   }
 }
 
@@ -216,7 +359,23 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  overflow-x: hidden;
+
+  /* clip rather than hidden, so descendants can still use position: sticky --
+     overflow-x: hidden would make this a scroll container and break it. */
+  overflow-x: clip;
+
+  /* Match Figma's text rendering. macOS browsers default to subpixel
+     antialiasing, which thickens strokes and makes every weight read heavier
+     than the design; Figma rasterises with grayscale antialiasing. Without
+     this, the type looks bold even when the computed weight is correct.
+     No effect on Windows, which uses DirectWrite regardless. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Real 300/400/500 cuts exist in both variable fonts, so never let the
+     browser fake a weight -- a synthesised bold would reintroduce exactly the
+     heaviness this rule removes. */
+  font-synthesis: none;
 
   /* min-width: 320px;
   min-height: 100vh; */
@@ -240,6 +399,16 @@ body {
 .blurred-bg {
   position: relative;
 } */
+
+/* Scrolls, but shows no scrollbar -- for rows that overflow sideways and are
+   driven by dragging, arrows or a trackpad rather than by the bar itself. */
+.noScrollbar {
+  scrollbar-width: none;
+}
+
+.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 /* FOR CUSTOM SCROLLBAR STYLING */
 .custom-scrollbar::-webkit-scrollbar-track {

@@ -1,11 +1,10 @@
 import { Link } from "react-router";
 
-
 function NavigationTab({ label, linkAddress, onClick }) {
   return (
     <Link to={linkAddress}>
       <button
-        className="cursor-pointer transition ease-in duration-200  hover:bg-background-secondary/40 w-9 xl:w-[120px] h-2.5"
+        className="label w-9 xl:w-7.5 h-control rounded-sm cursor-pointer hover:bg-background-secondary/40 transition ease-in duration-200"
         onClick={onClick}
       >
         {label}

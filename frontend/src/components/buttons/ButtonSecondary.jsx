@@ -1,13 +1,13 @@
+// Fill is 40% white rather than solid: the button sits over the landing page's
+// gradient background, which is meant to show through it.
 function ButtonSecondary({ label, onClick }) {
   return (
-    <>
-      <button
-        className="w-btnW h-control p-0.5 border-1 text-baseWhite  xl:text-baseBlack border-white xl:border-baseBlack transition ease-in duration-200 hover:bg-background-secondary/40 cursor-pointer "
-        onClick={onClick}
-      >
-        {label}
-      </button>
-    </>
+    <button
+      className="label w-btnW h-control rounded-sm bg-background-white/40 text-baseBlack border-1 border-baseBlack hover:bg-background-secondary/40 transition ease-in duration-200 cursor-pointer"
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 }
 

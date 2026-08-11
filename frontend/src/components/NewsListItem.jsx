@@ -1,18 +1,17 @@
 import { formatDate } from "../utils/formatDate";
 
+// Desktop: date in a fixed column, 16px gap, title alongside.
+// Mobile: date stacked above the title.
+// The date is the heavier of the two.
 function NewsListItem({ news }) {
   return (
-    <div className="flex xl:flex-row flex-col  items-start pr-1 xl:pr-0 h-2.625 gap-1">
-      
-      <div className="flex xl:w-[105px] bodySmallBold">
-        {news["Date"] ? formatDate(news["Date"]) : "Dec 4, 2024"}
-        {/* {console.log(`received date string: ${news["Date"]},  formatted : ${formatDate(news["Date"])}`)} */}
+    <div className="flex flex-col xl:flex-row items-start gap-0.5 xl:gap-1 w-full">
+      <div className="bodySmallBold shrink-0 xl:w-6.5">
+        {news["Date"] ? formatDate(news["Date"]) : ""}
       </div>
-      <div className="flex bodySmall  xl:w-[878px] xl:mr-1 ">
-        {news["Title"] ??
-          "Siggraph Asia 2024 have started at the Tokyo International Forum! Come find me at the Experience Hall as I will be chairing the XR session."}
-      </div>
+      <div className="bodySmall grow">{news["Title"]}</div>
     </div>
   );
 }
+
 export default NewsListItem;

@@ -1,12 +1,19 @@
 import Modal from "./Modal";
 import SocialMediaHandleContainer from "../SocialMediaHandleContainer";
+import ButtonPrimary from "../buttons/ButtonPrimary";
 import check from "../../assets/icons/check.svg";
 import processing from "../../assets/icons/processing.svg";
 import { useRef, useState } from "react";
 
 const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 
-function ContactModal({ children, onClose, backgroundColor, horizontalGap }) {
+// Shared by all three fields: white fill, 1px black stroke, 4px radius, 16px
+// of horizontal padding, and a placeholder in the invalid grey. The textarea
+// overrides the height and adds vertical padding.
+const FIELD =
+  "bg-background-white w-full h-2.5 border-1 border-baseBlack rounded-sm px-1 body placeholder:text-text-invalid";
+
+function ContactModal({ onClose }) {
   // handling the form submission for the contact form inside the contact modal
   const nameReference = useRef();
   const emailReference = useRef();
@@ -41,84 +48,72 @@ function ContactModal({ children, onClose, backgroundColor, horizontalGap }) {
           messageReference.current.value = "";
         }, 1000);
       } else {
-        setStatus("Failed.");
+        setStatus("Failed");
       }
     } catch (error) {
       console.error("❌ Fetch error:", error);
       setStatus("Failed");
       // this alerts the user about an error processing the message and closes the modal
       alert("Sorry there was an error sending your message, try again later");
-      setIsModalOpenContact(false);
+      onClose();
     }
   };
   return (
     <>
-      <Modal onClose={onClose} backgroundColor="bg-background-tertiary" horizontalGap={horizontalGap}>
-        <div className=" xl:w-33 w-full my-10 px-1.5 xl:px-0 flex flex-col gap-2 xl:gap-2">
-          <div className=" xl:w-33 w-full px-1.5 xl:px-0 flex flex-col gap-2 xl:gap-2">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2 ">
-                <h1 className="heading1">Let's keep in touch!</h1>
-                <p className="body">
-                  Drop a message to say hi, or send an email to
-                  inclusiverealitylab[at]gmail.com, we will get back to you
-                  soon. <br></br> Feel free to follow our social media accounts
-                  as well.
-                </p>
-                <SocialMediaHandleContainer iconColor="blk" />
-              </div>
-              <form
-                onSubmit={handleFormSubmission}
-                className="flex flex-col items-center justify-between gap-1.5"
-              >
-                <input
-                  type="text"
-                  name="contactName"
-                  ref={nameReference}
-                  placeholder="Name"
-                  className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
-                />
-                <input
-                  type="email"
-                  name="contactEmail"
-                  ref={emailReference}
-                  placeholder="Email"
-                  className="bg-background-white w-full h-2.5 border-1 border-black px-1 body"
-                />
-                <textarea
-                  type="text"
-                  name="message"
-                  ref={messageReference}
-                  placeholder="Message"
-                  className="bg-background-white w-full h-10 border-1 border-black px-1 py-0.5 body"
-                />
-                <button
-                  className={`label text-white text-center  ${
-                    status == "Sent"
-                      ? "bg-background-secondary py-[4px] px-3.5"
-                      : "bg-background-black py-[4px] "
-                  } bg-background-black w-full h-2.5 hover:text-secondary`}
-                  type="submit"
-                >
-                  {status === "Sending" ? (
-                    <span className="flex items-center justify-center">
-                      <img
-                        src={processing}
-                        alt="processing"
-                        className="w-2 h-2"
-                      />
-                    </span>
-                  ) : status === "Sent" ? (
-                    <span className="flex items-center justify-center">
-                      <img src={check} alt="checkmark" className="w-2 h-2" />
-                    </span>
-                  ) : (
-                    "Send"
-                  )}
-                </button>
-              </form>
+      <Modal onClose={onClose} backgroundColor="bg-background-secondaryLight">
+        {/* One column at a single 32px rhythm, so the title, copy, social row
+            and form are all spaced alike. */}
+        <div className="xl:w-33 w-full my-10 px-1.5 xl:px-0 flex flex-col gap-2">
+          <h2 className="heading2">Let’s keep in touch!</h2>
+          <p className="body">
+            Drop a message to say hi, or send an email to
+            inclusiverealitylab[at]gmail.com, we will get back to you soon.{" "}
+            <br></br> Feel free to follow our social media accounts as well.
+          </p>
+          <SocialMediaHandleContainer />
+          <form onSubmit={handleFormSubmission} className="flex flex-col gap-2">
+            {/* the fields stay grouped at the design's 24px; the 32px falls
+                between the group and the button */}
+            <div className="flex flex-col gap-1.5">
+              <input
+                type="text"
+                name="contactName"
+                ref={nameReference}
+                placeholder="Name"
+                className={FIELD}
+              />
+              <input
+                type="email"
+                name="contactEmail"
+                ref={emailReference}
+                placeholder="Email"
+                className={FIELD}
+              />
+              <textarea
+                name="message"
+                ref={messageReference}
+                placeholder="Message"
+                className={`${FIELD} h-10 py-0.5`}
+              />
             </div>
-          </div>
+            {/* The fill stays black in every state; only the content swaps.
+                Processing spins at 40, the checkmark sits at 32. */}
+            <ButtonPrimary
+              type="submit"
+              label="Send"
+              className="w-full flex items-center justify-center"
+            >
+              {status === "Sending" ? (
+                <img
+                  src={processing}
+                  alt="Sending"
+                  className="w-control h-control"
+                />
+              ) : status === "Sent" ? (
+                <img src={check} alt="Sent" className="w-2 h-2" />
+              ) : null}
+            </ButtonPrimary>
+          </form>
         </div>
       </Modal>
     </>

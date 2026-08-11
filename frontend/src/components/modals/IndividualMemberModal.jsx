@@ -1,69 +1,36 @@
-import closeBlack from "../../assets/icons/closeBlack.svg";
-import ReactDOM from "react-dom";
-import { useState } from "react";
 import Modal from "./Modal";
 import formatLink from "../../utils/formatLink";
 import ProfilePhotoContainer from "../ProfilePhotoContainer";
-import email_blk from "../../assets/icons/email_blk.svg";
-import scholar from "../../assets/icons/scholar_blk.svg";
-import linkedin_blk from "../../assets/icons/linkedin_blk.svg";
-import facebook_blk from "../../assets/icons/fb_blk.svg";
-import x_blk from "../../assets/icons/x_blk.svg";
+import email from "../../assets/icons/email.svg";
+import scholar from "../../assets/icons/google scholar.svg";
+import linkedin from "../../assets/icons/linkedin.svg";
+import facebook from "../../assets/icons/fb.svg";
+import x from "../../assets/icons/x.svg";
+import linkIcon from "../../assets/icons/link.svg";
 
+// Same icon set and 32px sizing as the footer's social row.
 const connectionPlatforms = [
-  { name: "Email", key: "Email", icon: email_blk },
+  { name: "Email", key: "Email", icon: email },
   { name: "Google Scholar", key: "Google Scholar", icon: scholar },
-  { name: "Linkedin", key: "Linkedin", icon: linkedin_blk },
-  { name: "Facebook", key: "Facebook", icon: facebook_blk },
-  { name: "X", key: "X", icon: x_blk },
+  { name: "Linkedin", key: "Linkedin", icon: linkedin },
+  { name: "Facebook", key: "Facebook", icon: facebook },
+  { name: "X", key: "X", icon: x },
 ];
 
 const hasContactInfo = (person) => {
   return connectionPlatforms.some((platform) => Boolean(person[platform.key]));
 };
 
-function IndividualMemberModal({
-  person,
-  onClose,
-  backgroundColor,
-  horizontalGap,
-}) {
-  const [message, setMessage] = useState("");
-
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-
-    const mailtoLink = `mailto:${person["Email"]}`;
-    const newWindow = window.open(
-      `https://mail.google.com/mail/?view=cm&to=${person["Email"]}`
-    );
-
-    // If a mail client isn't configured, window.open() may return null or quickly close.
-    setTimeout(() => {
-      if (
-        !newWindow ||
-        newWindow.closed ||
-        typeof newWindow.closed === "undefined"
-      ) {
-        // Fallback: copy email to clipboard and notify the user
-        navigator.clipboard.writeText(email);
-        setMessage("No mail client detected. Email copied to clipboard!");
-      }
-    }, 500);
-  };
+function IndividualMemberModal({ person, onClose }) {
   return (
     <>
       {person && (
-        <Modal
-          onClose={onClose}
-          backgroundColor="bg-background-white"
-          horizontalGap="[0px]"
-        >
-          <div className="xl:w-modal  my-10 xl:px-0 px-1.5 w-full  flex flex-col gap-[64px] ">
-            <div className="w-full flex flex-col xl:gap-[40px] gap-[32px] items-center ">
+        <Modal onClose={onClose} backgroundColor="bg-background-white">
+          <div className="w-full xl:max-w-narrowBox mx-auto my-10 px-1.5 flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-2 xl:gap-2.5 items-center">
               <ProfilePhotoContainer person={person} />
               <div className="flex flex-col max-w-[640px] gap-1 items-center justify-center">
-                <p className="heading2 text-center">{`${person["Given Name"]} ${person["Family Name"]}`}</p>
+                <p className="heading3 text-center">{`${person["Given Name"]} ${person["Family Name"]}`}</p>
                 <p className="bodyBig text-center">
                   {person["Affiliation"]
                     ? person["Affiliation"]
@@ -73,29 +40,35 @@ function IndividualMemberModal({
             </div>
             {/* Optional about me section */}
             {person["Bio"] && (
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 <p className="heading4">About me</p>
                 <p className="body">{person["Bio"]}</p>
               </div>
             )}
             {/* Optional areas of expertise section */}
             {person["Expertise"] && (
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 <p className="heading4">Areas of expertise</p>
                 <p className="body">{person["Expertise"]}</p>
               </div>
             )}
             {/* Optional website section */}
             {person["Website"] && (
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 <p className="heading4">Website</p>
-                <p className="body">
-                  <a href={formatLink(person["Website"])} target="_blank">{formatLink(person["Website"])}</a>
-                </p>
+                <a
+                  href={formatLink(person["Website"])}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="body flex flex-row items-center gap-0.25 w-fit cursor-pointer"
+                >
+                  <img src={linkIcon} alt="" className="w-1.5 h-1.5 shrink-0" />
+                  {formatLink(person["Website"])}
+                </a>
               </div>
             )}
             {/* Optional contact section */}
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
               {hasContactInfo(person) && (
                 <>
                   <p className="heading4">Contact me</p>
@@ -108,10 +81,13 @@ function IndividualMemberModal({
                             href={`mailto:${person[platform.key]}`}
                             key={platform.key}
                             target="_blank"
-                            
+                            rel="noopener noreferrer"
                           >
-                            <img src={platform.icon} width={32} height={32} />
-                            
+                            <img
+                              src={platform.icon}
+                              alt={`${platform.name} icon`}
+                              className="w-2 h-2"
+                            />
                           </a>
                         );
                       } else if (person[platform.key]) {
@@ -120,8 +96,13 @@ function IndividualMemberModal({
                             href={formatLink(person[platform.key])}
                             key={platform.key}
                             target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            <img src={platform.icon} width={32} height={32} />
+                            <img
+                              src={platform.icon}
+                              alt={`${platform.name} icon`}
+                              className="w-2 h-2"
+                            />
                           </a>
                         );
                       }

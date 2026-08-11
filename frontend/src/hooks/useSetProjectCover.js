@@ -10,14 +10,16 @@ function useSetProjectCover(project) {
           img.src = `${import.meta.env.BASE_URL}images/works/${project["Cover"]}`;
           img.onload = () => setBgImage(img.src);
           img.onerror = () => setBgImage(projectImagePlaceholder);
-          console.log("Loaded project cover image:", img.onerror);
         } else {
           setBgImage(projectImagePlaceholder);
         }
       }, [project["Cover"]]);
-    
+
+      // The permanent 25% dark wash is gone: covers now sit under black text
+      // on the card, and the only dimming in the design is ProjectCard's
+      // hover state, which owns its own overlay.
       const projectCoverStyle = {
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${bgImage})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       };

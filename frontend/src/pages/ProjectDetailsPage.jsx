@@ -1,142 +1,169 @@
-import { use } from "react";
-import useSetProjectCover from "../hooks/useSetProjectCover";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
-import { formatDate } from "../utils/formatDate";
-import extractYear from "../utils/extractYear";
-import LabelContainer from "../components/ProjectLabelsContainer";
-import ProjectLabelsContainer from "../components/ProjectLabelsContainer";
-import InfoLabel from "../components/labels/InfoLabel";
-import extractSourceFromEmbedVideo from "../utils/extractSourceFromEmbedVideo";
-import extractData from "../utils/extractData";
-import PublicationListItem from "../components/PublicationListItem";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+
+import useSetProjectCover from "../hooks/useSetProjectCover";
+import ProjectLabelsContainer from "../components/ProjectLabelsContainer";
 import PublicationsContainer from "../components/PublicationsContainer";
-import LoadingSpinnner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
+import extractYear from "../utils/extractYear";
+import extractData from "../utils/extractData";
+import extractSourceFromEmbedVideo from "../utils/extractSourceFromEmbedVideo";
 
 function ProjectDetailsPage() {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const { id } = useParams();
   const location = useLocation();
-  const { state } = location;
-  const { project } = state;
-  const [projectBackgroundStyle] = useSetProjectCover(project);
 
-  const videoSrc = extractSourceFromEmbedVideo(project["Embed Video"]);
+  // Arriving from a card carries the project in router state. A refresh or a
+  // shared link does not, so fall back to fetching it by the :id in the URL --
+  // without this the page threw on any direct visit.
+  const [project, setProject] = useState(location.state?.project ?? null);
+  const [isLoadingProject, setIsLoadingProject] = useState(
+    !location.state?.project
+  );
+  const [notFound, setNotFound] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [relatedPublication, setRelatedPublication] = useState([]);
+  const [relatedPublications, setRelatedPublications] = useState([]);
+  const [isLoadingPublications, setIsLoadingPublications] = useState(false);
 
   useEffect(() => {
-    // const titleToGet = project["Publication Title"]; // FOR SINGLE RELATED PUBLICATION
-    const titlesToGet = project["Publication ID"]; // FOR MULTIPLE PUBLICATIONS
-    console.log("Fetching related publication for title:", titlesToGet);
-    if (!titlesToGet) {
-      return;
-    }
+    if (project) return;
 
-    if (titlesToGet.length == 0) {
-      return;
+    async function loadProject() {
+      try {
+        // No by-id endpoint exists, but both lists together are ~10KB.
+        const [current, past] = await Promise.all([
+          axios.get(API_BASE_URL, {
+            params: { entity: "projects", resource: "current" },
+          }),
+          axios.get(API_BASE_URL, {
+            params: { entity: "projects", resource: "past" },
+          }),
+        ]);
+        const all = [...extractData(current.data), ...extractData(past.data)];
+        const match = all.find((p) => String(p.ID) === String(id));
+        if (match) setProject(match);
+        else setNotFound(true);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+        setNotFound(true);
+      } finally {
+        setIsLoadingProject(false);
+      }
     }
+    loadProject();
+  }, [id, project, API_BASE_URL]);
+
+  useEffect(() => {
+    const publicationIds = project?.["Publication ID"];
+    if (!publicationIds || publicationIds.length === 0) return;
+
     async function loadRelatedPublications() {
+      setIsLoadingPublications(true);
       try {
         const res = await axios.get(API_BASE_URL, {
           params: {
             entity: "publications",
-            // resource: "publicationByTitle", // for single
-            resource: "multiplePublicationsID", // for multiple
-            // publicationTitle: titleToGet, // for single
-            pubList: titlesToGet, // for multiple
+            resource: "multiplePublicationsID",
+            pubList: publicationIds,
           },
         });
-        setRelatedPublication(res.data.result);
-        console.log("Related publication data:", res);
+        setRelatedPublications(extractData(res.data));
       } catch (error) {
-        console.error("Error fetching related publication:", error);
-        setRelatedPublication("");
+        console.error("Error fetching related publications:", error);
+        setRelatedPublications([]);
       } finally {
-        setIsLoading(false);
+        setIsLoadingPublications(false);
       }
     }
     loadRelatedPublications();
-  }, []);
+  }, [project, API_BASE_URL]);
+
+  const [projectCoverStyle] = useSetProjectCover(project ?? {});
+
+  if (isLoadingProject) {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (notFound || !project) {
+    return (
+      <div className="pageShell items-start mx-auto xl:max-w-narrowBox min-h-screen">
+        <h1 className="heading2">Project not found</h1>
+        <p className="body">
+          This project may have been removed, or the link may be incorrect.
+        </p>
+      </div>
+    );
+  }
+
+  const videoSrc = extractSourceFromEmbedVideo(project["Embed Video"]);
+  const members = project["Member Name"];
+  const memberNames = Array.isArray(members) ? members.join(", ") : members;
 
   return (
-    <>
-      {project && (
-        <div className="mt-4 w-screen bg-background-white ">
-          <div className="pageShell mx-auto">
-            {project["Cover"] && (<div
-              className={`xl:w-screen w-screen xl:h-50 h-hero z-15 self-center object-cover`}
-              style={projectBackgroundStyle}
-
-            ></div>)}
-            
-            {/* {project details header} */}
-            <div className="flex flex-col gap-1 w-full ">
-              {/* Labels sit above the title on mobile and below it on desktop.
-                  Rendered once and reordered rather than rendered twice. */}
-              <div className="flex xl:order-last">
-                <ProjectLabelsContainer
-                  researchThemes={project["Research Theme"]}
-                />
-              </div>
-
-              <p className="body w-full hidden xl:flex">
-                {extractYear(project["Start Date"])} -{" "}
-                <span>
-                  {" "}
-                  {project["End Date"]
-                    ? extractYear(project["End Date"])
-                    : "Present"}
-                </span>{" "}
-              </p>
-              <p className="heading1">{project["Project Name"]}</p>
-            </div>
-            {/* authors section */}
-            <div className="flex xl:flex-col flex-col gap-1 ">
-              <p className="heading4">People</p>
-              <p className="body">{project["Member Name"].join(", ")}</p>
-            </div>
-            {/* intro section */}
-            <div className="flex xl:flex-col flex-col gap-1 ">
-              <p className="heading4">About this project</p>
-              <p className="body">{project["Intro"]}</p>
-            </div>
-            {/* video section */}
-            {videoSrc && (
-              <div className="w-full xl:h-[580.5px] sm:h-[184px] border-2 flex">
-                <iframe
-                  width="100%"
-                  height="auto"
-                  src={videoSrc}
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            )}
-
-            {/* related publications section */}
-            <div className="flex xl:flex-col flex-col gap-1 ">
-              <p className="heading4">Publications</p>
-              {/* <PublicationListItem publication={} /> */}
-              {/* {relatedPublication && (
-                <PublicationListItem publication={relatedPublication} />
-              )} */}
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                    <LoadingSpinnner/>
-                </div>
-              
-              ) : (
-                <PublicationsContainer publications={relatedPublication} />
-              )}
-            </div>
-          </div>
+    <div className="w-screen">
+      {/* cover sits in the content column at 9:5, below the fixed navbar */}
+      {project["Cover"] && (
+        <div className="w-full xl:max-w-contentBox mx-auto px-1.5 pt-4.5 xl:pt-6">
+          <div className="w-full aspect-[9/5]" style={projectCoverStyle} />
         </div>
       )}
-    </>
+
+      <div className="pageShell items-start mx-auto xl:max-w-narrowBox">
+        <div className="flex flex-col gap-1.5 w-full">
+          <p className="body">
+            {extractYear(project["Start Date"])} -{" "}
+            {project["End Date"] ? extractYear(project["End Date"]) : "Present"}
+          </p>
+          <h1 className="heading2">{project["Project Name"]}</h1>
+          <ProjectLabelsContainer
+            researchThemes={project["Research Theme"]}
+          />
+        </div>
+
+        {memberNames && (
+          <section className="flex flex-col gap-1.5 w-full">
+            <h2 className="heading4">People</h2>
+            <p className="body">{memberNames}</p>
+          </section>
+        )}
+
+        {project["Intro"] && (
+          <section className="flex flex-col gap-1.5 w-full">
+            <h2 className="heading4">About this project</h2>
+            <p className="body whitespace-pre-line">{project["Intro"]}</p>
+          </section>
+        )}
+
+        {videoSrc && (
+          <section className="w-full aspect-video">
+            <iframe
+              className="w-full h-full"
+              src={videoSrc}
+              title={`${project["Project Name"]} video`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </section>
+        )}
+
+        {(isLoadingPublications || relatedPublications.length > 0) && (
+          <section className="flex flex-col gap-1.5 w-full">
+            <h2 className="heading4">Publications</h2>
+            <PublicationsContainer
+              publications={relatedPublications}
+              isLoading={isLoadingPublications}
+            />
+          </section>
+        )}
+      </div>
+    </div>
   );
 }
 
