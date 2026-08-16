@@ -29,7 +29,7 @@ function ProjectCard({ project, className = "" }) {
 
   return (
     <div
-      className={`${className} group flex flex-col rounded-lg border-1 border-baseBlack bg-background-white overflow-hidden cursor-pointer`}
+      className={`${className} group flex flex-col rounded-lg border-1 border-element-black bg-element-white overflow-hidden cursor-pointer`}
       onClick={handleCardClick}
     >
       {/* cover; hover lays a flat 20% black over it and nothing else */}
@@ -37,7 +37,7 @@ function ProjectCard({ project, className = "" }) {
         className="relative w-full aspect-[63/40] shrink-0"
         style={projectCoverStyle}
       >
-        <div className="absolute inset-0 bg-baseBlack/0 group-hover:bg-baseBlack/20 transition ease-in duration-200" />
+        <div className="absolute inset-0 bg-element-black/0 group-hover:bg-element-black/20 transition ease-in duration-200" />
       </div>
 
       {/* white panel */}

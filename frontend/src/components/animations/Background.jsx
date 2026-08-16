@@ -11,11 +11,17 @@ function Background() {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 -z-10 pointer-events-none bg-background-white"
+      className="fixed inset-0 -z-10 pointer-events-none bg-background-primary"
     >
       <span className="blob blobGreen" />
       <span className="blob blobYellow" />
       <span className="blob blobBlue" />
+
+      {/* The design veils the fields with a 50% white layer, which is what
+          gives them their haze -- without it the tints read far too strong.
+          It sits last so it covers all three, and inside this container so it
+          stays behind the page content. */}
+      <span className="absolute inset-0 bg-element-white/50" />
     </div>
   );
 }

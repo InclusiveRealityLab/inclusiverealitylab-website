@@ -135,7 +135,7 @@ function LandingPage() {
               compensating for. In flow, whatever follows simply starts beneath
               it. See heroPull/heroPullLg for where the offsets come from. */}
           <div className="relative -mt-heroPull xl:-mt-heroPullLg w-full xl:max-w-contentBox mx-auto px-1.5 z-20">
-            <div className="w-full max-w-32.5 mx-auto xl:mx-0 flex flex-col gap-1.5 bg-background-white border-1 border-baseBlack rounded-lg px-2.5 py-3 xl:px-3.5 xl:py-4">
+            <div className="w-full max-w-32.5 mx-auto xl:mx-0 flex flex-col gap-1.5 bg-element-white border-1 border-element-black rounded-lg px-2.5 py-3 xl:px-3.5 xl:py-4">
               <div className="body">Hi, welcome to Inclusive Reality Lab 👋</div>
               <div className="heading3">
                 We envision a seamless world where the physical and virtual blur
@@ -209,7 +209,7 @@ function LandingPage() {
           {/* News. A bordered 800px panel centred in the column, holding a
               fixed-height scrolling list. */}
           <section className="w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
-            <div className="flex flex-col gap-1.5 w-full xl:max-w-50 mx-auto border-1 border-baseBlack rounded-lg px-1 xl:px-2.5 py-3">
+            <div className="flex flex-col gap-1.5 w-full xl:max-w-50 mx-auto border-1 border-element-black rounded-lg px-1 xl:px-2.5 py-3">
               <h2 className="heading4 text-center">Lab News</h2>
               <div className="custom-scrollbar flex flex-col gap-1.5 p-1 h-20 xl:h-12.5 overflow-y-auto">
                 {isNewsLoading ? (

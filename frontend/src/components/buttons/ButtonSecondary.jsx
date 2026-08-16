@@ -3,7 +3,7 @@
 function ButtonSecondary({ label, onClick }) {
   return (
     <button
-      className="label w-btnW h-control rounded-sm bg-background-white/40 text-baseBlack border-1 border-baseBlack hover:bg-background-secondary/40 transition ease-in duration-200 cursor-pointer"
+      className="label w-btnW h-control rounded-sm bg-element-white/40 text-text-primary border-1 border-element-black hover:bg-element-secondaryLight/40 transition ease-in duration-200 cursor-pointer"
       onClick={onClick}
     >
       {label}

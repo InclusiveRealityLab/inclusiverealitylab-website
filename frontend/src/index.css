@@ -2,60 +2,83 @@
 @import "tailwindcss";
 
 @theme {
-  /* BASE COLORS */
-  --color-baseBlack: #000000;
+  /* BASE COLORS
+     Base/black is a near-black, not #000. */
+  --color-baseBlack: #191a1a;
   --color-baseWhite: #ffffff;
-  --color-baseGrey: #b3b3b3;
-  --color-baseDarkGrey: #737373;
-  --color-baseLightGrey: #efefef;
+  --color-baseGrey: #b0b5b3;
+  --color-baseDarkGrey: #636966;
+  --color-baseLightGrey: #edeeed;
 
   /* BRAND COLORS
-     Values come from the Figma variables (Brand/*). The "light" tints back the
-     research-theme chips: primary=Understand, secondary=Assist, tertiary=Augment. */
-  --color-primary: #0087bd;
-  --color-secondary: #7cfe7c;
-  --color-tertiary: #f3ff69;
+     Values come from the Figma variables (Brand/*). Each family runs
+     dark / base / light / extra light. The light tints fill the research-theme
+     chips: primary=Understand, secondary=Assist, tertiary=Augment. */
+  --color-primary: #258cf4;
+  --color-secondary: #3ce197;
+  --color-tertiary: #e7eb33;
 
-  --color-primaryLight: #b3dbeb;
-  --color-secondaryLight: #bbffbd;
-  --color-tertiaryLight: #f9ffb4;
+  --color-primaryDark: #0a437b;
+  --color-secondaryDark: #0b472c;
+  --color-tertiaryDark: #4a4b07;
 
-  --color-secondaryExtraLight: #f1fff2;
-  --color-secondaryDark: #275428;
+  --color-primaryLight: #85c3ff;
+  --color-secondaryLight: #95eec6;
+  --color-tertiaryLight: #f2f58f;
+
+  --color-primaryExtraLight: #dbedff;
+  --color-secondaryExtraLight: #e0faee;
+  --color-tertiaryExtraLight: #fbfcdf;
 
   /* SEMANTIC */
-  --color-error: #ff276f;
+  --color-error: #ec4b4b;
 
   --color-text-primary: var(--color-baseBlack);
+  --color-text-white: var(--color-baseWhite);
   --color-text-secondary: var(--color-baseDarkGrey);
   --color-text-invalid: var(--color-baseGrey);
-  --color-text-active: var(--color-secondary);
+  --color-text-error: var(--color-error);
 
-  --color-background-primary: var(--color-primary);
-  --color-background-secondary: var(--color-secondary);
-  --color-background-tertiary: var(--color-tertiary);
-
-  --color-background-white: var(--color-baseWhite);
+  /* COLOR TOKENS */
+  /* The page itself, plus any modal that sits on it. This used to alias the
+     brand blue, so background-* named two different things -- the surface a
+     page sits on, and a brand colour used as a fill. A brand colour used as a
+     surface is now background-brand-*; anything drawn on top of a surface is
+     element-*. */
+  --color-background-primary: var(--color-baseWhite);
   --color-background-black: var(--color-baseBlack);
   --color-background-invalid: var(--color-baseLightGrey);
+  /* Brand colours as a surface, which is what the extra-light tints are for.
+     There is deliberately no background-brand-*Light/Dark: those are stronger
+     than a large area wants, so they live in the element namespace below. */
+  --color-background-brand-primary: var(--color-primaryExtraLight);
+  --color-background-brand-secondary: var(--color-secondaryExtraLight);
+  --color-background-brand-tertiary: var(--color-tertiaryExtraLight);
 
   --color-element-black: var(--color-baseBlack);
   --color-element-white: var(--color-baseWhite);
   --color-element-grey: var(--color-baseGrey);
   --color-element-greyDark: var(--color-baseDarkGrey);
   --color-element-greyLight: var(--color-baseLightGrey);
+
   --color-element-primary: var(--color-primary);
   --color-element-secondary: var(--color-secondary);
   --color-element-tertiary: var(--color-tertiary);
 
-  --color-background-primaryLight: var(--color-primaryLight);
-  --color-background-secondaryLight: var(--color-secondaryLight);
-  --color-background-tertiaryLight: var(--color-tertiaryLight);
+  --color-element-primaryLight: var(--color-primaryLight);
+  --color-element-secondaryLight: var(--color-secondaryLight);
+  --color-element-tertiaryLight: var(--color-tertiaryLight);
+
+  --color-element-primaryDark: var(--color-primaryDark);
+  --color-element-secondaryDark: var(--color-secondaryDark);
+  --color-element-tertiaryDark: var(--color-tertiaryDark);
+  /* and no element-*ExtraLight -- an extra-light tint is a background. */
+
 
   /* TYPOGRAPHY
      Three weights, matching the Figma text styles:
-     Light 300 (body*), Regular 400 (heading 2/3, caption), Medium 500
-     (heading 4, label, *bold). */
+     Light 300 (body*), Regular 400 (all headings, titles, caption), Medium 500
+     (label, *bold). */
   --font-title: "Lexend Giga", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-weight-light: 300;
@@ -69,7 +92,7 @@
      for "desktop" and leave lg: alone to avoid two names for one width. */
   --breakpoint-xl: 1024px;
 
-  /* SPACING */
+  /* SPACING TOKENS */
   --spacing: 16px;
 
   /* LAYOUT
@@ -106,11 +129,14 @@
 
 @layer components {
 
-  /* HEADINGS and TITLES */
+  /* HEADINGS and TITLES
+     Every Lexend Giga style is tracked -0.02em per the Figma variables; the
+     Inter styles below keep their 0.04em. */
   .bigTitle {
     font-family: var(--font-title);
-    font-size: 4rem;
+    font-size: 3rem; /* 48px */
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-regular);
   }
 
@@ -118,6 +144,7 @@
     font-family: var(--font-title);
     font-size: 2.5rem;
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-regular);
   }
 
@@ -125,6 +152,7 @@
     font-family: var(--font-title);
     font-size: 2.125rem; /* 34px */
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-regular);
   }
 
@@ -132,6 +160,7 @@
     font-family: var(--font-title);
     font-size: 1.75rem; /* 28px */
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-regular);
   }
 
@@ -139,6 +168,7 @@
     font-family: var(--font-title);
     font-size: 1.375rem; /* 22px */
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-regular);
   }
 
@@ -146,7 +176,8 @@
     font-family: var(--font-title);
     font-size: 1rem;
     line-height: 1.5;
-    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.02em;
+    font-weight: var(--font-weight-regular);
   }
 
  
@@ -155,6 +186,7 @@
     font-family: var(--font-title);
     font-size: 0.75rem;
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-medium);
   }
 
@@ -162,6 +194,7 @@
     font-family: var(--font-title);
     font-size: 0.75rem;
     line-height: 1.5;
+    letter-spacing: -0.02em;
     font-weight: var(--font-weight-medium);
   }
 
@@ -252,8 +285,8 @@
     top: -25%;
     background: radial-gradient(
       ellipse closest-side,
-      var(--color-secondaryLight) 0%,
-      color-mix(in srgb, var(--color-secondaryLight) 45%, transparent) 55%,
+      var(--color-element-secondaryLight) 0%,
+      color-mix(in srgb, var(--color-element-secondaryLight) 45%, transparent) 55%,
       transparent 100%
     );
     animation: blobDriftA 15s ease-in-out infinite;
@@ -266,8 +299,8 @@
     top: -20%;
     background: radial-gradient(
       ellipse closest-side,
-      var(--color-tertiaryLight) 0%,
-      color-mix(in srgb, var(--color-tertiaryLight) 45%, transparent) 55%,
+      var(--color-element-tertiaryLight) 0%,
+      color-mix(in srgb, var(--color-element-tertiaryLight) 45%, transparent) 55%,
       transparent 100%
     );
     animation: blobDriftB 20s ease-in-out infinite;
@@ -281,8 +314,8 @@
     bottom: -40%;
     background: radial-gradient(
       ellipse closest-side,
-      var(--color-primaryLight) 0%,
-      color-mix(in srgb, var(--color-primaryLight) 45%, transparent) 55%,
+      var(--color-element-primaryLight) 0%,
+      color-mix(in srgb, var(--color-element-primaryLight) 45%, transparent) 55%,
       transparent 100%
     );
     animation: blobDriftC 25s ease-in-out infinite;
@@ -360,6 +393,13 @@ body {
   display: flex;
   place-items: center;
 
+  /* The page's default ink and surface. Without these, text fell back to the
+     browser's pure black rather than Base/black, so a change to the palette
+     never reached the copy it was meant to. Everything that does not set its
+     own colour now inherits from here. */
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+
   /* clip rather than hidden, so descendants can still use position: sticky --
      overflow-x: hidden would make this a scroll container and break it. */
   overflow-x: clip;
@@ -380,25 +420,6 @@ body {
   /* min-width: 320px;
   min-height: 100vh; */
 }
-
-/* Add this to your CSS file or in a <style> tag */
-/* .blurred-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/background/background_desktop.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: blur(64px); 
-  z-index: -1;
-}
-
-.blurred-bg {
-  position: relative;
-} */
 
 /* Scrolls, but shows no scrollbar -- for rows that overflow sideways and are
    driven by dragging, arrows or a trackpad rather than by the bar itself. */
@@ -421,7 +442,7 @@ body {
 } 
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--color-baseBlack) 20%, transparent);
+  background: color-mix(in srgb, var(--color-element-black) 20%, transparent);
   height:49px;
   border-radius: 7px;
   width:4px;

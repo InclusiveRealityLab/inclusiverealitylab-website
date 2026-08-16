@@ -1,8 +1,6 @@
-// Research-theme chips. The design fills each chip with its solid brand colour
-// at 40% -- not the Brand/*-light tokens, which are separate named colours in
-// the same family and read slightly differently.
+// Research-theme chips, filled with their brand light tint at full opacity.
 export const infoTagStyles = {
-  understand: "bg-background-primary/40",
-  assist: "bg-background-secondary/40",
-  augment: "bg-background-tertiary/40",
+  understand: "bg-element-primaryLight",
+  assist: "bg-element-secondaryLight",
+  augment: "bg-element-tertiaryLight",
 };

@@ -14,9 +14,9 @@ function SectionTab({ label, selected, onClick }) {
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`caption shrink-0 min-w-5.5 h-2 px-0.5 rounded-sm border-1 cursor-pointer transition ease-in duration-200 hover:bg-background-secondary/40 ${
+      className={`caption shrink-0 min-w-5.5 h-2 px-0.5 rounded-sm border-1 cursor-pointer transition ease-in duration-200 hover:bg-element-secondaryLight/40 ${
         selected
-          ? "bg-background-secondary/40 border-baseBlack"
+          ? "bg-element-secondaryLight/40 border-element-black"
           : "bg-transparent border-transparent"
       }`}
     >

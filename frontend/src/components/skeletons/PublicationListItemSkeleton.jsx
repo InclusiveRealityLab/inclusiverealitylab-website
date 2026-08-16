@@ -6,7 +6,7 @@ import Skeleton from "./Skeleton";
 function PublicationListItemSkeleton() {
   return (
     <div
-      className="flex flex-col xl:flex-row-reverse w-full max-w-25 xl:max-w-content rounded-lg border-1 border-baseBlack bg-background-white overflow-hidden"
+      className="flex flex-col xl:flex-row-reverse w-full max-w-25 xl:max-w-content rounded-lg border-1 border-element-black bg-element-white overflow-hidden"
       aria-hidden="true"
     >
       <Skeleton className="w-full aspect-[5/3] xl:aspect-auto xl:w-16 xl:h-10 shrink-0" />
