@@ -55,9 +55,9 @@ function Navbar() {
   let isGradientUnderlayAdded = false;
 
   if (isOpen) {
-    bgClass = "bg-background-white";
+    bgClass = "bg-background-primary";
   } else if (isScrolledBeyondVisual) {
-    bgClass = "bg-white bg-transparent";
+    bgClass = "bg-element-white";
   } else {
     bgClass = "bg-transparent";
     isGradientUnderlayAdded = true;
@@ -83,10 +83,10 @@ function Navbar() {
       >
         {" "}
         {isGradientUnderlayAdded && (
-          <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-white/25 to-white/0 flex flex-row items-center justify-between px-2 -z-10"></div>
+          <div className="fixed top-[-50px]  w-full h-[200px] bg-gradient-to-b from-background-primary/25 to-background-primary/0 flex flex-row items-center justify-between px-2 -z-10"></div>
         )}
         <nav
-          className={`label flex flex-col xl:flex-row justify-between text-baseBlack xl:max-w-contentBox w-full mx-auto px-1.5 xl:py-0.25 `}
+          className={`label flex flex-col xl:flex-row justify-between text-text-primary xl:max-w-contentBox w-full mx-auto px-1.5 xl:py-0.25 `}
         >
           {/* Above the menu: when open, the menu spans the whole viewport and
               is pulled up over this row, so its white fill would otherwise
@@ -122,7 +122,7 @@ function Navbar() {
               viewport height pulled back up over the header. Desktop is a row
               in the bar itself and opts out of both. */}
           <ul
-            className={`bg-background-white xl:bg-transparent text-baseBlack
+            className={`bg-background-primary xl:bg-transparent text-text-primary
           flex flex-col flex-1 h-screen -mt-4.5 xl:h-auto xl:mt-0 xl:justify-end justify-center items-center xl:gap-1 gap-1.5 xl:py-1.5 py-4 xl:flex-row ${
             isOpen ? "block" : "hidden"
           } xl:flex `}

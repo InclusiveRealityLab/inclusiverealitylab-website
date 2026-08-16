@@ -7,7 +7,7 @@ function InfoLabel({ label }) {
 
   return (
     <div
-      className={`caption flex items-center justify-center w-6.5 h-1.5 rounded-sm border-1 border-baseBlack text-baseBlack ${tone}`}
+      className={`caption flex items-center justify-center w-6.5 h-1.5 rounded-sm border-1 border-element-black text-text-primary ${tone}`}
     >
       {label}
     </div>

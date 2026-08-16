@@ -8,10 +8,10 @@ function PublicationListItem({ publication }) {
   const cover = publication["Cover"];
 
   const linkClass =
-    "label w-6.5 h-2.5 rounded-sm border-1 border-baseBlack flex items-center justify-center transition ease-in duration-200 hover:bg-background-secondary/40";
+    "label w-6.5 h-2.5 rounded-sm border-1 border-element-black flex items-center justify-center transition ease-in duration-200 hover:bg-element-secondaryLight/40";
 
   return (
-    <div className="flex flex-col xl:flex-row-reverse w-full max-w-25 xl:max-w-content rounded-lg border-1 border-baseBlack bg-background-white overflow-hidden">
+    <div className="flex flex-col xl:flex-row-reverse w-full max-w-25 xl:max-w-content rounded-lg border-1 border-element-black bg-element-white overflow-hidden">
       {cover && (
         <img
           src={`${import.meta.env.BASE_URL}images/works/${cover}`}

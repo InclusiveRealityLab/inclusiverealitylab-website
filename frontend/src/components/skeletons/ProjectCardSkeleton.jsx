@@ -5,7 +5,7 @@ import Skeleton from "./Skeleton";
 function ProjectCardSkeleton({ className = "" }) {
   return (
     <div
-      className={`${className} flex flex-col rounded-lg border-1 border-baseBlack bg-background-white overflow-hidden`}
+      className={`${className} flex flex-col rounded-lg border-1 border-element-black bg-element-white overflow-hidden`}
       aria-hidden="true"
     >
       <Skeleton className="w-full aspect-[63/40] shrink-0" />

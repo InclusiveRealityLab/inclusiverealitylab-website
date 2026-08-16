@@ -11,7 +11,7 @@ const POST_API = import.meta.env.VITE_API_POST_BASE_URL;
 // of horizontal padding, and a placeholder in the invalid grey. The textarea
 // overrides the height and adds vertical padding.
 const FIELD =
-  "bg-background-white w-full h-2.5 border-1 border-baseBlack rounded-sm px-1 body placeholder:text-text-invalid";
+  "bg-element-white w-full h-2.5 border-1 border-element-black rounded-sm px-1 body placeholder:text-text-invalid";
 
 function ContactModal({ onClose }) {
   // handling the form submission for the contact form inside the contact modal
@@ -60,7 +60,7 @@ function ContactModal({ onClose }) {
   };
   return (
     <>
-      <Modal onClose={onClose} backgroundColor="bg-background-secondaryLight">
+      <Modal onClose={onClose} backgroundColor="bg-background-brand-secondary">
         {/* One column at a single 32px rhythm, so the title, copy, social row
             and form are all spaced alike. */}
         <div className="xl:w-33 w-full my-10 px-1.5 xl:px-0 flex flex-col gap-2">

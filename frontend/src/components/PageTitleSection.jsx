@@ -18,7 +18,7 @@ function PageTitleSection({ title, children }) {
 
   return (
     <div
-      className={`sticky top-0 z-20 w-full bg-background-white transition-transform duration-200 ease-in ${
+      className={`sticky top-0 z-20 w-full bg-background-primary transition-transform duration-200 ease-in ${
         navHidden ? "-translate-y-4.5 xl:-translate-y-6" : ""
       }`}
     >

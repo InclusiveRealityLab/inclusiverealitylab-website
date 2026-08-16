@@ -1,5 +1,5 @@
 // The contact form's Send button is this same object -- black fill, white
-// label, label turning secondaryLight on hover -- so it comes through here
+// label, label turning the secondary light tint on hover -- so it comes through here
 // rather than being hand-rolled. It only differs in stretching full width and
 // swapping its label for a status icon, which is what className and children
 // are for.
@@ -7,7 +7,7 @@ function ButtonPrimary({ label, onClick, type = "button", className = "", childr
   return (
     <button
       type={type}
-      className={`label w-btnW h-control rounded-sm bg-background-black text-baseWhite hover:text-secondaryLight transition ease-in duration-200 cursor-pointer ${className}`}
+      className={`label w-btnW h-control rounded-sm bg-element-black text-text-white hover:text-element-secondaryLight transition ease-in duration-200 cursor-pointer ${className}`}
       onClick={onClick}
     >
       {children ?? label}

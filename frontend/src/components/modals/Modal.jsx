@@ -29,7 +29,7 @@ function Modal({ children, onClose, backgroundColor }) {
   return ReactDOM.createPortal(
     <>
       <div
-        className="fixed top-0 right-0 w-full h-screen overflow-scroll z-100 bg-black/40"
+        className="fixed top-0 right-0 w-full h-screen overflow-scroll z-100 bg-element-black/10"
       >
         <div
           className={`right-0 fixed w-full xl:max-w-68 h-screen transition-transform ease-in duration-300 motion-reduce:transition-none ${
