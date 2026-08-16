@@ -8,7 +8,7 @@ import facebook from "../../assets/icons/fb.svg";
 import x from "../../assets/icons/x.svg";
 import linkIcon from "../../assets/icons/link.svg";
 
-// Same icon set and 32px sizing as the footer's social row.
+// Same icon set and 40px sizing as the footer's social row.
 const connectionPlatforms = [
   { name: "Email", key: "Email", icon: email },
   { name: "Google Scholar", key: "Google Scholar", icon: scholar },
@@ -72,7 +72,7 @@ function IndividualMemberModal({ person, onClose }) {
               {hasContactInfo(person) && (
                 <>
                   <p className="heading4">Contact me</p>
-                  <div className="flex flex-row gap-1.5  py-0.5">
+                  <div className="flex flex-row gap-1 py-0.25">
                     {/* use absolute links when linking profiles */}
                     {connectionPlatforms.map((platform) => {
                       if (person[platform.key] && platform.key === "Email") {
@@ -86,7 +86,7 @@ function IndividualMemberModal({ person, onClose }) {
                             <img
                               src={platform.icon}
                               alt={`${platform.name} icon`}
-                              className="w-2 h-2"
+                              className="w-2.5 h-2.5"
                             />
                           </a>
                         );
@@ -101,7 +101,7 @@ function IndividualMemberModal({ person, onClose }) {
                             <img
                               src={platform.icon}
                               alt={`${platform.name} icon`}
-                              className="w-2 h-2"
+                              className="w-2.5 h-2.5"
                             />
                           </a>
                         );
