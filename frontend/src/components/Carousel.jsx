@@ -37,6 +37,10 @@ function Carousel({ projects = [], isLoading = false }) {
     return () => window.removeEventListener("resize", measure);
   }, [projects.length, isLoading]);
 
+  // Arrows need something to scroll and a pointing device. The pointer half
+  // is CSS-only, so this is the JS half and pointer-fine: carries the rest.
+  const showArrows = canScroll && !isLoading;
+
   // The track is a real scroll container rather than a transform, so a
   // trackpad swipe, a touch drag and the arrows all drive the same thing.
   const scrollByStep = (direction) => {
@@ -79,12 +83,21 @@ function Carousel({ projects = [], isLoading = false }) {
             ))}
       </div>
 
-      {/* controls: arrows left, view-all right */}
-      <div className="flex flex-row justify-between items-center gap-1.5 w-full xl:max-w-contentBox mx-auto px-1.5 pl-4">
+      {/* Controls. Whether the arrows are there decides the rest of this row:
+          the left inset exists to line them up with the cards, and the button
+          only moves to the right edge to make room for them. Both therefore
+          hang off the same two conditions the arrows do -- something to
+          scroll, and a pointing device -- so on a touch screen, or when the
+          track does not overflow, the button simply centres. */}
+      <div
+        className={`flex flex-row justify-between items-center gap-1.5 w-full xl:max-w-contentBox mx-auto px-1.5 ${
+          showArrows ? "pointer-fine:pl-4" : ""
+        }`}
+      >
         {/* Arrows are for pointing devices; touch and trackpad scroll the
             track directly. Hidden entirely when nothing overflows, and while
             loading -- there is nothing to page through yet. */}
-        {canScroll && !isLoading && (
+        {showArrows && (
           <div className="hidden pointer-fine:flex flex-row justify-start items-center gap-1.5">
             <button
               onClick={() => scrollByStep(-1)}
@@ -108,11 +121,12 @@ function Carousel({ projects = [], isLoading = false }) {
           </div>
         )}
 
-        {/* sits at the right edge of the container at every width */}
         <ButtonText
           label="View All Projects"
           linkAddress="/projects"
-          className="w-full max-w-17 ml-auto xl:w-15"
+          className={`w-full max-w-17 mx-auto xl:w-15 ${
+            showArrows ? "pointer-fine:mr-0" : ""
+          }`}
         />
       </div>
     </div>

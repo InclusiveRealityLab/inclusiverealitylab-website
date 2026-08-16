@@ -3,12 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/IRL_favicon.ico" />
+
+    <!-- Home screen icons. iOS reads apple-touch-icon directly; Android takes
+         its icon from the manifest, and falls back to the low-resolution
+         favicon without one. -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="IRL" />
+    <meta name="theme-color" content="#ffffff" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Inclusive Reality Lab (IRL) is a human-computer interaction (HCI) lab directed by Dr. Yun Suen Pai and based at University of Auckland (UoA). Our research explores how our physical and virtual reality can be leveraged to understand cognitive, behavioral, and emotional states, assist individuals in their daily lives, and augment human abilities. By designing adaptive and empowering technologies, we aim to create a world where diverse individuals can thrive, connect, and reach their full potential."
+      content="We envision an Inclusive Reality: a prosocial space where age, ability and even species no longer limit us. We study how technology can understand, assist and augment our natural abilities."
     />
     <meta name="title" content="Inclusive Reality Lab" />
+
+    <!-- Link previews. These URLs are absolute on purpose: crawlers do not
+         resolve relative paths, so they must name the live domain rather than
+         follow Vite's base. The preview description is its own, shorter text:
+         previews truncate at roughly 200 characters. og and twitter carry the
+         same words so the two never drift apart. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Inclusive Reality Lab" />
+    <meta property="og:url" content="https://inclusiverealitylab.org/" />
+    <meta property="og:title" content="Inclusive Reality Lab" />
+    <meta
+      property="og:description"
+      content="HCI Lab researching how technology can understand needs, assist and augment natural abilities."
+    />
+    <meta
+      property="og:image"
+      content="https://inclusiverealitylab.org/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Inclusive Reality Lab" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@irl_uoa" />
+    <meta name="twitter:title" content="Inclusive Reality Lab" />
+    <meta
+      name="twitter:description"
+      content="HCI Lab researching how technology can understand needs, assist and augment natural abilities."
+    />
+    <meta
+      name="twitter:image"
+      content="https://inclusiverealitylab.org/og-image.png"
+    />
 
     <!-- Google tag (gtag.js) -->
     <script

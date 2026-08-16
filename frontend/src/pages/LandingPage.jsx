@@ -151,16 +151,16 @@ function LandingPage() {
 
         <div className="relative z-0">
           {/* Three Themes Section, at the narrower 912 measure. */}
-          <section className="flex flex-col gap-4 w-full xl:max-w-narrowBox mx-auto px-1.5 pt-8 pb-4">
-            <p className="heading3 text-center">
+          <section className="flex flex-col gap-2 w-full xl:max-w-narrowBox mx-auto px-1.5 pt-8 pb-4">
+            <p className="heading4 text-center">
               Our work is broken down into three categories
             </p>
 
-            <div className="w-full flex flex-col xl:flex-row gap-2.5">
+            <div className="w-full flex flex-col xl:flex-row gap-2">
               {THEMES.map(({ title, description }) => (
                 <div
                   key={title}
-                  className="flex-1 flex flex-col gap-1 text-center"
+                  className="flex-1 flex flex-col gap-1 px-1 text-center"
                 >
                   <p className="heading2">{title}</p>
                   <p className="body">{description}</p>
@@ -178,7 +178,7 @@ function LandingPage() {
           </section>
 
           {/* Mission Text, at the same 912 measure as the themes section */}
-          <section className="heading3 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
+          <section className="heading4 w-full xl:max-w-narrowBox mx-auto px-1.5 py-4">
             We study how technology can understand human needs so it can assist and 
             augment our natural abilities. <br />
             <br />
