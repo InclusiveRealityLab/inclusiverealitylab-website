@@ -10,10 +10,7 @@
   --color-baseDarkGrey: #636966;
   --color-baseLightGrey: #edeeed;
 
-  /* BRAND COLORS
-     Values come from the Figma variables (Brand/*). Each family runs
-     dark / base / light / extra light. The light tints fill the research-theme
-     chips: primary=Understand, secondary=Assist, tertiary=Augment. */
+  /* BRAND COLORS */
   --color-primary: #258cf4;
   --color-secondary: #3ce197;
   --color-tertiary: #e7eb33;
