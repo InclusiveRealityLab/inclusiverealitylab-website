@@ -16,11 +16,21 @@ const getAllPeople = async (req, res) => {
         person.profile = formatProfilePhotoURL(person.profile);
       }
 
-      if (person.role === "Collaborator" && person["start date"] && !person["end date"]) {
-        person.category = "Collaborator";
-      } else if (person["start date"] && person["end date"] ) {
+      // Someone is alumni once their end date has passed -- not merely because
+      // one is recorded. A leaving date set in the future still describes a
+      // current member, so they stay in Lab or Collaborator until it arrives.
+      //
+      // The three branches are ordered so a future end date cannot fall
+      // through all of them: only the first tests the end date at all, and the
+      // other two ask nothing about it.
+      const hasLeft =
+        person["end date"] && new Date(person["end date"]) < new Date();
+
+      if (person["start date"] && hasLeft) {
         person.category = "Alumni";
-      } else if (person.role !== "Collaborator" && person["start date"] && !person["end date"]){
+      } else if (person["start date"] && person.role === "Collaborator") {
+        person.category = "Collaborator";
+      } else if (person["start date"]) {
         person.category = "Lab";
       }
       // this enforces ordering of profiles in the people page 
