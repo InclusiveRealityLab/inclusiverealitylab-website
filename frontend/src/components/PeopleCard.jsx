@@ -25,12 +25,16 @@ function PeopleCard({ person }) {
               <ProfilePhotoContainer photoStyle={"grayscale group-hover:grayscale-0"} person={person} />
               
             )}
-            <div className="flex flex-col justify-between items-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
-              <div className="flex flex-col justify-between  items-center heading4 ">
-                <p className="text-center">{person["Given Name"]} </p>
+            {/* text-center sits on the container so it reaches every line.
+                items-center only centres the block, which looks identical
+                until something wraps -- "Undergraduate Student" does, at the
+                mobile card width. */}
+            <div className="flex flex-col justify-between items-center text-center heading4 w-full gap-0.5 xl:min-h-[85px] ">
+              <div className="flex flex-col justify-between items-center heading4">
+                <p>{person["Given Name"]} </p>
                 <p>{person["Family Name"]} </p>
               </div>
-              {person["Affiliation"] && person["Role"] == "Collaborator" ? (<p className="bodySmall text-center">{person["Affiliation"]}</p>) : (<p className="bodySmall">{person["Role"]}</p>) }
+              {person["Affiliation"] && person["Role"] == "Collaborator" ? (<p className="bodySmall">{person["Affiliation"]}</p>) : (<p className="bodySmall">{person["Role"]}</p>) }
             </div>
           </div>
         </>

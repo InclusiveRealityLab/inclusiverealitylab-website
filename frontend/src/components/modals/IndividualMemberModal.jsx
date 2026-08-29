@@ -26,7 +26,7 @@ function IndividualMemberModal({ person, onClose }) {
     <>
       {person && (
         <Modal onClose={onClose} backgroundColor="bg-background-primary">
-          <div className="w-full xl:max-w-narrowBox mx-auto my-10 px-1.5 flex flex-col gap-4">
+          <div className="w-full xl:max-w-narrowBox mx-auto my-8 xl:my-10 px-1.5 flex flex-col gap-4">
             <div className="w-full flex flex-col gap-2 xl:gap-2.5 items-center">
               <ProfilePhotoContainer person={person} />
               <div className="flex flex-col max-w-[640px] gap-1 items-center justify-center">

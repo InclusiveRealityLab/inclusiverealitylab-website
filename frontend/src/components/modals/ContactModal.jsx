@@ -63,7 +63,7 @@ function ContactModal({ onClose }) {
       <Modal onClose={onClose} backgroundColor="bg-background-brand-secondary">
         {/* One column at a single 32px rhythm, so the title, copy, social row
             and form are all spaced alike. */}
-        <div className="xl:w-33 w-full my-10 px-1.5 xl:px-0 flex flex-col gap-2">
+        <div className="xl:w-33 w-full my-8 xl:my-10 px-1.5 xl:px-0 flex flex-col gap-2">
           <h2 className="heading2">Let’s keep in touch!</h2>
           <p className="body">
             Drop a message to say hi, or send an email to

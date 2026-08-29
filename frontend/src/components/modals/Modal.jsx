@@ -39,11 +39,14 @@ function Modal({ children, onClose, backgroundColor }) {
           <div
             className={`${backgroundColor} overflow-y-scroll flex flex-col items-center h-full`}
           >
+            {/* The close button lives in a header band: 72 tall on mobile, so
+                the 40 icon centres with 16 above and below. Desktop keeps the
+                design's 40 inset instead. */}
             <div
-              className={` ${backgroundColor}  xl:max-w-modal w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center `}
+              className={`${backgroundColor} xl:max-w-modal w-full absolute flex flex-row border-0 xl:justify-start justify-end items-center h-4.5 xl:h-auto`}
             >
               <button
-                className={` ${backgroundColor}  align    mt-2.5  mr-1.5 cursor-pointer`}
+                className={`${backgroundColor} mr-1.5 xl:mt-2.5 cursor-pointer`}
                 onClick={handleClose}
               >
                 <img src={closeBlack} alt="Close" />
