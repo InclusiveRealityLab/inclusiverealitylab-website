@@ -128,7 +128,7 @@ function ProjectDetailsPage() {
 
         {memberNames && (
           <section className="flex flex-col gap-1.5 w-full">
-            <h2 className="heading4">People</h2>
+            <h2 className="heading4">Internal members</h2>
             <p className="body">{memberNames}</p>
           </section>
         )}
